@@ -5,7 +5,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 class User(models.Model):
     email = models.CharField(max_length=40)
     name = models.CharField(max_length=30)
-    password = models.CharField(max_length=30, password=True)
+    password = models.CharField(max_length=30)
 
 
 class Contact(models.Model):
@@ -13,7 +13,6 @@ class Contact(models.Model):
     email = models.EmailField(max_length=50)
     name = models.CharField(max_length=30)
     phone = PhoneNumberField()
-    pass
 
 
 class Task(models.Model):
