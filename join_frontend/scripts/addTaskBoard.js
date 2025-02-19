@@ -1,3 +1,5 @@
+const taskURL = 'http://127.0.0.1:8000/api/tasks/';
+const userURL = 'http://127.0.0.1:8000/api/contacts/'
 const dateInput = document.getElementById('dueDateInput');
 let tasks = [
     {
@@ -299,25 +301,11 @@ function setArrayUsers() {
  * fills the Object [task] with the inputs from the addTask form
  */
 function setArrayInputs() {
-    task['date'] = changeDateFormat();
+    task['date'] = document.getElementById('dueDateInput').value;
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length;
     task['id'] = id;
     task['title'] = document.getElementById('titleInput').value;
-}
-
-
-/**
- * Changes Date format from Input to German format
- * 
- * @returns formatted Date in German
- */
-function changeDateFormat() {
-    let date = document.getElementById('dueDateInput').value;
-    let formattedDate = date.replace(/-/g, '/');
-    let [year, month, day] = formattedDate.split('/');
-    let formattedDateStr = `${day}/${month}/${year}`;
-    return formattedDateStr;
 }
 
 
@@ -372,10 +360,22 @@ function updateUserDisplay(userBox, userName, input) {
 /**
  * pushes the current taskAllArray into the local storage Array
  */
-function save() {
-    taskAllArray.push(task);
-    let tasksAsText = JSON.stringify(taskAllArray);
-    localStorage.setItem('taskAllArray', tasksAsText);
+async function save() {
+    try {
+        let response = await fetch(taskURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(task)
+        });
+
+        let result = await response.json();
+        console.log('Server Response:', result);
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+    }
 }
 
 
