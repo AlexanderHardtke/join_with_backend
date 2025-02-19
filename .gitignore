@@ -5,6 +5,8 @@
 /tmp
 /out-tsc
 /bazel-out
+/join_frontend/out/
+/join_frontend/scripts/firebase.js
 
 # Node
 /node_modules

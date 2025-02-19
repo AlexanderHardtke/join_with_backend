@@ -1,5 +1,5 @@
-const taskURL = 'https://join-357c8-default-rtdb.europe-west1.firebasedatabase.app/tasksAll/';
-const userURL = 'https://join-357c8-default-rtdb.europe-west1.firebasedatabase.app/contactall'
+const taskURL = 'http://127.0.0.1:8000/api/tasks/';
+const userURL = 'http://127.0.0.1:8000/api/contacts/'
 
 let tasks = [
     {
@@ -224,7 +224,7 @@ function createTask() {
     }
     save();
     showSuccessTask();
-    goToBoard();
+    // goToBoard();
 }
 
 
@@ -344,10 +344,21 @@ function updateUserDisplay(userBox, userName, input) {
 /**
  * pushes the current taskAllArray into the local storage Array
  */
-function save() {
-    taskAllArray.push(task);
-    let tasksAsText = JSON.stringify(taskAllArray);
-    localStorage.setItem('taskAllArray', tasksAsText);
+async function save() {
+    console.log("task",task);
+    try {
+        let response = await fetch(taskURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ tasks: task }),
+        });
+        let result = await response.json();
+        console.log('Server Response:', result);
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+    }
 }
 
 
