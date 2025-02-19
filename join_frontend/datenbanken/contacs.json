@@ -1,0 +1,44 @@
+[
+  {
+      "color": "#CFD41D",
+      "email": "MarieZimmer@gmail.com",
+      "name": "Marie Zimmerman",
+      "phone": "+88 8888 888 88 8"
+  },
+  {
+      "color": "#FB5807",
+      "email": "Lukas@gmail.com",
+      "name": "Lukas Bauer",
+      "phone": "+33 3333 333 33 3"
+  },
+  {
+      "color": "#CA841B",
+      "email": "max@gmail.com",
+      "name": "Max Muster",
+      "phone": "+88 8888 888 88 8"
+  },
+  {
+      "color": "#16C99D",
+      "email": "SophieBach@gmail.com",
+      "name": "Sophie Bach",
+      "phone": "+99 9999 999 99 9"
+  },
+  {
+      "color": "#5A52B9",
+      "email": "SarahMueller@gmail.com",
+      "name": "Sarah Mueller",
+      "phone": "+33 3333 333 33 3"
+  },
+  {
+      "color": "#0F91AF",
+      "email": "LisaBach@gmail.com",
+      "name": "Lisa Bach",
+      "phone": "+49 4444 444 44 4"
+  },
+  {
+      "color": "#D8CD92",
+      "email": "Fischer@gmail.com",
+      "name": "Klaus Fischer",
+      "phone": "+44 4444 444 44 4"
+  }
+]

@@ -1,0 +1,451 @@
+body{
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  width: 100%;
+  font-family: 'Inter';
+  overflow: hidden;
+  background-color: rgb(246, 247, 248);
+}
+.LoginPageSignUp,
+.LoginPageMain,
+.LogInPrivacyLegal {
+    opacity: 0;
+    transition: opacity 2s ease;
+}
+#SignUpWindow,
+#LoginWindow,
+.LogInPrivacyLegal,
+.LoginPageGuestLogin,
+.LoginPageSignUp {
+    display: none;
+}
+.JoinLogoStyle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100px;
+    height: 100px;
+    transition: all 2s ease; 
+    z-index: 10; 
+}
+.logo-move {
+    top: 80px;
+    left: 77px;
+    transform: translate(0, 0);
+}
+.show-content .LoginPageSignUp,
+.show-content .LoginPageMain,
+.show-content .LogInPrivacyLegal {
+    opacity: 1;
+    transition: opacity 2s ease-in; 
+}
+.show-content #SignUpWindow,
+.show-content #LoginWindow,
+.show-content .LogInPrivacyLegal,
+.show-content .LoginPageGuestLogin,
+.show-content .LoginPageSignUp {
+    display: flex;
+}
+.none{
+  display: none!important;
+}
+.JoinLogoStyle{
+  width: 100px;
+  height: 122px;
+}
+.MainPageHeader{
+  display: flex;
+  justify-content: end;
+}
+.LoginPageSignUpButton{
+  width: 91px;
+  height: 49px;
+  background-color: #2A3647;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  gap: 10px;
+  font-size: 16px;
+  font-weight: 700;
+  border-style: none;
+}
+.LoginPageSignUpButton:hover{
+  cursor: pointer;
+  background-color: #29ABE2;
+}
+.LoginPageSignUp{
+  width: 279px;
+  height: 49px;
+  margin-top: 67px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-right: 120px;
+}
+.LoginPageSignUpText{
+  font-size: 20px;
+  font-weight: 20px;
+}
+.LoginPageMain{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -45%);
+  border-radius: 30px;
+  padding: 48px 115px 48px 115px;
+  background-color: white;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.LogInTextStyle{
+  font-weight: 700;
+  font-size: 61px;
+  height: 73px;
+}
+.LoginXLineStyle{
+  width: 150px;
+  height: 3px;
+  background-color: #29ABE2; 
+}
+.LoginTextLine{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 89px;
+  width: 315px;
+}
+.LoginInputfieldIcon{
+  height: 24px;
+  width: 24px;
+}
+.LoginInputfieldIconLock{
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+}
+.LoginInputfield{
+  height: 24px;
+  width: 356px;
+  border-style: none;
+  outline: none;
+  font-size: 20px;
+  font-weight: 400;
+  background-color: white!important;
+}
+input:-webkit-autofill {
+  background-color: white !important; 
+  -webkit-box-shadow: 0 0 0px 1000px white inset !important; 
+  color: inherit !important; 
+}
+.LoginPageInputfields{
+  width: 422px;
+  height: 196px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-top: 24px;
+}
+.LoginInputIcon{
+  display: flex;
+  align-items: center;
+  width: 422px;
+  height: 48px;
+  justify-content: center;
+  border-radius: 10px;
+  border: solid 1px;
+  gap: 10px;
+}
+.LoginRememberCheck{
+  width: 150px;
+  height: 24px;
+  margin-left: 39px;
+  gap: 8px;
+  display: flex;
+  align-items: center;
+}
+.LoginCheckbox{
+  width: 24px;
+  height: 24px;
+  border: 3px;
+  cursor: pointer;
+}
+.custom-checkbox input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+.custom-checkbox .checkmark {
+  position: relative;
+  height: 20px;
+  width: 20px;
+  background-color: white;
+  border-radius: 5px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  border: 1px solid black;
+}
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  background-color: white;
+  border-color: black;
+}
+.custom-checkbox .checkmark::after {
+  content: "";
+  position: absolute;
+  display: none;
+  left: 7px;
+  top: 3px;
+  width: 5px;
+  height: 10px;
+  border: solid black;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  display: block;
+}
+.LoginCheckRemember{
+  font-weight: 400;
+  font-size: 16px;
+}
+.LoginPageLoginButton{
+  width: 110px;
+  height: 48px;
+  border-radius: 8px;
+  gap: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #2A3647;
+  color: white;
+  font-size: 21px;
+  font-weight: 700;
+  border-style: none;
+}
+.LoginPageLoginButton:hover{
+  cursor: pointer;
+  background-color: #29ABE2;
+}
+.LoginPageGuestButton{
+  width: 177px;
+  height: 48px;
+  border-radius: 8px;
+  border: solid 1px;
+  gap: 10px;
+  font-size: 21px;
+  font-weight: 700;
+  background-color: white;
+}
+.LoginPageGuestButton:hover{
+  cursor: pointer;
+  border-color: #29ABE2;
+  color: #29ABE2;
+}
+.LoginPageGuestLogin{
+  display: flex;
+  width: 322px;
+  height: 48px;
+  gap: 35px;
+  margin-top: 24px;
+}
+.LogInPrivacyLegal{
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  width: 246px;
+  height: 35px;
+  margin-bottom: 16px;
+}
+.LogInPrivacyLegalText{
+  text-decoration: none;
+  color: #A8A8A8;
+  display: flex;
+  gap: 8px;
+  width: 109px;
+  padding: 8px;
+  height: 35px;
+}
+.LogInPrivacyLegalText:hover{
+  color: #29ABE2; 
+  cursor: pointer;
+}
+
+@media(max-width: 1200px){
+  .MainPageHeader{
+    height: 100vh;
+    align-items: end;
+    justify-content: center;
+    
+  }
+  .LoginPageSignUp{
+    margin-right: 0;
+    margin-bottom: 64px;
+  }
+  .LoginPageMain{
+    padding: 24px;
+  }
+}
+@media(max-width: 900px){
+  .logo-move{
+    top: 38px;
+    left: 37px;
+  }
+  .JoinLogoStyle{
+    height: 100px;
+    width: 80px;
+  }
+}
+@media(max-width: 700px){
+  .LogInTextStyle{
+    font-size: 47px;
+  }
+  .LoginXLineStyle{
+    width: 88px;
+  }
+  .LoginTextLine{
+    height: 72px;
+    margin-top: 16px;
+  }
+}
+@media(max-width: 600px){
+  .LoginInputIcon{
+    width: 364px;
+  }
+  .LoginPageInputfields{
+    width: 364px;
+  }
+  .LoginInputfield{
+    width: 298px;
+  }
+  .JoinLogoStyle{
+    height: 78px;
+    width: 64px;
+  }
+  .LoginPageMain{
+    padding: 0px;
+    width: 396px;
+    height: 450px;
+    justify-content: start;
+    margin-top: -24px;
+  }
+
+  .LoginPageGuestLogin{
+    flex-direction: column;
+    gap: 8px;
+    height: 123px;
+    width: 180px;
+  }
+  .LoginPageLoginButton{
+    width: 100%;
+  }
+}
+@media(max-width: 420px){
+  .LoginInputIcon{
+    width: 280px;
+  }
+  .LoginPageInputfields{
+    width: 280px;
+  }
+  .LoginInputfield{
+    width: 214px;
+  }
+  .LoginPageMain{
+    padding: 0px;
+    width: 310px;
+    height: 450px;
+    justify-content: start;
+    margin-top: -24px;
+  }
+}
+@media(max-width: 600px) and (min-height: 800px){
+  .LoginPageMain{
+    height: 515px;
+  }
+  .LoginXLineStyle{
+    margin-top: 14px;
+  }
+  .LoginPageInputfields{
+    margin-top: 32px;
+  }
+  .LoginPageLoginButton{
+    height: 56px;
+  }
+  .LoginPageGuestLogin{
+    gap: 0;
+    justify-content: space-between;
+    margin-top: 32px;
+  }
+  .LoginTextLine{
+    margin-top: 32px;
+  }
+  .LogInPrivacyLegal{
+    margin-bottom: 24px;
+  }
+  .LoginPageSignUp{
+    margin-bottom: 96px;
+  }
+}
+@media(min-width: 601px) and (min-height: 900px){
+  .LoginPageMain{
+    height: 515px;
+    padding: 48px 24px 48px 24px;
+  }
+  .LoginPageInputfields{
+    height: 220px;
+    margin-top: 64px;
+  }
+  .LoginPageGuestLogin{
+    margin-top: 48px;
+  }
+  .logo-move{
+    top: 38px;
+    left: 37px;
+  }
+}
+@media(min-width: 801px) and (min-height: 900px){
+  .LoginPageMain{
+    height: 515px;
+    padding: 48px 24px 48px 24px;
+  }
+  .LoginPageInputfields{
+    height: 220px;
+    margin-top: 64px;
+  }
+  .LoginPageGuestLogin{
+    margin-top: 48px;
+  }
+  .logo-move{
+    top: 80px;
+    left: 77px;
+  }
+}
+@media(max-width: 600px) and (max-height: 730px){
+  .LoginPageMain{
+    height: 410px;
+  }
+  .logo-move{
+    top: 24px;
+    left: 24px;
+  }
+  .LoginInputIcon{
+    height: 40px;
+  }
+  .LoginPageInputfields{
+    height: 140px;
+  }
+}

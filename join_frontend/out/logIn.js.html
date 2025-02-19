@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: LogIn.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: LogIn.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { app, database, ref, get, child, set } from './SignUp.js';
+const BaseUrl = "https://join-317-default-rtdb.europe-west1.firebasedatabase.app/";
+let matchingUser;
+window.loginUser = loginUser;
+window.addInputListeners = addInputListeners;
+window.guestLogIN = guestLogIN;
+window.loadRememberedData = loadRememberedData;
+window.logInAnimation = logInAnimation;
+fetchContactTask();
+
+
+/**
+ * The current password and email are read out here and if the data is not found, the border of the email container changes to red.
+ * 
+ * @returns 
+ */
+function logInvalidateEmail() {
+    const emailInputElement = document.getElementById("emailInputLogin");
+    const emailContainer = document.getElementById("LoginInputIconID1");
+    const emailInput = emailInputElement.value;
+    const usersRef = ref(database, 'users');
+    logInvalidateEmail1(emailInput, emailContainer);
+    get(usersRef).then((snapshot) => {
+        logInvalidateEmail2(snapshot, emailInput, emailContainer);
+    }).catch(() => {
+        emailContainer.style.border = '1px solid red';
+    });
+}
+
+
+/**
+ * If the email field is empty, the border of the container will turn black.
+ * 
+ * @param {*} emailInput 
+ * @param {*} emailContainer 
+ * @returns 
+ */
+function logInvalidateEmail1(emailInput, emailContainer) {
+    if (emailInput.trim() === '') {
+        emailContainer.style.border = '1px solid black';
+        matchingUser = null;
+        return;
+    }
+}
+
+
+/**
+ * If the email field is empty when logging in, the border of the container is black and if entered incorrectly it is red.
+ * 
+ * @param {*} snapshot 
+ * @param {*} emailInput 
+ * @param {*} emailContainer 
+ */
+function logInvalidateEmail2(snapshot, emailInput, emailContainer) {
+    if (snapshot.exists()) {
+        try {
+            const usersData = snapshot.val();
+            matchingUser = Object.values(usersData).find(user => user.email === emailInput);
+            if (matchingUser) {
+                emailContainer.style.border = '1px solid black';
+            } else {
+                emailContainer.style.border = '1px solid red';
+            }
+        } catch{emailContainer.style.border = '1px solid red';}
+    } else {
+        emailContainer.style.border = '1px solid red';
+    }
+}
+
+
+/**
+ * Adds two add event listeners to the two input fields. The first is responsible for when the field is clicked to enter text and
+ * the second, when you leave the field, the original state is restored.
+ * 
+ */
+function addInputListeners() {
+    const emailInputElement = document.getElementById("emailInputLogin");
+    emailInputElement.addEventListener('input', logInvalidateEmail);
+    emailInputElement.addEventListener('change', logInvalidateEmail);
+    emailInputElement.addEventListener('blur', resetEmailBorderOnBlur);
+    const passwordInputElement = document.getElementById("passwordInput1");
+    passwordInputElement.addEventListener('input', logInvalidatePassword);
+    passwordInputElement.addEventListener('change', logInvalidatePassword);
+    passwordInputElement.addEventListener('blur', resetPasswordBorderOnBlur);
+}
+
+
+/**
+ * If the password field is empty when logging in, the border of the container is black, 
+ * if it is entered incorrectly it is red and if it is correct it is blue.
+ * 
+ * @returns 
+ */
+function logInvalidatePassword() {
+    const passwordInputElement = document.getElementById("passwordInput1");
+    const passwordContainer = passwordInputElement.closest(".LoginInputIcon");
+    const passwordInput = passwordInputElement.value;
+    if (passwordInput.trim() === '') {
+        passwordContainer.style.border = '1px solid black';
+        return;
+    }
+    if (matchingUser &amp;&amp; matchingUser.password === passwordInput) {
+        passwordContainer.style.border = '1px solid #29ABE2';
+    } else {
+        passwordContainer.style.border = '1px solid red'; 
+    }
+}
+
+
+/**
+ * When you leave the field, the border is set to black.
+ * 
+ */
+function resetEmailBorderOnBlur() {
+    const emailContainer = document.getElementById("LoginInputIconID1");
+    emailContainer.style.border = '1px solid black';
+}
+
+
+/**
+ * When you leave the field, the border is set to black.
+ * 
+ */
+function resetPasswordBorderOnBlur() {
+    const passwordInputElement = document.getElementById("passwordInput1");
+    const passwordContainer = passwordInputElement.closest(".LoginInputIcon");
+    passwordContainer.style.border = '1px solid black';
+}
+
+
+/**
+ * Data is retrieved from the input fields and transferred to the functions.
+ * 
+ */
+function loginUser() {
+    const emailInputElement = document.getElementById("emailInputLogin");
+    const passwordInputElement = document.getElementById("passwordInput1");
+    const rememberMeChecked = document.getElementById("rememberMe").checked;
+    const emailInput = emailInputElement.value;
+    const passwordInput = passwordInputElement.value;
+    loginUser1(rememberMeChecked)
+    const usersRef = ref(database, 'users');
+    get(usersRef).then((snapshot) => {
+        if (snapshot.exists()) {
+            loginUser2(emailInput, passwordInput, snapshot)
+        } else {
+            userInformationPopUp('Keine Benutzer gefunden.')
+        }})
+}
+
+
+/**
+ * Here, data such as email, encrypted password and the click on the Rememberfield are saved in local storage.
+ * If Rememberfield is not ticked, the data will not be saved
+ * 
+ * @param {*} rememberMeChecked 
+ */
+function loginUser1(rememberMeChecked){
+    if (rememberMeChecked) {
+        localStorage.setItem('rememberedEmail', emailInput);
+        localStorage.setItem('rememberedPassword', encryptPassword(passwordInput));
+        localStorage.setItem('rememberMeChecked', 'true'); 
+    } else {
+        localStorage.removeItem('rememberedEmail'); 
+        localStorage.removeItem('rememberedPassword');
+        localStorage.setItem('rememberMeChecked', 'false');
+    }
+}
+
+
+/**
+ * This function checks whether the email and password in the login match a user in the database.
+ * If this is the case, the current user with the name is saved in an array in the local storage.
+ * 
+ * @param {*} emailInput 
+ * @param {*} passwordInput 
+ */
+function loginUser2(emailInput, passwordInput, snapshot){
+    const usersData = snapshot.val();
+    const matchingUser = Object.values(usersData).find(user => 
+        user.email === emailInput);
+    if (matchingUser) {
+        if (matchingUser.password === passwordInput) {
+            localStorage.removeItem('CurrentUser');
+            let decodedName = decodeURIComponent(matchingUser.name);
+            localStorage.setItem('CurrentUser', JSON.stringify(decodedName));
+            window.location.href = `/htmls/summary.html`;
+        } else {
+            userInformationPopUp('Passwort ist falsch!')}
+    } else {
+        userInformationPopUp('E-Mail existiert nicht!')}
+}
+
+
+/**
+ * The password is encrypted using Base64 and returned. 
+ * 
+ * @param {*} password 
+ * @returns 
+ */
+function encryptPassword(password) {
+    return btoa(password);
+    
+}
+
+
+/**
+ * Converts the Base64-encoded password back to plain text and returns it.
+ * 
+ * @param {*} encryptedPassword 
+ * @returns 
+ */
+function decryptPassword(encryptedPassword) {
+    const decodedPassword = atob(encryptedPassword); 
+    return decodedPassword;
+    
+}
+
+
+/**
+ * First of all, the stored values are retrieved from the localStorage and stored in variables. 
+ * Then the values are loaded into the input fields except for the checkbox, where it is first checked whether it is true.
+ * 
+ */
+function loadRememberedData() {
+    const rememberedEmail = localStorage.getItem('rememberedEmail'); 
+    const rememberedPassword = localStorage.getItem('rememberedPassword');
+    const rememberMeChecked = localStorage.getItem('rememberMeChecked'); 
+    if (rememberedEmail) {
+        document.getElementById('emailInputLogin').value = rememberedEmail;
+    }
+    if (rememberedPassword) {
+        document.getElementById('passwordInput').value = decryptPassword(rememberedPassword);
+    }
+    if (rememberMeChecked === 'true') {
+        document.getElementById('rememberMe').checked = true;
+    }
+}
+
+
+/**
+ * If the button with the guest access was pressed in the login, the local storage 
+ * the CurrentUser array is deleted and then recreated with the CurrentUser Guest.
+ * The current CurrentUser is also transferred to the summary.html file. 
+ * 
+ */
+function guestLogIN(){
+    let matchingUser = 'Guest'
+    localStorage.removeItem('CurrentUser');
+    localStorage.setItem('CurrentUser', JSON.stringify(matchingUser));
+    window.location.href = `/htmls/summary.html?name=${encodeURIComponent(matchingUser)}`;
+}
+
+
+/**
+ * Here, the body and the JoinLogo are assigned to a variable. The first animation causes the logo to move to the top left.
+ * The second animation fades in the remaining content with a delay and ensures that scrolling is possible again.
+ * 
+ */
+export function logInAnimation(){
+    const logo = document.querySelector('.JoinLogoStyle');
+    const body = document.body;
+    setTimeout(() => {
+        logo.classList.add('logo-move');
+        setTimeout(() => {
+            body.classList.add('show-content');
+            body.style.overflow = 'auto'; 
+        }, 1000);
+    }, 400);
+}
+
+
+/**
+ * If the arrays already exist in the local storage, they will be deleted. 
+ * The arrays are recreated empty and the data from the Firebase is stored in variables in Json format.
+ * 
+ */
+async function fetchContactTask(){
+    localStorage.removeItem('taskAllArray');
+    localStorage.removeItem('contactAllArray');
+    let taskAllArray = [];
+    let contactAllArray = [];
+    const pathTasks = 'tasksAll';
+    const pathContacts = 'contactall';
+    let Summaryall = await fetch(BaseUrl + pathTasks + '.json');
+    let Summaryallshow = await Summaryall.json();
+    let Contactall = await fetch(BaseUrl + pathContacts + '.json');
+    let Contactallshow = await Contactall.json();
+    fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray)
+}
+
+
+/**
+ * The data from the variables is added to the array and stored in the local storage.
+ * 
+ * @param {*} Contactallshow 
+ * @param {*} Summaryallshow 
+ * @param {*} contactAllArray 
+ * @param {*} taskAllArray 
+ */
+function fetchContactTask2(Contactallshow, Summaryallshow, contactAllArray, taskAllArray){
+    for (let key in Summaryallshow) {
+        taskAllArray.push(Summaryallshow[key]);
+    }
+    for (let key in Contactallshow) {
+        contactAllArray.push(Contactallshow[key]);
+    }
+    localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
+    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LoginGoodMorning">LoginGoodMorning</a></li><li><a href="global.html#SignUpLoad">SignUpLoad</a></li><li><a href="global.html#SignUpLoad2">SignUpLoad2</a></li><li><a href="global.html#activateprioButton">activateprioButton</a></li><li><a href="global.html#addInputListeners">addInputListeners</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#applyFocusAndValidation">applyFocusAndValidation</a></li><li><a href="global.html#applyFocusAndValidation2">applyFocusAndValidation2</a></li><li><a href="global.html#backToLogin">backToLogin</a></li><li><a href="global.html#booleanForContact">booleanForContact</a></li><li><a href="global.html#calculateSubtaskProgress">calculateSubtaskProgress</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#changeDateFormat">changeDateFormat</a></li><li><a href="global.html#changeDateFormatEdit">changeDateFormatEdit</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#checkInput1">checkInput1</a></li><li><a href="global.html#checkInput2">checkInput2</a></li><li><a href="global.html#checkInput3">checkInput3</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtask">checkSubtask</a></li><li><a href="global.html#checkWidthAndExecute">checkWidthAndExecute</a></li><li><a href="global.html#cleanarray">cleanarray</a></li><li><a href="global.html#clearAddTask">clearAddTask</a></li><li><a href="global.html#clearCategory">clearCategory</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#clearSubtaskInput">clearSubtaskInput</a></li><li><a href="global.html#closeAddTask">closeAddTask</a></li><li><a href="global.html#closeAddTask2">closeAddTask2</a></li><li><a href="global.html#contactInfo">contactInfo</a></li><li><a href="global.html#contactLoad">contactLoad</a></li><li><a href="global.html#contactLoadTargetid">contactLoadTargetid</a></li><li><a href="global.html#contactWindowSmallSize">contactWindowSmallSize</a></li><li><a href="global.html#contactloadchar">contactloadchar</a></li><li><a href="global.html#contactloadcontainer">contactloadcontainer</a></li><li><a href="global.html#contactloadcontainer1">contactloadcontainer1</a></li><li><a href="global.html#contactloadcontainer2">contactloadcontainer2</a></li><li><a href="global.html#contactloadcontainer3">contactloadcontainer3</a></li><li><a href="global.html#contactloadcontainer4">contactloadcontainer4</a></li><li><a href="global.html#contactloadcontainer5">contactloadcontainer5</a></li><li><a href="global.html#contactloadcontainer6">contactloadcontainer6</a></li><li><a href="global.html#convertDateFormat">convertDateFormat</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#decryptPassword">decryptPassword</a></li><li><a href="global.html#deleteContactList">deleteContactList</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#editContactCloseWindow">editContactCloseWindow</a></li><li><a href="global.html#editContactShowWindow">editContactShowWindow</a></li><li><a href="global.html#editDeleteChoice">editDeleteChoice</a></li><li><a href="global.html#editDeleteWindow">editDeleteWindow</a></li><li><a href="global.html#editNewContact">editNewContact</a></li><li><a href="global.html#editNewContactChange">editNewContactChange</a></li><li><a href="global.html#editNewContactHtml2">editNewContactHtml2</a></li><li><a href="global.html#editNewContactHtmlChange">editNewContactHtmlChange</a></li><li><a href="global.html#editNewContactSave">editNewContactSave</a></li><li><a href="global.html#editNewContactSave1">editNewContactSave1</a></li><li><a href="global.html#editNewContactSave2">editNewContactSave2</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#encryptPassword">encryptPassword</a></li><li><a href="global.html#fetchContactTask">fetchContactTask</a></li><li><a href="global.html#fetchContactTask2">fetchContactTask2</a></li><li><a href="global.html#formatCategoryClass">formatCategoryClass</a></li><li><a href="global.html#formatPhoneNumber">formatPhoneNumber</a></li><li><a href="global.html#formatSectionName">formatSectionName</a></li><li><a href="global.html#generateInitialsAndPriorityHTML">generateInitialsAndPriorityHTML</a></li><li><a href="global.html#generateSubtaskProgressHTML">generateSubtaskProgressHTML</a></li><li><a href="global.html#generateTasksHTML">generateTasksHTML</a></li><li><a href="global.html#getInitialsToShow">getInitialsToShow</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getusers">getusers</a></li><li><a href="global.html#goBackToContacts">goBackToContacts</a></li><li><a href="global.html#goToBoard">goToBoard</a></li><li><a href="global.html#guestLogIN">guestLogIN</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#loadAll">loadAll</a></li><li><a href="global.html#loadContact">loadContact</a></li><li><a href="global.html#loadFunctions">loadFunctions</a></li><li><a href="global.html#loadMembers">loadMembers</a></li><li><a href="global.html#loadRememberedData">loadRememberedData</a></li><li><a href="global.html#loadTaskProgress">loadTaskProgress</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUser">loadUser</a></li><li><a href="global.html#logInAnimation">logInAnimation</a></li><li><a href="global.html#logInvalidateEmail">logInvalidateEmail</a></li><li><a href="global.html#logInvalidateEmail1">logInvalidateEmail1</a></li><li><a href="global.html#logInvalidateEmail2">logInvalidateEmail2</a></li><li><a href="global.html#logInvalidatePassword">logInvalidatePassword</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#loginUser1">loginUser1</a></li><li><a href="global.html#loginUser2">loginUser2</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#onmouse">onmouse</a></li><li><a href="global.html#onmouseClose">onmouseClose</a></li><li><a href="global.html#openAddTask">openAddTask</a></li><li><a href="global.html#outmouse">outmouse</a></li><li><a href="global.html#outmouseClose">outmouseClose</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#renderAllTasks">renderAllTasks</a></li><li><a href="global.html#renderFilteredTasks">renderFilteredTasks</a></li><li><a href="global.html#renderInitials">renderInitials</a></li><li><a href="global.html#renderSection">renderSection</a></li><li><a href="global.html#renderSubtaskProgress">renderSubtaskProgress</a></li><li><a href="global.html#renderTasksInSection">renderTasksInSection</a></li><li><a href="global.html#resetEmailBorderOnBlur">resetEmailBorderOnBlur</a></li><li><a href="global.html#resetPasswordBorderOnBlur">resetPasswordBorderOnBlur</a></li><li><a href="global.html#resetprioButtons">resetprioButtons</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#saveTasksToLocalStorage">saveTasksToLocalStorage</a></li><li><a href="global.html#searchTask">searchTask</a></li><li><a href="global.html#searchUser">searchUser</a></li><li><a href="global.html#searchUsers">searchUsers</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectTechTask">selectTechTask</a></li><li><a href="global.html#selectUserStory">selectUserStory</a></li><li><a href="global.html#setArray">setArray</a></li><li><a href="global.html#setContactDetails">setContactDetails</a></li><li><a href="global.html#setPrioHigh">setPrioHigh</a></li><li><a href="global.html#setPrioLow">setPrioLow</a></li><li><a href="global.html#setPrioMedium">setPrioMedium</a></li><li><a href="global.html#setTimeBasedGreeting">setTimeBasedGreeting</a></li><li><a href="global.html#showSubtask">showSubtask</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#showSuccessTask">showSuccessTask</a></li><li><a href="global.html#signUpWindow">signUpWindow</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#submitToFirebase">submitToFirebase</a></li><li><a href="global.html#submitToFirebase1">submitToFirebase1</a></li><li><a href="global.html#submitToFirebase2">submitToFirebase2</a></li><li><a href="global.html#summaryLoad">summaryLoad</a></li><li><a href="global.html#summarySectionCheck">summarySectionCheck</a></li><li><a href="global.html#summarySectionCheck2">summarySectionCheck2</a></li><li><a href="global.html#summarySectionCheck3">summarySectionCheck3</a></li><li><a href="global.html#summarySectionCheck4">summarySectionCheck4</a></li><li><a href="global.html#summarySectionCheck5">summarySectionCheck5</a></li><li><a href="global.html#toDoChangeOn">toDoChangeOn</a></li><li><a href="global.html#toDoChangeOut">toDoChangeOut</a></li><li><a href="global.html#toggleAssignedUser">toggleAssignedUser</a></li><li><a href="global.html#toggleCategory">toggleCategory</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleUserDropdown">toggleUserDropdown</a></li><li><a href="global.html#toggleUserDropdownEdit">toggleUserDropdownEdit</a></li><li><a href="global.html#truncateDescription">truncateDescription</a></li><li><a href="global.html#updateTaskProgress">updateTaskProgress</a></li><li><a href="global.html#userInformationPopUp">userInformationPopUp</a></li><li><a href="global.html#validateBorderChange">validateBorderChange</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#validateForm2">validateForm2</a></li><li><a href="global.html#validateName">validateName</a></li><li><a href="global.html#validatePhone">validatePhone</a></li><li><a href="global.html#validateValue">validateValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Sep 02 2024 14:12:36 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

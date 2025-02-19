@@ -1,0 +1,160 @@
+.mainContent {
+    margin-left: 232px;
+    padding: 96px 96px 0 96px;
+    background-color: #f5f6f7;
+    height: calc(100vh - 96px);
+    overflow-y: scroll;
+}
+
+.topLine {
+    margin-top: 20px;
+    padding-bottom: 0;
+}
+
+h1 {
+    padding-top: 100px;
+    font-size: 61px;
+    margin-bottom: 32px;
+}
+
+h2 {
+    margin-top: 24px;
+    padding-bottom: 16px;
+    font-size: 28px;
+    font-weight: 800;
+}
+
+h3 {
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.backButton {
+    cursor: pointer;
+    position: fixed;
+    top: 215px;
+    right: 96px;
+    z-index: 1;
+}
+
+.backButton:hover {
+    background-color: #ededed;
+    border-radius: 50%;
+    scale: 1.1;
+}
+
+p {
+    padding-bottom: 24px;
+}
+
+span {
+    color: #29ABE2;
+}
+
+ol li {
+    font-weight: 800;
+    font-size: 21px;
+}
+.SecondP{
+    margin-bottom: 48px;
+}
+.mainContent::-webkit-scrollbar{
+    width: 10px;
+}
+.mainContent::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 140px;
+    margin-bottom: 48px; 
+}
+.mainContent::-webkit-scrollbar-thumb{
+    background-color:  #A8A8A8;
+    border-radius: 8px;
+    max-height: 80px;
+}
+
+.bottomText {
+    margin-bottom: 40px;
+}
+
+@media(max-width: 1100px){
+    .mainContent{
+        margin-left: 148px;
+    }
+}
+@media(max-width: 900px){
+    .mainContent{
+        margin-left: 0px;
+        padding: 64px 40px 0px 40px;
+    }
+    
+    h1{
+        padding-top: 64px;
+    }
+    .backButton{
+        right: 48px;
+        top: 148px;
+    } 
+    .mainContent::-webkit-scrollbar{
+        width: 8px;
+    }
+    .mainContent::-webkit-scrollbar-track{
+        margin-bottom: 100px; 
+    }
+}
+@media(max-width: 700px){
+    .mainContent{
+        margin-left: 0px;
+        padding: 64px 40px 0 40px;
+    }
+    h1 {
+        font-size: 47px;
+    }
+    p {
+        font-size: 16px;
+        padding-bottom: 8px;
+    }
+    h2{
+        margin-top: 0;
+    }
+}
+@media(max-width: 600px){
+    h1 {
+        padding-left: 0px;
+        margin-bottom: 24px;
+    }
+    .mainContent{
+        padding: 48px 24px 0 24px;
+    }
+    .backButton{
+        right: 40px;
+        top: 128px;
+    } 
+    .mainContent::-webkit-scrollbar-track{
+        margin-bottom: 48px; 
+    }
+}
+@media(max-width: 500px){
+    h1 {
+        padding-left: 0px;
+    }
+    .mainContent{
+        padding: 40px 8px 0 8px;
+    }
+    .backButton{
+        right: 16px;
+        top: 120px;
+    } 
+}
+@media(max-width: 400px){
+    h1 {
+        font-size: 38px;
+    }
+    .backButton{
+        right: 8px;
+        top: 116px;
+    } 
+    h2{
+        font-size: 20px;
+    }
+}

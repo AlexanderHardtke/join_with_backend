@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Task</title>
+  <link rel="icon" type="image/x-icon" href="../assets/icons/logo.png">
+  <link href="../styles/fonts.css" rel="stylesheet">
+  <link href="../styles/addTask.css" rel="stylesheet">
+  <link href="../styles/addTaskResponsive.css" rel="stylesheet">
+  <link href="../styles/header.css" rel="stylesheet">
+</head>
+
+<body onload="init('header'), loadFunctions()">
+
+  <div id="header"></div>
+
+  <main class="mainContent" id="mainContent"></main>
+
+
+    <div class="taskSuccessAdd dNone" id="taskSuccessAdd">
+      Task added to board
+      <img src="../assets/icons/boardWhite.png">
+    </div>
+
+
+  <script src="../script.js"></script>
+  <script src="../templates/templates.js"></script>
+  <script src="../scripts/addTask.js"></script>
+  <script src="../scripts/addTaskChange.js"></script>
+</body>
+
+</html>

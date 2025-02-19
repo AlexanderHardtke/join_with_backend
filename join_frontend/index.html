@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="./assets/icons/logo.png">
+  <link rel="stylesheet" href="./styles/fonts.css">
+  <link rel="stylesheet" href="./styles/login.css">
+  <link rel="stylesheet" href="./styles/singnUp.css">
+  <title>Join</title>
+
+</head>
+<body>
+  <div id="UserInfoPopUp" class="none"></div>
+  <section>
+    <div class="JoinLogoDistance">
+      <img class="JoinLogoStyle" src="./assets/icons/logo.png" >
+    </div>
+  </section>
+  <header class="MainPageHeader">
+    <div id="SignUpButtonWindow" class="LoginPageSignUp">
+      <span class="LoginPageSignUpText">Not a Join User?</span>
+      <button onclick="signUpWindow()" class="LoginPageSignUpButton">Sign up</button>
+    </div>
+  </header>
+  <main id="SignUpWindow" class="none"></main>
+  <main id="LoginWindow" class="LoginPageMain">
+    <div class="LoginTextLine">
+      <span class="LogInTextStyle">Log in</span>
+      <div class="LoginXLineStyle"></div>
+    </div>
+    <form id="loginForm">
+      <section class="LoginPageInputfields">
+          <div id="LoginInputIconID1" class="LoginInputIcon">
+            <input id="emailInputLogin" class="LoginInputfield" type="text" placeholder="Email">
+            <img class="LoginInputfieldIcon" src="./assets/icons/mail.png">
+          </div>
+          <div id="LoginInputIconID2" class="LoginInputIcon">
+            <input id="passwordInput1" class="LoginInputfield" type="password" placeholder="Password">
+            <div>
+                <img id="toggleIcon" onclick="togglePasswordVisibility('toggleIcon', 'passwordInput1')" class="LoginInputfieldIconLock" src="./assets/icons/lock.png">
+            </div> 
+          </div> 
+          <div class="LoginRememberCheck">
+            <label class="custom-checkbox">
+              <input id="rememberMe" class="LoginCheckbox" type="checkbox">
+              <span class="checkmark"></span>
+            </label>
+            <span class="checkmark2">Remember me</span>
+          </div>
+          
+      </section>
+    </form>
+    <div class="LoginPageGuestLogin">
+      <button class="LoginPageLoginButton" onclick="loginUser()">Log in</button>
+      <button class="LoginPageGuestButton" onclick="guestLogIn()">Guest Log in</button>
+    </div>
+  </main>
+  <section class="LogInPrivacyLegal">
+    <a class="LogInPrivacyLegalText"  href="./htmls/privacyPolicy.html">Privacy Policy</a>
+    <a class="LogInPrivacyLegalText"  href="./htmls/legalNotice.html">Legal notice</a>
+  </section>
+  <script type="module" src="./scripts/firebase.js"></script>
+  <script src="./templates/SignUpHtml.js" defer></script>
+  <script type="module" defer> 
+    import { submitToFirebase } from './scripts/SignUp.js';
+   </script>
+  <script type="module" src="./scripts/LogIn.js" defer></script>
+</body>
+</html>

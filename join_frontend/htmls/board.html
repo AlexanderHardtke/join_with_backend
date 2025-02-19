@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../assets/icons/logo.png">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../style.css">
+  <link rel="stylesheet" href="../styles/board.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <link rel="stylesheet" href="../styles/detailboard.css">
+  <link rel="stylesheet" href="../styles/addTaskBoard.css">
+  <link rel="stylesheet" href="../styles/boardresponsive.css">
+  <script src="../script.js"></script>
+  <script src="../templates/templates.js"></script>
+  <script src="../templates/boardTemplates.js"></script>
+  <script src="../scripts/board.js"></script>
+  <script src="../scripts/searchTask.js"></script>
+  <script src="../scripts/detailTask.js"></script>
+  <script src="../scripts/editTask.js"></script>
+  <script src="../scripts/addTaskBoard.js"></script>
+  <script src="../scripts/addTaskChange.js"></script>
+  <title>Board</title>
+</head>
+
+<body onload="init('headerBoard'), loadAll()">
+  <header id="headerBoard"></header>
+
+  <div class="addTaskoverlay dNone slideinright" id="addTaskoverlay" onclick="closeAddTask()">
+    <main class="mainContent" id="mainContent"></main>
+  </div>
+  <section class="boardHeadline">
+    <div class="headlineAndSearch">
+      <div class="headlineBox">
+        <h1>Board</h1>
+        <button class="plusButton"><img class="plus" src="../assets/icons/addWhiteNoBorder.png"  alt="" onclick="loadFunctions()"></button>
+      </div>
+
+      <div class="searchContainer">
+        <div class="searchWrapper">
+          <input type="text" id="searchInput" class="searchTaskInput" placeholder="Find Task" oninput="searchTask()">
+          <div class="verticalLine"></div>
+          <img class="searchButton" src="../assets/icons/search.png" alt="Search" onclick="searchTask()">
+        </div>
+        <button class="btnAddTask" id="btnAddTask" onclick="loadFunctions()">
+          Add task <img src="../assets/icons/addWhiteNoBorder.png" alt="">
+        </button>
+      </div>
+    </div>
+
+
+    <div class="allTasks" id="allTasks">
+      <div>
+        <div class="headlineTasks">
+          <a href="#">To do</a>
+          <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
+        </div>
+        <div class="moveBox" id="toDo" ondrop="moveTo('toDo')" ondragover="allowDrop(event)" ondragenter="highlightBox('toDo')" ondragleave="handleDropLeave(event, 'toDo')"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">In progress</a>
+          <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
+        </div>
+        <div class="moveBox" id="inProgress" ondrop="moveTo('inProgress')" ondragover="allowDrop(event)" ondragenter="highlightBox('inProgress')" ondragleave="handleDropLeave(event, 'inProgress')"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">Await feedback</a>
+          <img onclick="loadFunctions()" src="../assets/icons/add.png" alt="">
+        </div>
+        <div class="moveBox" id="awaitFeedback" ondrop="moveTo('awaitFeedback')" ondragover="allowDrop(event)" ondragenter="highlightBox('awaitFeedback')" ondragleave="handleDropLeave(event, 'awaitFeedback')"></div>
+      </div>
+
+      <div>
+        <div class="headlineTasks">
+          <a href="#">Done</a>
+        </div>
+        <div class="moveBox" id="done" ondrop="moveTo('done')" ondragover="allowDrop(event)" ondragenter="highlightBox('done')" ondragleave="handleDropLeave(event, 'done')"></div>
+      </div>
+    </div>
+
+    <div id="containerTasksDetail" onclick="closeTaskWithOverlay ()" class="containerTasksDetail d-none slideinright">
+      <div id="taskDetailCard"></div>
+    </div>
+  </section>
+
+  <div class="taskSuccessAdd dNone" id="taskSuccessAdd">
+    Task added to board
+    <img src="../assets/icons/boardWhite.png">
+  </div>
+  
+</body>
+</html>

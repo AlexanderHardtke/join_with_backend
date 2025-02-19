@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/x-icon" href="../assets/icons/logo.png">
+  <title>Summary</title>
+  <link rel="stylesheet" href="../styles/summary.css">
+  <link rel="stylesheet" href="../styles/fonts.css">
+  <link rel="stylesheet" href="../styles/header.css">
+  <script src="../script.js"></script>
+  <script src="../templates/templates.js"></script>
+</head>
+<body onload="init('headerContact')">
+  <header id="headerContact"></header>
+  <main class="SummaryMain">
+    <section class="SummarySection">
+      <header id="SummaryheaderheadlineNone" class="Summaryheaderheadline">
+        <span class="headerheadlinefirst">Join 360</span>
+        <div class="SummaryYLine"></div>
+        <span class="headerheadlinesecond">Key Metrics at a Glance</span> 
+        <div class="SummaryXLineHeader"></div>
+      </header>
+      <section class="SummaryFirstSection">
+        <div id="SummaryLeftToDoNone" class="SummaryLeftToDo">
+          <div class="SummaryLeftToDoFirst">
+            <button onclick="window.location.href='../htmls/board.html'" onmouseover="toDoChangeOn('ChangeIcon1')" onmouseout="toDoChangeOut('ChangeIcon1')" class="SummaryButtonFirst">
+              <div id="ChangeIcon1">
+                <img class="SummaryCircleDark" src="../assets/icons/editCircleDark.png">
+              </div>
+              <div class="SummaryCountText">
+                <span  id="SummaryToDoCount" class="SummaryCount"></span>
+                <span class="SummaryText">To-do</span>
+              </div>
+            </button>
+            <button onclick="window.location.href='../htmls/board.html'" onmouseover="toDoChangeOn('ChangeIcon2')" onmouseout="toDoChangeOut('ChangeIcon2')" class="SummaryButtonFirst">
+              <div id="ChangeIcon2">
+                <img class="SummaryCircleDark" src="../assets/icons/checkCircleDark.png">
+              </div>
+              <div class="SummaryCountText">
+                <span  id="SummaryDoneCount" class="SummaryCount"></span>
+                <span class="SummaryText">Done</span>
+              </div>
+            </button> 
+          </div>
+          <button onclick="window.location.href='../htmls/board.html'" class="SummaryLeftSecond">
+            <div class="SummaryButtonSecond">
+              <div>
+                <img class="SummaryCircleDark2" src="../assets/icons/prioUrgentCircle.png">
+              </div>
+              <div class="SummaryCountText">
+                <span id="SummaryCount"  class="SummaryCount"></span>
+                <span class="SummaryText1">Urgent</span>
+              </div>
+            </div>
+            <div class="SummarySecondYLine"></div>
+            <div class="SummarySecondDeadline">
+              <span id="currentDate" class="SummarySecondDate"></span>
+              <span class="SummarySecondDeadlineText">Upcoming Deadline</span>
+            </div>
+          </button>
+          <div class="SummaryLeftToDoThird">
+            <button onclick="window.location.href='../htmls/board.html'" class="SummaryButtonThird1">
+              <span id="SummaryBoardCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Tasks in</span>
+              <span class="SummaryAreaThirdText">Board</span>
+            </button>
+            <button onclick="window.location.href='../htmls/board.html'" class="SummaryButtonThird2">
+              <span id="SummaryTaskProgressCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Tasks in</span>
+              <span class="SummaryAreaThirdText">Progress</span>
+            </button>
+            <button onclick="window.location.href='../htmls/board.html'" class="SummaryButtonThird3">
+              <span  id="SummaryAwaitFeedbackCount" class="SummaryAreaThird"></span>
+              <span class="SummaryAreaThirdText">Awaiting</span>
+              <span class="SummaryAreaThirdText">Feedback</span>
+            </button>
+          </div>
+        </div>
+        <section id="SummaryRightSectionNone" class="SummaryRightSection">
+          <span id="Timewelcome" class="SummaryRightSectionText1"></span>
+          <span id="UserLogGoodMorning" class="SummaryRightSectionText2"></span>
+        </section>
+      </section>
+    </section>
+  </main>
+  <script src="../scripts/Summary.js"></script>
+</body>
+</html>

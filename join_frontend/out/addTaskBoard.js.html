@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: addTaskBoard.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: addTaskBoard.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>const dateInput = document.getElementById('dueDateInput');
+
+let tasks = [
+    {
+        'category': '',
+        'date': '',
+        'description': '',
+        'id': '',
+        'prio': '/assets/icons/prioMedium.png',
+        'prioName': 'Medium',
+        'section': 'toDo',
+        'subtasks': [],
+        'title': '',
+        'assignedInitals': [],
+        'assignedName': [],
+        'color': [],
+    },
+];
+let task = tasks[0];
+
+/**
+ * Loads the initial tasks for the addTask.html unless you are on mobile then open addTask.html
+ */
+function loadFunctions() {
+    if (window.innerWidth &lt;= 1040) {
+        window.location.href = 'addTask.html';
+    }
+    else {
+        loadAddTaskComplete();
+        activateprioButton(1);
+        getusers();
+        searchUsers();
+        openAddTask();
+    }
+}
+
+
+document.addEventListener('focusout', (event) => {
+    if (event.target &amp;&amp; event.target.id === 'subtasksInput') {
+        showSubtaskIcons();
+    }
+});
+
+
+if (dateInput) {
+    dateInput.addEventListener('input', function () {
+        if (dateInput.value) {
+            dateInput.classList.add('has-value');
+        } else {
+            dateInput.classList.remove('has-value');
+        }
+    });
+}
+
+
+document.addEventListener('dblclick', function (dblclickEvent) {
+    let subTaskInput0 = document.getElementById("subTaskBox0");
+    let subTaskInput1 = document.getElementById("subTaskBox1");
+    if (subTaskInput0 &amp;&amp; subTaskInput0.contains(dblclickEvent.target)) {
+        editSubtask(0);
+    }
+    else if (subTaskInput1 &amp;&amp; subTaskInput1.contains(dblclickEvent.target)) {
+        editSubtask(1);
+    }
+});
+
+
+document.addEventListener('click', function (clickEvent) {
+    let dropdown = document.getElementById("dropdown");
+    let button = document.getElementById('userButton');
+    if (dropdown &amp;&amp; button &amp;&amp; !dropdown.contains(clickEvent.target) &amp;&amp; !button.contains(clickEvent.target) &amp;&amp; !dropdown.classList.contains('dNone')) {
+        toggleUserDropdown();
+    }
+});
+
+
+/**
+ * Opens the AddTask Window in the board.html
+ */
+function openAddTask() {
+    document.getElementById('addTaskoverlay').classList.remove('dNone');
+    document.getElementById('xButton').classList.remove('dNone');
+}
+
+
+/**
+ * Closes the AddTask Window in the board.html if you click on the Overlay
+ */
+function closeAddTask() {
+    if (event.target.id === 'addTaskoverlay') {
+        document.getElementById('addTaskoverlay').classList.add('dNone');
+        document.getElementById('xButton').classList.add('dNone');
+    }
+}
+
+
+/**
+ * Closes the AddTask Window in the board.html
+ */
+function closeAddTask2() {
+    document.getElementById('addTaskoverlay').classList.add('dNone');
+    document.getElementById('xButton').classList.add('dNone');
+}
+/**
+ * Resets all priority Buttons and activates the clicked priority Button and it's Function
+ * 
+ * @param {number} i This is the number of the priority Button
+ */
+function activateprioButton(i) {
+    resetprioButtons()
+    switch (i) {
+        case 0:
+            setPrioHigh(task);
+            break;
+        case 1:
+            setPrioMedium(task);
+            break;
+        case 2:
+            setPrioLow(task);
+            break;
+    }
+}
+
+
+/**
+ * Breaks up the array and load the individual user
+ * 
+ */
+function getusers() {
+    document.getElementById('dropdownUsers').innerHTML = ``;
+    document.getElementById('assignedUsers').innerHTML = ``;
+    for (let i = 0; i &lt; contactAllArray.length; i++) {
+        let user = contactAllArray[i];
+        loadUser(user, i)
+    }
+}
+
+
+/**
+ * Gets the initials of the individual user and starts the render Function for the dropdown Menu
+ * 
+ * @param {Object} user The individual User in the Array
+ * @param {number} i The index of the Object in the Array
+ */
+function loadUser(user, i) {
+    let nameParts = user.name.split(' ');
+    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
+    renderAssignedTo(user, initials, i);
+    renderAssignedUser(user, initials, i);
+}
+
+
+/**
+ * Selects the Category in the dropdown Menu and resets it if the same one is clicked and sets it into the array task
+ * 
+ * @param {string} cat This string contains the category
+ */
+function selectCategory(cat) {
+    let userstory = document.getElementById('userStory');
+    let techTask = document.getElementById('techTask');
+    if (cat === "User Story" &amp;&amp; !userstory.classList.contains('dropdownButtonSelected')) {
+        selectUserStory(userstory, techTask)
+    }
+    else if (cat === "Technical Task" &amp;&amp; !techTask.classList.contains('dropdownButtonSelected')) {
+        selectTechTask(userstory, techTask)
+    }
+    else {
+        clearCategory();
+    }
+    task['category'] = cat;
+    toggleCategory()
+}
+
+
+/**
+ * Sets the focus on the subtask input field
+ */
+function showSubtask() {
+    document.getElementById('subtasksInput').focus();
+}
+
+
+/**
+ * Pushes the subtask input field into the task Array and puts it into a subtaskbox
+ * 
+ * @param {string} input The value of the subtask input
+ */
+function createSubtask(input) {
+    if (task['subtasks'][0] === null || task['subtasks'].length === 0) {
+        putSubTask(input, 0);
+        task['subtasks'].splice(0, 1, input);
+        clearSubtaskInput(0);
+    }
+    else if (task['subtasks'][1] === null || task['subtasks'].length === 1) {
+        putSubTask(input, 1);
+        task['subtasks'].splice(1, 1, input);
+        clearSubtaskInput(1);
+    }
+    else {
+        document.getElementById('inputerrorSubTask2').style.display = 'block';
+        document.getElementById('subtasksInput').classList.add('redInputBorder');
+    }
+}
+
+
+/**
+ * clears the value of the subtask input field
+ */
+function clearSubtaskInput() {
+    document.getElementById('subtasksInput').value = "";
+}
+
+
+/**
+ * clears all Input Fields and buttons and puts them into their default state
+ */
+function clearAddTask() {
+    getusers();
+    document.getElementById('titleInput').value = "";
+    document.getElementById('descriptionInput').value = "";
+    document.getElementById('dueDateInput').value = "";
+    document.getElementById('subtasksInput').value = "";
+    activateprioButton(1);
+    clearCategory();
+    clearSubtask(0);
+    clearSubtask(1);
+}
+
+
+/**
+ * Creates a new Task and adds it to the local storage
+ * 
+ * @returns stops the function if not all inputs needed are filled
+ */
+function createTask() {
+    setArray();
+    if (!checkInputs()) {
+        return;
+    }
+    save();
+    closeAddTask2();
+    clearAddTask();
+    loadAll();
+}
+
+
+/**
+ * checks if all 3 inputs are filled
+ * 
+ * @returns true if all inputs are validated
+ */
+function checkInputs() {
+    let checked = true;
+    checked = checkInput1(checked);
+    checked = checkInput2(checked);
+    checked = checkInput3(checked);
+    return checked;
+}
+
+
+/**
+ * fills the Object [task] with all inputs from the user
+ */
+function setArray() {
+    let users = document.getElementsByClassName('dropdownButton');
+    for (let i = 0; i &lt; users.length; i++) {
+        if (users[i].classList.contains('dropdownButtonSelectedUser')) {
+            task['assignedName'].push(document.getElementById(`searchUserName${i}`).innerText);
+            task['assignedInitals'].push(document.getElementById(`userCircle${i}`).innerText);
+            task['color'].push(document.getElementById(`userCircle${i}`).style.backgroundColor);
+        }
+    }
+    task['date'] = changeDateFormat();
+    task['description'] = document.getElementById('descriptionInput').value;
+    let id = taskAllArray.length;
+    task['id'] = id;
+    task['title'] = document.getElementById('titleInput').value;
+}
+
+
+/**
+ * Changes Date format from Input to German format
+ * 
+ * @returns formatted Date in German
+ */
+function changeDateFormat() {
+    let date = document.getElementById('dueDateInput').value;
+    let formattedDate = date.replace(/-/g, '/');
+    let [year, month, day] = formattedDate.split('/');
+    let formattedDateStr = `${day}/${month}/${year}`;
+    return formattedDateStr;
+}
+
+
+/**
+ * checks if the searchUser input is filled and pushes the info to the function searchuser()
+ */
+function searchUsers() {
+    let timeout;
+    document.getElementById('searchUser').addEventListener('input', function () {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            searchUser(this.value);
+        }, 300);
+    })
+};
+
+
+/**
+ * filters the dropdown users by the input and only shows the users that matches the input
+ * 
+ * @param {string} input the input the user writes in searchUser ID
+ */
+function searchUser(input) {
+    input = input.toLowerCase();
+    let users = document.getElementsByClassName('dropdownButton');
+    for (let i = 0; i &lt; users.length; i++) {
+        let userNameElement = users[i].getElementsByClassName('searchUserName')[0];
+        let userName = userNameElement.innerHTML;
+        const id = userName.toLowerCase();
+        if (input.length >= 3) {
+            if (id.includes(input)) {
+                users[i].style.display = 'flex';
+            } else {
+                users[i].style.display = 'none';
+            }
+        } else {
+            users[i].style.display = 'flex';
+        }
+    }
+}
+
+
+/**
+ * pushes the current taskAllArray into the local storage Array
+ */
+function save() {
+    taskAllArray.push(task);
+    let tasksAsText = JSON.stringify(taskAllArray);
+    localStorage.setItem('taskAllArray', tasksAsText);
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LoginGoodMorning">LoginGoodMorning</a></li><li><a href="global.html#SignUpLoad">SignUpLoad</a></li><li><a href="global.html#SignUpLoad2">SignUpLoad2</a></li><li><a href="global.html#activateprioButton">activateprioButton</a></li><li><a href="global.html#addInputListeners">addInputListeners</a></li><li><a href="global.html#allowDrop">allowDrop</a></li><li><a href="global.html#applyFocusAndValidation">applyFocusAndValidation</a></li><li><a href="global.html#applyFocusAndValidation2">applyFocusAndValidation2</a></li><li><a href="global.html#backToLogin">backToLogin</a></li><li><a href="global.html#booleanForContact">booleanForContact</a></li><li><a href="global.html#calculateSubtaskProgress">calculateSubtaskProgress</a></li><li><a href="global.html#capitalizeFirstLetter">capitalizeFirstLetter</a></li><li><a href="global.html#changeDateFormat">changeDateFormat</a></li><li><a href="global.html#changeDateFormatEdit">changeDateFormatEdit</a></li><li><a href="global.html#changeSubtask">changeSubtask</a></li><li><a href="global.html#checkInput1">checkInput1</a></li><li><a href="global.html#checkInput2">checkInput2</a></li><li><a href="global.html#checkInput3">checkInput3</a></li><li><a href="global.html#checkInputs">checkInputs</a></li><li><a href="global.html#checkSubtask">checkSubtask</a></li><li><a href="global.html#checkWidthAndExecute">checkWidthAndExecute</a></li><li><a href="global.html#cleanarray">cleanarray</a></li><li><a href="global.html#clearAddTask">clearAddTask</a></li><li><a href="global.html#clearCategory">clearCategory</a></li><li><a href="global.html#clearSubtask">clearSubtask</a></li><li><a href="global.html#clearSubtaskInput">clearSubtaskInput</a></li><li><a href="global.html#closeAddTask">closeAddTask</a></li><li><a href="global.html#closeAddTask2">closeAddTask2</a></li><li><a href="global.html#contactInfo">contactInfo</a></li><li><a href="global.html#contactLoad">contactLoad</a></li><li><a href="global.html#contactLoadTargetid">contactLoadTargetid</a></li><li><a href="global.html#contactWindowSmallSize">contactWindowSmallSize</a></li><li><a href="global.html#contactloadchar">contactloadchar</a></li><li><a href="global.html#contactloadcontainer">contactloadcontainer</a></li><li><a href="global.html#contactloadcontainer1">contactloadcontainer1</a></li><li><a href="global.html#contactloadcontainer2">contactloadcontainer2</a></li><li><a href="global.html#contactloadcontainer3">contactloadcontainer3</a></li><li><a href="global.html#contactloadcontainer4">contactloadcontainer4</a></li><li><a href="global.html#contactloadcontainer5">contactloadcontainer5</a></li><li><a href="global.html#contactloadcontainer6">contactloadcontainer6</a></li><li><a href="global.html#convertDateFormat">convertDateFormat</a></li><li><a href="global.html#createNewContact">createNewContact</a></li><li><a href="global.html#createSubtask">createSubtask</a></li><li><a href="global.html#createTask">createTask</a></li><li><a href="global.html#decryptPassword">decryptPassword</a></li><li><a href="global.html#deleteContactList">deleteContactList</a></li><li><a href="global.html#deleteSubtask">deleteSubtask</a></li><li><a href="global.html#editContactCloseWindow">editContactCloseWindow</a></li><li><a href="global.html#editContactShowWindow">editContactShowWindow</a></li><li><a href="global.html#editDeleteChoice">editDeleteChoice</a></li><li><a href="global.html#editDeleteWindow">editDeleteWindow</a></li><li><a href="global.html#editNewContact">editNewContact</a></li><li><a href="global.html#editNewContactChange">editNewContactChange</a></li><li><a href="global.html#editNewContactHtml2">editNewContactHtml2</a></li><li><a href="global.html#editNewContactHtmlChange">editNewContactHtmlChange</a></li><li><a href="global.html#editNewContactSave">editNewContactSave</a></li><li><a href="global.html#editNewContactSave1">editNewContactSave1</a></li><li><a href="global.html#editNewContactSave2">editNewContactSave2</a></li><li><a href="global.html#editSubtask">editSubtask</a></li><li><a href="global.html#encryptPassword">encryptPassword</a></li><li><a href="global.html#fetchContactTask">fetchContactTask</a></li><li><a href="global.html#fetchContactTask2">fetchContactTask2</a></li><li><a href="global.html#formatCategoryClass">formatCategoryClass</a></li><li><a href="global.html#formatPhoneNumber">formatPhoneNumber</a></li><li><a href="global.html#formatSectionName">formatSectionName</a></li><li><a href="global.html#generateInitialsAndPriorityHTML">generateInitialsAndPriorityHTML</a></li><li><a href="global.html#generateSubtaskProgressHTML">generateSubtaskProgressHTML</a></li><li><a href="global.html#generateTasksHTML">generateTasksHTML</a></li><li><a href="global.html#getInitialsToShow">getInitialsToShow</a></li><li><a href="global.html#getRandomColor">getRandomColor</a></li><li><a href="global.html#getusers">getusers</a></li><li><a href="global.html#goBackToContacts">goBackToContacts</a></li><li><a href="global.html#goToBoard">goToBoard</a></li><li><a href="global.html#guestLogIN">guestLogIN</a></li><li><a href="global.html#load">load</a></li><li><a href="global.html#loadAll">loadAll</a></li><li><a href="global.html#loadContact">loadContact</a></li><li><a href="global.html#loadFunctions">loadFunctions</a></li><li><a href="global.html#loadMembers">loadMembers</a></li><li><a href="global.html#loadRememberedData">loadRememberedData</a></li><li><a href="global.html#loadTaskProgress">loadTaskProgress</a></li><li><a href="global.html#loadTasks">loadTasks</a></li><li><a href="global.html#loadUser">loadUser</a></li><li><a href="global.html#logInAnimation">logInAnimation</a></li><li><a href="global.html#logInvalidateEmail">logInvalidateEmail</a></li><li><a href="global.html#logInvalidateEmail1">logInvalidateEmail1</a></li><li><a href="global.html#logInvalidateEmail2">logInvalidateEmail2</a></li><li><a href="global.html#logInvalidatePassword">logInvalidatePassword</a></li><li><a href="global.html#loginUser">loginUser</a></li><li><a href="global.html#loginUser1">loginUser1</a></li><li><a href="global.html#loginUser2">loginUser2</a></li><li><a href="global.html#moveTo">moveTo</a></li><li><a href="global.html#onmouse">onmouse</a></li><li><a href="global.html#onmouseClose">onmouseClose</a></li><li><a href="global.html#openAddTask">openAddTask</a></li><li><a href="global.html#outmouse">outmouse</a></li><li><a href="global.html#outmouseClose">outmouseClose</a></li><li><a href="global.html#protect">protect</a></li><li><a href="global.html#renderAllTasks">renderAllTasks</a></li><li><a href="global.html#renderFilteredTasks">renderFilteredTasks</a></li><li><a href="global.html#renderInitials">renderInitials</a></li><li><a href="global.html#renderSection">renderSection</a></li><li><a href="global.html#renderSubtaskProgress">renderSubtaskProgress</a></li><li><a href="global.html#renderTasksInSection">renderTasksInSection</a></li><li><a href="global.html#resetEmailBorderOnBlur">resetEmailBorderOnBlur</a></li><li><a href="global.html#resetPasswordBorderOnBlur">resetPasswordBorderOnBlur</a></li><li><a href="global.html#resetprioButtons">resetprioButtons</a></li><li><a href="global.html#save">save</a></li><li><a href="global.html#saveTasksToLocalStorage">saveTasksToLocalStorage</a></li><li><a href="global.html#searchTask">searchTask</a></li><li><a href="global.html#searchUser">searchUser</a></li><li><a href="global.html#searchUsers">searchUsers</a></li><li><a href="global.html#selectCategory">selectCategory</a></li><li><a href="global.html#selectTechTask">selectTechTask</a></li><li><a href="global.html#selectUserStory">selectUserStory</a></li><li><a href="global.html#setArray">setArray</a></li><li><a href="global.html#setContactDetails">setContactDetails</a></li><li><a href="global.html#setPrioHigh">setPrioHigh</a></li><li><a href="global.html#setPrioLow">setPrioLow</a></li><li><a href="global.html#setPrioMedium">setPrioMedium</a></li><li><a href="global.html#setTimeBasedGreeting">setTimeBasedGreeting</a></li><li><a href="global.html#showSubtask">showSubtask</a></li><li><a href="global.html#showSubtaskIcons">showSubtaskIcons</a></li><li><a href="global.html#showSuccessTask">showSuccessTask</a></li><li><a href="global.html#signUpWindow">signUpWindow</a></li><li><a href="global.html#startDragging">startDragging</a></li><li><a href="global.html#submitToFirebase">submitToFirebase</a></li><li><a href="global.html#submitToFirebase1">submitToFirebase1</a></li><li><a href="global.html#submitToFirebase2">submitToFirebase2</a></li><li><a href="global.html#summaryLoad">summaryLoad</a></li><li><a href="global.html#summarySectionCheck">summarySectionCheck</a></li><li><a href="global.html#summarySectionCheck2">summarySectionCheck2</a></li><li><a href="global.html#summarySectionCheck3">summarySectionCheck3</a></li><li><a href="global.html#summarySectionCheck4">summarySectionCheck4</a></li><li><a href="global.html#summarySectionCheck5">summarySectionCheck5</a></li><li><a href="global.html#toDoChangeOn">toDoChangeOn</a></li><li><a href="global.html#toDoChangeOut">toDoChangeOut</a></li><li><a href="global.html#toggleAssignedUser">toggleAssignedUser</a></li><li><a href="global.html#toggleCategory">toggleCategory</a></li><li><a href="global.html#togglePasswordVisibility">togglePasswordVisibility</a></li><li><a href="global.html#toggleUserDropdown">toggleUserDropdown</a></li><li><a href="global.html#toggleUserDropdownEdit">toggleUserDropdownEdit</a></li><li><a href="global.html#truncateDescription">truncateDescription</a></li><li><a href="global.html#updateTaskProgress">updateTaskProgress</a></li><li><a href="global.html#userInformationPopUp">userInformationPopUp</a></li><li><a href="global.html#validateBorderChange">validateBorderChange</a></li><li><a href="global.html#validateCheckbox">validateCheckbox</a></li><li><a href="global.html#validateConfirmPassword">validateConfirmPassword</a></li><li><a href="global.html#validateEmail">validateEmail</a></li><li><a href="global.html#validateForm">validateForm</a></li><li><a href="global.html#validateForm2">validateForm2</a></li><li><a href="global.html#validateName">validateName</a></li><li><a href="global.html#validatePhone">validatePhone</a></li><li><a href="global.html#validateValue">validateValue</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Sep 02 2024 14:12:36 GMT+0200 (Mitteleuropäische Sommerzeit)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

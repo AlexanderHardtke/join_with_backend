@@ -1,0 +1,541 @@
+
+
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter';
+    overflow-y: hidden;
+    background-color: rgb(246, 247, 248);
+}
+.SummaryMain{
+    display: flex;
+    overflow-y: scroll;
+    flex-direction: column;
+    height: 1024px;
+    width: -webkit-fill-available;
+    position: absolute;
+    z-index: 1;
+    scrollbar-width: none;
+}
+.Summaryheaderheadline{
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    height: 73px;
+    margin-left: 12px;
+}
+.SummarySection{
+    margin-top: 206px;
+    margin-left: 320px;
+}
+.headerheadlinefirst{
+    font-size: 61px;
+    font-weight: 700;
+}
+.SummaryYLine{
+    height: 60px;
+    width: 3px;
+    background-color: #29ABE2;
+}
+.SummaryCircleDark{
+    width: 69px;
+    height: 69px;
+    pointer-events: none;
+}
+.SummaryCircleDark2{
+    width: 60px;
+    height: 60px;
+}
+.headerheadlinesecond{
+    font-size: 27px;
+    font-weight: 400;
+}
+.SummaryFirstSection{
+    margin-top: 56px;
+    margin-left: 12px;
+    display: flex;
+    align-items: center;
+    margin-right: 100px;
+    margin-bottom: 300px;
+}
+.SummaryLeftToDo{
+    margin-bottom: 16px;
+    height: 562px;
+    width: 560px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.SummaryMain::-webkit-scrollbar{
+    display: none;
+}
+
+.SummaryLeftToDoFirst{
+    height: 168px;
+    width: 560px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+.SummaryButtonFirst{
+    width: 264px;
+    height: 168px;
+    border-radius: 30px;
+    gap: 18px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-style: none;
+    background-color: white;
+}
+.SummaryButtonFirst:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+}
+.SummaryCount{
+    font-size: 64px;
+    font-weight: 600;
+}
+.SummaryText{
+    font-size: 20px;
+    font-weight: 400;
+}
+.SummaryText1{
+    font-size: 16px;
+    font-weight: 400;
+}
+.SummaryCountText{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.SummaryButtonSecond{
+    width: 130px;
+    height: 96px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+}
+.SummaryLeftSecond{
+    height: 168px;
+    width: 560px;
+    border-radius: 30px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 61px;
+    border-style: none;
+    background-color: white;
+}
+.SummaryLeftSecond:hover {
+    transform: scale(1.02);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+}
+.SummarySecondYLine{
+    height: 102px;
+    width: 2px;
+    background-color: #D1D1D1;
+}
+.SummarySecondDeadline{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    align-items: start;
+}
+.SummarySecondDate{
+    font-size: 21px;
+    font-weight: 700;
+    height: 34px;
+}
+.SummarySecondDeadlineText{
+    font-weight: 400;
+    font-size: 16px;
+}
+.SummaryLeftToDoThird{
+    width: 100%;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.SummaryButtonThird1{
+    height: 168px;
+    width: 168px;
+    margin-top: 1px;
+    border-radius: 30px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: none;
+    background-color: white;
+    align-items: center;
+}
+.SummaryButtonThird1:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+}
+.SummaryButtonThird2{
+    height: 168px;
+    width: 168px;
+    margin-top: 1px;
+    border-radius: 30px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: none;
+    background-color: white;
+    align-items: center;
+}
+.SummaryButtonThird2:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+}
+.SummaryButtonThird3{
+    height: 168px;
+    width: 168px;
+    margin-top: 1px;
+    border-radius: 30px;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-style: none;
+    background-color: white;
+    align-items: center;
+}
+.SummaryButtonThird3:hover {
+    transform: scale(1.05);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.3);
+    background-color: #2A3647;
+    cursor: pointer;
+    color: white;
+}
+.SummaryAreaThird{
+    font-size: 64px;
+    font-weight: 600;
+}
+.SummaryAreaThirdText{
+    font-size: 20px;
+    font-weight: 400;
+}
+.SummaryRightSection{
+    height: 136px;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin-left: 75px;
+}
+.SummaryRightSectionText1{
+    font-size: 47px;
+    font-weight: 500;
+}
+.SummaryRightSectionText2{
+    font-size: 64px;
+    font-weight: 700;
+    color: #29ABE2;
+}
+
+@media(max-width: 1400px){
+    
+    body{
+        height: 1024px;
+    }
+    .SummaryLeftToDo{
+        display: none;
+    }
+    .Summaryheaderheadline{
+        display: none;
+    }
+    .SummaryRightSection{
+        width: 100%;
+        margin-left: 0px;
+        margin-top: 64px;
+        
+    }
+    .SummaryRightSectionText1{
+        display: flex;
+        justify-content: center;
+    }
+    .SummaryFirstSection{
+        margin-right: 0;
+        margin-top: 56px;
+        margin-left: 0px;
+    }
+    .SummaryRightSectionText2{
+        display: flex;
+        justify-content: center;
+    }
+    .SummaryMain{
+        height: 924px;
+        position: unset;
+        width: calc(100% - 232px);
+        margin-left: 232px;
+    }
+    .SummaryLeftSecond{
+        gap: 40px;
+    }
+    .SummarySection{
+        margin-left: 0px;
+        display: flex;
+        width: 100%;
+        margin-top: 206px;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+    .SummaryMain::-webkit-scrollbar-track{
+        margin-bottom: 230px; 
+    }
+}
+
+@media(max-width: 1100px){
+    .SummaryMain{
+        width: calc(100% - 148px);
+        margin-left: 148px;
+    }
+}
+
+@media(max-width: 900px){
+    .SummaryMain{
+        height: calc(100vh - 80px);
+        width: 100%;
+        margin-left: 0;
+        overflow: hidden;
+    }
+    body{
+        height: calc(100vh - 100px);
+    }
+    .SummarySection{
+        margin-top: 120px;
+    }
+    .headerheadlinefirst {
+        font-size: 47px;
+    }
+    .headerheadlinesecond{
+        font-size: 20px;
+    }
+    .SummaryLeftToDo{
+        width: 396px;
+        height: 384px;
+    }
+    .SummaryLeftToDoFirst{
+        height: 110px;
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .SummaryButtonFirst{
+        height: 110px;
+        width: 240px;
+    }
+    .SummaryFirstSection{
+        margin-top: 32px;
+    }
+    .SummaryLeftToDoThird{
+        height: auto;
+    }
+    .Summaryheaderheadline{
+        margin-left: 0;
+    }
+    .SummaryCircleDark{
+        height: 56px;
+        width: 56px;
+    }
+    .SummaryCircleDark2{
+        width: 48px;
+        height: 48px;
+    }
+    .SummaryCount{
+        font-size: 47px;
+    }
+    .SummaryLeftToDo{
+        width: 496px;
+    }
+    .SummaryLeftSecond{
+        width: 496px;
+        gap: 40px;
+        height: 110px;
+    }
+    .SummaryButtonSecond{
+        gap: 18px;
+    }
+    .SummaryRightSection{
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        margin-top: 0;
+    }
+    .SummaryButtonThird3{
+        height: 110px;
+        width: 156px;
+    }
+    .SummaryButtonThird2{
+        height: 110px;
+        width: 156px;
+    }
+    .SummaryButtonThird1{
+        height: 110px;
+        width: 156px;
+    }
+    .SummaryAreaThird{
+        font-size: 47px;
+    }
+    .SummaryAreaThirdText{
+        font-size: 16px;
+    }
+    .SummaryText{
+        font-size: 16px;
+    }
+    .SummaryYLine{
+        height: 50px;
+    } 
+    .SummarySecondYLine{
+        height: 68px;
+    }
+}
+@media(max-width: 600px){
+    .SummaryLeftToDo{
+        width: 396px;
+    }
+    .SummaryButtonFirst{
+        width: 186px;
+        border-radius: 20px;
+        gap: 10px;
+    }
+    .SummaryLeftSecond{
+        width: 396px;
+        gap: 32px;
+    }
+    .SummaryCircleDark{
+        width: 40px;
+        height: 40px;
+    }
+    .SummaryText {
+        font-size: 14px;
+    }
+    .SummaryRightSectionText1{
+        font-size: 36px;
+    }
+    .SummaryRightSectionText2{
+        font-size: 47px;
+    }
+    .SummaryButtonSecond{
+        gap: 10px;
+        width: fit-content;
+    }
+    .SummarySecondDate{
+        font-size: 16px;
+    }
+    .SummarySecondDeadlineText{
+        font-size: 14px;
+    }
+    .SummaryButtonThird3{
+        height: 116px;
+        width: 116px;
+    }
+    .SummaryButtonThird2{
+        height: 116px;
+        width: 116px;
+    }
+    .SummaryButtonThird1{
+        height: 116px;
+        width: 116px;
+    }
+    .SummaryAreaThirdText{
+        font-size: 14px;
+    }
+    .SummaryXLineHeader{
+        height: 3px;
+        width: 90px;
+        background-color: #29ABE2;
+    }
+    .SummaryYLine{
+        display: none;
+    }
+    .none{
+        display: none;
+    }
+    .Summaryheaderheadline{
+       flex-direction: column;
+        gap: 0;
+        height: auto;
+        width: 396px;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    .SummarySection{
+        margin-top: 104px;
+    }
+    .SummaryFirstSection{
+        margin-top: 40px;
+    }
+}
+@media (max-width: 600px) and (min-height: 900px) {
+    .SummarySection{
+        margin-top: 128px;
+    }
+    .Summaryheaderheadline{
+        gap: 16px;
+    }
+}
+@media (max-width: 420px) and (max-height: 700px) {
+    .SummarySection{
+        margin-top: 96px;
+    }
+    .Summaryheaderheadline{
+        gap: 4px;
+    }
+    .SummaryFirstSection{
+        margin-top: 16px;
+    }
+    .SummaryLeftToDo{
+        height: 360px;
+    }
+}
+@media(max-width: 420px){
+    .SummaryLeftToDo{
+        width: 310px;
+    }
+    .SummaryButtonFirst{
+        width: 150px;
+    }
+    .SummaryLeftSecond{
+        width: 310px;
+        gap: 10px;
+    }
+    .SummaryButtonThird1{
+        width: 96px;
+    }
+    .SummaryButtonThird2{
+        width: 96px;
+    }
+    .SummaryButtonThird3{
+        width: 96px;
+    }
+    .Summaryheaderheadline{
+        width: 310px;
+    }
+}

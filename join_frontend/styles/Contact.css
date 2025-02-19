@@ -1,0 +1,1400 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter';
+    overflow: hidden;
+    background-color: rgb(246, 247, 248);
+}
+.headerstyle{
+    height: 96px;
+    width: 100%;
+    background-color: cadetblue;
+}
+.mainareasplit{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color:aquamarine;
+}
+.leftside{
+    width: 232px;
+}
+.Contactsection{
+    width: 100%;
+    background-color: white;    
+}
+.contactleft{
+    height: 101px;
+}
+.ContactEmailPhone{
+    height: 130px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.Contactleftbetween{
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: fixed;
+}
+.ContactInforWindow{
+    position: fixed;
+    bottom: -100%; 
+    left: 50%;
+    transform: translateX(-50%); 
+    transition: bottom 0.4s ease-in-out;
+    z-index: 999;
+}
+.Contactshow-popup {
+    bottom: 25%; 
+}
+.ContactInformation{
+    width: fit-content;
+    background-color:#2A3647;
+    color: white;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.ContactleftSection{
+    height: calc(100vh - 140px);
+    margin-top: 22.5px;
+    width: 456px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 120px;
+    margin-left: 232px;
+}
+.AddContactButton{
+    width: 352px;
+    background-color: rgb(42,54,71);
+    color:  white;
+    border-radius: 10px;
+    height: 56px;
+    font-size: 21px;
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+}
+.AddContactButton:hover{
+    cursor: pointer;
+    background-color: #29ABE2;
+}
+.Contactcontent{
+    display: flex;
+    width: 100%;
+    height: calc(100vh - 96px);
+    overflow: hidden;
+    margin-top: 100px;
+}
+.Rightsectionheadline{
+    display:flex;
+    margin-top: 110px;
+    margin-left: 55px;
+    gap: 30px;
+    height: 70px;
+    align-items: center;
+}
+.Contactheadline{
+    font-size: 61px;
+    font-weight: 700;
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+.Contactsmallheadline{
+    font-size: 27.5px;
+    font-weight: 400;
+    height: 28px;
+    display: flex;
+    align-items: center;
+}
+.Contactyline{
+    background-color: #29ABE2;
+    width: 3px;
+    height: 60px;
+}
+.AddContactText{
+    font-size: 21px;
+    font-weight: 700;
+}
+.PersonaddIcon{
+    width: 32px;
+}
+.EveryContactStyle{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    margin-top: 80px;
+    overflow-y: auto;
+}
+.EveryContactStyle::-webkit-scrollbar{
+    width: 12px;
+    height: 20px;
+}
+.EveryContactStyle::-webkit-scrollbar-track{
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 8px;
+    margin-bottom: 20px;
+}
+.EveryContactStyle::-webkit-scrollbar-thumb{
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+.ContactfieldInfo{
+    width: 560px;
+    height: 360px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-left: 55px;
+    margin-top: 35px;
+}
+.ContactSection{
+    height: 120px;
+}
+.ContactName{
+    font-size: 56px;
+}
+.ContactCircleName{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    width: 560px;
+}
+.NameEditDelete{
+    margin-left: 55px;
+}
+.ContactEmailText1{
+    font-size: 16px;
+    font-weight: 700;
+}
+.ContactEmailText2{
+    font-size: 16px;
+    font-weight: 400;
+    color: #007CEE;
+}
+.ContactInfoContainer{
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    justify-content: space-between;
+}
+.ContactPhoneText2{
+    font-size: 16px;
+    font-weight: 400;
+}
+.ContactInformationText{
+    font-size: 20px;
+    font-weight: 400;
+}
+.ContactInformationBorder{
+    height: 70px;
+    display: flex;
+    align-items: center;
+}
+.CircleInitial{
+    width: 120px;
+    height: 120px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 47px;
+    color: white;
+}
+.ContactDeleteButton{
+    display: flex;
+    align-items: center;
+    border-style: none;
+    justify-content: center;
+    background-color: white;
+    gap: 8px;
+    width: 60px;
+    height: 24px;
+}
+.ContactEditButton{
+    display: flex;
+    align-items: center;
+    border-style: none;
+    justify-content: center;
+    background-color: white;
+    width: 60px;
+    height: 24px;
+    gap: 8px;
+}
+.ContactEditButton:hover{
+    cursor: pointer;
+    color: #007CEE;
+}
+.ContactDeleteButton:hover{
+    cursor: pointer;
+}
+.ContactEditChangeClass1{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.ContactEditChangeClass1:hover{
+    filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
+}
+.ContactEditDelete{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 160px;
+    height: 24px;
+    margin-top: 8px;
+}
+.ContactDeleteEdit{
+    height: 24px;
+    width: 24px;
+}
+.ContactDeleteEditText{
+    font-size: 16px;
+    font-weight: 400;
+}
+.gray-line {
+    width: 350px;
+    height: 1px;
+    background-color: gray;
+    margin: 10px 0; 
+}
+.Backgroundgray:hover{
+    background-color: rgb(241, 243, 244);
+}
+.EditContactWindow{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: all;
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 100;
+}
+.EditWindowNew{
+    width: 1212px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 100;
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+    height: 592px;   
+    background-color: white;
+    overflow-y: hidden;
+    display: flex;
+    border-radius: 30px;
+}
+.Slideinleft{
+    animation: slideInLeft 0.4s ease-out forwards;
+}
+.Slideinright{
+    animation: slideInRight 0.4s ease-out forwards;
+}
+.ImgCloseStyle{
+    height: 32px;
+    width: 32px;
+}
+.EditContactCloseWindow{
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+}
+.EditContactCloseWindow:hover{
+    cursor: pointer;
+    background-color: rgb(241, 243, 244);
+}
+.MenuEditDeleteOptionsSmall{
+    display: none;
+}
+.EditCloseWindow{
+    margin-top: 48px;
+    display: flex;
+    height: 32px;
+    justify-content: end;
+    margin-right: 48px;
+}
+.CircleInputstyle{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.none{
+    display: none;
+}
+.EditJoinLogo{
+    height: 66px;
+    width: 55px;
+    margin-left: 16px;
+}
+.EditLeftTopStyle{
+    margin-top: 154px;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    margin-left: 48px;
+}
+.EditWindowLeftArea{
+    width: 453px;
+    height: 592px;
+    background-color: #2A3647;
+    display: flex;
+    flex-direction: column;
+}
+.EditWindowRightArea{
+    height: 100%;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    width: 759px;
+}
+.EditFormInputfield{
+    width: 100%;
+}
+.EditwindowInputfield{
+    margin-top: 137px;
+    width: 422px;
+    height: 215px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    margin-right: 48px;
+    justify-content: space-between;
+}
+.InputfieldEditStyle{
+    width: 100%;
+    height: 48px;
+    border-style: none;
+    margin-left: 12px;
+}
+.EditWindowInput{
+    display: flex;
+    width: 100%;
+    height: 50px;
+    color:green;
+    border: solid 1px;
+    align-items: center;
+    border-radius: 10px;
+}
+.EditWindowDeleteButton{
+    height: 56px;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 21px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.EditWindowDeleteButton:hover{
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10; 
+    border: solid 1px #29ABE2;
+    color: #29ABE2;
+}
+.EditWindowDeleteButton2{
+    height: 56px;
+    width: fit-content;
+    border-radius: 8px;
+    background-color: white;
+    font-size: 21px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+.EditWindowDeleteButton2:hover{
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 10; 
+    border: solid 1px #29ABE2;
+    color: #29ABE2;
+}
+.XButtonCloseStyle{
+    display: flex;
+    align-items: center;
+}
+.EditWindowSaveButton{
+    height: 56px;
+    width: fit-content;
+    display: flex;
+    align-items: center;
+    background-color: #2A3647;
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 21px;
+    justify-content: center;
+    gap: 8px;
+    border-style: none;
+}
+.EditWindowSaveButton:hover{
+    cursor: pointer;
+    background-color: #29ABE2;
+}
+.EditSaveCheck{
+    height: 24px;
+    width: 24px;
+}
+.InputfieldIcon{
+    height: 24px;
+    width: 24px;
+    margin-right: 12px;
+}
+.EditwindowInputDeleteSave{
+    display: flex;
+    flex-direction: column;
+}
+.EditWindowAddText1{
+    font-size: 61px;
+    font-weight: 700;
+    color: white;
+    height: 73px;
+    margin-left: 16px;
+}
+.EditWindowDeleteSave{
+    margin-top: 48px;
+    margin-right: 48px;
+    width: 422px;
+    display: flex;
+    gap: 24px;
+}
+.ImgCloseStyle2{
+    height: 24px;
+    width: 24px;
+}
+.EditWindowAddText1Con{
+    margin-top: 16px;
+    height: 89px;
+    display: flex;
+    align-items: center;
+}
+.EditWindowAddxline{
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+    margin-left: 16px;
+}
+.EditContactmainWindow{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+.EditCloseHeaderSmall{
+    display: none;
+}
+
+.EditCircleStyle{
+    height: 120px;
+    width: 120px;
+    margin-top: 204px;
+    margin-left: 97px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 47px;
+    font-weight: 500;
+    color: white;
+}
+.EditWindowAddText2{
+    font-size: 27px;
+    font-weight: 400;
+    color: white;
+    margin-bottom: 12px;
+    margin-left: 16px;
+}
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+@keyframes slideInLeft {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+.initial-span {
+    font-size: 24px;
+    font-weight: bold;
+    display: block;
+    margin: 5px 27.5px;
+}
+.AddCircleInitials{
+    height: 64px;
+    width: 64px;
+}
+.person-button {
+    width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: none;
+    height: 80px;
+    padding: 10px 15px;
+    margin: 10px 0;
+    cursor: pointer;
+    background-color: white; 
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    gap: 35px;
+}
+.person-button.button-active {
+    background-color: #2A3647; 
+    color: white;
+}
+.ArrowstylePosition{
+    display: none;
+}
+.initial-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    border: solid 1px;
+}
+.name-email {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 240px;
+    align-items: flex-start;
+}
+.person-name {
+    font-size: 20px;
+    font-weight: 400;
+}
+.ContactsInfoSectionClass{
+    position: relative;
+    z-index: 20;
+}
+.person-email {
+    margin-top: 4px;
+    font-size: 20px;
+    color: #007CEE; 
+}
+.EditCloseHeaderSmall{
+    border-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    position: fixed;
+    top: 48px;
+    right: 48px;
+}
+.EditCloseHeaderSmall:hover{
+    background-color:  rgb(241, 243, 244);
+    cursor: pointer;
+}
+
+@media(max-width: 1400px){
+    .ContactfieldInfo{
+        width: fit-content;
+    }
+    .ContactCircleName{
+        width: fit-content;
+    }
+    .CircleInitial{
+        height: 100px;
+        width: 100px;
+    }
+    .ContactName{
+        font-size: 47px;
+    }
+    .Contactheadline{
+        font-size: 47px;
+    }
+    .Rightsectionheadline{
+        gap: 16px;
+        margin-left: 32px;
+    }
+    .ContactfieldInfo{
+        margin-left: 32px;
+    }
+    .Contactsmallheadline{
+        font-size: 20px;
+    }
+    .Contactyline{
+        height: 50px;
+    }
+    .ContactSection{
+        height: 100px;
+    }
+}
+@media(max-width: 1300px){
+    .EditWindowNew{
+        width: 1000px;
+        height: 520px;
+    }
+    .EditWindowLeftArea{
+        width: 350px;
+    }
+    .EditWindowAddText1{
+        font-size: 48px;
+        height: 50px;
+    }
+    .EditWindowAddText1Con{
+        height: fit-content;
+        margin-top: 24px;
+    }
+    .EditLeftTopStyle{
+        margin-top: 140px;
+        width: 100%;
+        display: flex;
+        justify-content: start;
+        margin-left: 0;
+        align-items: start;
+    }
+    .EditCircleStyle{
+        height: 100px;
+        width: 100px;
+        margin-left: 48px;
+    }
+}
+@media(max-width: 1100px){
+    .ContactleftSection{
+        margin-left: 150px;
+    }
+    .EditLeftTopStyle{
+        margin-top: 88px;
+    }
+    .EditWindowAddText2{
+        margin-top: 72px;
+    }
+    .EditWindowNew{
+        width: 850px;
+        height: 480px;
+    }
+    .EditwindowInputfield{
+        width: 360px;
+        margin-right: 0;
+    }
+    .EditwindowInputDeleteSave{
+        align-items: center;
+        margin-right: 48px;
+    }
+    .ContactleftSection{
+        width: 400px;
+    }
+    .EditCircleStyle{
+        margin-left: 40px;
+    }
+    .EditWindowDeleteSave{
+        margin-top: 32px;
+        width: 360px;
+        margin-right: 0px;
+    }
+    .NameEditDelete{
+        margin-left: 16px;
+    }
+    .ContactfieldInfo{
+        margin-left: 16px;
+    }
+    .Rightsectionheadline{
+        margin-left: 16px;
+    }
+    .CircleInitial{
+        height: 80px;
+        width: 80px;
+        font-size: 36px;
+    }
+    .ContactName{
+        font-size: 40px;
+    }
+    .Contactheadline{
+        font-size: 40px;
+    }
+    .Contactyline{
+        height: 40px;
+    }
+    .ContactSection{
+        height: 80px;
+    }
+    .ContactleftSection{
+        width: 364px;
+    }
+    .EveryContactStyle{
+        width: 372px;
+    }
+    .AddContactButton{
+        width: 352px;
+    }
+    .Contactleftbetween{
+        width: 364px;
+    }
+}
+@media(max-width: 900px){
+    .ContactleftSection{
+        margin-left: 8px;
+    }
+    .ContactEditDelete{
+        display: none;
+    }
+    .ContactfieldInfo{
+        margin-left: 100px;
+     }
+    .EditWindowDeleteButton2{
+        display: none;
+    }
+    .MenuEditDeleteButton:hover{
+        background-color: #29ABE2;
+    }
+    .EditCloseHeaderSmall{
+        border-style: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        background-color:#2A3647;
+        border-radius: 50%;
+        position: fixed;
+        top: 24px;
+        right: 24px;
+    }
+    .ContactsInfoSectionClass{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 96px;
+        bottom: 80px;
+        z-index: -1;
+        height: calc(100vh - 160px);
+    }
+    .EditWindowAddText2{
+        font-size: 20px;
+        margin-top: 4px;
+        margin-left: 0;
+        width: 300px;
+        margin-bottom: 8px;
+    }
+    .Slideinleft{
+        animation: slideInLeft 0.4s ease-out forwards;
+    }
+    .Slideinright{
+        animation: slideInRight 0.4s ease-out forwards;
+    }
+    @keyframes slideInRight {
+        from {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+        to {
+            transform: translateY(0);
+            opacity: 1;
+        }
+    }
+    @keyframes slideInLeft {
+        from {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateY(100%);
+            opacity: 0;
+        }
+    }
+    .EditContactCloseWindow{
+        display: none;
+    }
+    .EditWindowAddText1Con{
+        width: 300px;
+    }
+    .EditWindowAddText1{
+        margin-left: 0px;
+    }
+    .EditCloseHeaderSmall:hover{
+        cursor: pointer;
+        background-color:#29ABE2;
+    }
+    .Rightsectionheadline{
+        margin-top: 24px;
+        width: fit-content;
+        margin-right: 8px;
+        display: none;
+        margin-left: 100px;
+    }
+    .CircleInputstyle{
+        justify-content: center;
+    }
+    .EveryContactStyle{
+        margin-bottom: 80px;
+    }
+    .EditWindowLeftArea{
+        height: 300px;
+        width: 100%;
+        align-items: center;
+    }
+    .EditWindowInput{
+        height: 40px;
+    }
+    .InputfieldEditStyle{
+        height: 38px;
+    }
+    
+    .EditWindowNew{
+        width: 650px;
+        height: 570px;
+        display: flex;
+        flex-direction: column;
+    }
+    .EditWindowAddxline{
+        margin-top: 0px;
+        margin-left: 0;
+
+    }
+    .EditJoinLogo{
+        display: none;
+    }
+    .EditWindowRightArea{
+        width: 100%;
+    }
+    .EditCloseWindow{
+        margin-right: 0;
+        margin-top: 0;
+        height: 0;
+    }
+    .EditWindowAddxlineOutStyle{
+        width: 300px;
+    }
+    .EditCircleStyle{
+        position: fixed;
+        margin-top: -60px;
+        margin-left: 0;
+        height: 120px;
+        width: 120px;
+        border: solid 3px;
+        border-color: white;
+    }
+    .EditwindowInputfield{
+        width: 360px;
+        margin-right: 0;
+        height: 180px;
+        margin-top: 96px;
+    }
+    .EditwindowInputDeleteSave{
+        align-items: center;
+        margin-right: 0;
+        width: 100%;
+    }
+    .ContactleftSection{
+        width: 400px;
+    }
+    .EditLeftTopStyle{
+        margin-top: 16px;
+        margin-left: 0;
+        align-items: center;
+    }
+    .EditWindowDeleteSave{
+        margin-top: 32px;
+        width: 360px;
+        margin-right: 0px;
+        justify-content: center;
+    }
+    .ContactsmallSizeStyle{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        height: -webkit-fill-available;
+    }
+    .ContactEditButton{
+        width: 88px;
+        justify-content: start;
+        height: 40px;
+    }
+    .ContactDeleteButton{
+        width: 88px;
+        justify-content: start;
+        height: 40px;
+    }
+    .StyleBackarrowClick{
+        height: 40px;
+        width: 40px;
+        border-style: none;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .StyleBackarrowClick:hover{
+        cursor: pointer;
+        background-color: rgb(241, 243, 244);
+    }
+    .StyleBackarrow{
+        height: 32px;
+        width: 32px;
+    }
+    .AddContactButton{
+        display: none;
+    }
+    .EveryContactStyle{
+        margin-top: -16px;
+    }
+    .Contactleftbetween{
+        display: none;
+    }
+    .MenuEditDeleteButton{
+        height: 56px;
+        width: 56px;
+        background-color: #2A3647;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 100;
+        position: relative;
+    }
+    .MenuEditDeleteButton:hover{
+        cursor: pointer;
+    }
+    .ContactleftSection{
+        width: 100%;
+    }
+    .MenuEditDeleteButtonPosition{
+       position: fixed;
+       bottom: 100px;
+       right: 100px;
+       z-index: 10;
+    }
+    .MenuEditDeleteOptionsSmall{
+        display: flex;
+        flex-direction: column;
+        box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.302), 0 2px 6px 2px rgba(60, 64, 67, 0.149);
+        height: 100px;
+        width: 116px;
+        border-radius: 20px 20px 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        bottom: 100px;
+        right: 40px;
+        z-index: 200;
+    }
+    .ArrowstylePosition{
+        display: flex;
+        position: fixed;
+        top: 136px;
+        right: 114px;
+     }
+    .CircleInitial{
+        height: 120px;
+        width: 120px;
+        font-size: 56px;
+    }
+    .ContactName{
+        font-size: 61px;
+    }
+    .Contactheadline{
+        font-size: 61px;
+    }
+    .ContactCircleName{
+        height: 120px;
+    }
+    .ContactSection{
+        height: 120px;
+    }
+    .Contactsmallheadline{
+        font-size: 27.5px;
+    }
+    .Contactyline{
+        height: 60px;
+    }
+    .SlideinWindowDW1{
+        animation: slideInWDWindow1 0.4s ease-out forwards;
+    }
+    .SlideinWindowDW2{
+        animation: slideInWDWindow2 0.4s ease-out forwards;
+    }
+    @keyframes slideInWDWindow1 {
+        from {
+            transform: translateX(100%);
+        }
+        to {
+            transform: translateX(0);
+        }
+    }
+    @keyframes slideInWDWindow2 {
+        from {
+            transform: translateX(0);
+        }
+        to {
+            transform: translateX(100%);
+        }
+    }
+}
+@media(max-width: 800px){
+    .MenuEditDeleteButtonPosition{
+        right: 48px;
+     }
+     .ArrowstylePosition{
+        top: 136px;
+        right: 56px;
+     }
+     .MenuEditDeleteOptionsSmall{
+        right: 48px;
+     }
+     .ContactfieldInfo{
+        margin-left: 40px;
+     }
+     .Rightsectionheadline{
+        margin-left: 40px;
+     }
+}
+@media(max-width: 700px){
+    .MenuEditDeleteButtonPosition{
+        right: 40px;
+     }
+     .ArrowstylePosition{
+        top: 136px;
+        right: 46px;
+     }
+     .MenuEditDeleteOptionsSmall{
+        right: 40px;
+     }
+     .EditWindowNew{
+        width: 550px;
+     }
+     .CircleInitial{
+        height: 80px;
+        width: 80px;
+        font-size: 40px;
+    }
+    .EditWindowDeleteButton{
+        height: 48px;
+    }
+    .EditWindowSaveButton{
+        height: 48px;
+    }
+    .ContactName{
+        font-size: 47px;
+    }
+    .Contactheadline{
+        font-size: 47px;
+        height: 48px;
+    }
+    .ContactCircleName{
+        height: 80px;
+    }
+    .ContactSection{
+        height: 80px;
+    }
+    .Contactsmallheadline{
+        font-size: 20px;
+        height: 20px;
+    }
+    .Contactyline{
+        height: 50px;
+    }
+    .MenuEditDeleteButton{
+        height: 48px;
+        width: 48px;
+    }
+}
+@media(max-width: 600px){
+    .MenuEditDeleteButtonPosition{
+        right: 16px;
+     }
+     .ArrowstylePosition{
+        top: 128px;
+        right: 20px;
+     } 
+     .ContactfieldInfo{
+        margin-left: 24px;
+     }
+     .Rightsectionheadline{
+        margin-left: 24px;
+     }
+     .MenuEditDeleteOptionsSmall{
+        right: 16px;
+     }
+     .Rightsectionheadline{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        gap: 0;
+        height: auto;
+        gap: 8px;
+     }
+     .Contactyline{
+       display: none;
+     }
+     .EditWindowNew{
+        width: 450px;
+     }
+     .ContactNewyline{
+        width: 90px;
+        height: 3px;
+        background-color: #29ABE2;
+    }
+    .MenuEditDeleteButton{
+        height: 40px;
+        width: 40px;
+    }
+    .PersonAddButton{
+        height: 18px;
+    }
+    .ContactsmallSizeStyle{
+        margin-left: 16px;
+        align-items: start;
+    }
+}
+@media(max-width: 500px){
+    .Rightsectionheadline{
+        margin-left: 24px;
+    }
+    .EditWindowAddxline{
+        margin-top: 0;
+    }
+    .EditwindowInputfield{
+        width: 320px;
+    }
+    .EditWindowDeleteSave{
+        width: 320px;
+        justify-content: center
+    }
+    .EditWindowDeleteButton{
+        font-size: 18px;
+        height: 40px;
+    }
+    .EditWindowSaveButton{
+        font-size: 18px;
+        height: 40px;
+    }
+    .EditCloseHeaderSmall{
+        top: 16px;
+        right: 16px;
+    }
+    .EditWindowAddText1{
+        font-size: 41px;
+    }
+    .EditWindowNew{
+        width: 350px;
+     }
+    .ContactfieldInfo{
+        margin-left: 24px;
+        height: 300px;
+    }
+    .CircleInitial{
+        height: 64px;
+        width: 64px;
+        font-size: 32px;
+    }
+    .ContactName{
+        font-size: 40px;
+    }
+    .Contactheadline{
+        font-size: 40px;
+        height: 40px;
+    }
+    .ContactCircleName{
+        height: 64px;
+    }
+    .ContactSection{
+        height: 64px;
+    }
+    .EditCircleStyle{
+        height: 100px;
+        width: 100px;
+        margin-top: -50px;
+    }
+    .EditWindowAddText2{
+        width: 280px;
+        margin-bottom: 0;
+        margin-top: 0;
+    }
+    .MenuEditDeleteButtonPosition{
+        right: 32px;
+     }
+     .ArrowstylePosition{
+        right: 32px;
+        top: 112px;
+    }
+}
+@media(max-width: 400px){
+    .MenuEditDeleteButtonPosition{
+        right: 24px;
+     }
+     .EveryContactStyle{
+        width: 310px;
+     }
+     .gray-line{
+        width: 290px;
+     }
+     .ContactleftSection{
+        margin-left: 0;
+     }
+     .person-button{
+        width: 290px;
+        gap: 8px;
+        padding: 6px 8px
+     }
+     .name-email{
+        width: 220px;
+     }
+     .person-email{
+        font-size: 16px;
+     }
+     .ArrowstylePosition{
+        right: 24px;
+     }
+     .MenuEditDeleteOptionsSmall{
+        right: 16px;
+     }
+     .Rightsectionheadline{
+        margin-left: 8px;
+     }
+     .ContactfieldInfo{
+        margin-left: 8px;
+     }
+    .CircleInitial{
+        height: 56px;
+        width: 56px;
+        font-size: 28px;
+    }
+    .ContactName{
+        font-size: 36px;
+    }
+    .Contactheadline{
+        font-size: 36px;
+        height: 36px;
+    }
+    .ContactCircleName{
+        height: 56px;
+    }
+    .ContactSection{
+        height: 56px;
+    }
+    .ContactsmallSizeStyle{
+        margin-left: 8px;
+    }
+    .EditwindowInputfield{
+        width: 270px;
+    }
+    .EditWindowDeleteSave{
+        width: 270px;
+    }
+    .EditWindowNew{
+        width: 310px;
+    }
+    .EditCloseHeaderSmall {
+        top: 8px;
+        right: 8px;
+    }
+    .EditLeftTopStyle{
+        margin-left: 12px;
+    }
+    .EditWindowAddxlineOutStyle{
+        width: 280px;
+    }
+    .EditWindowAddText1Con{
+        width: 280px;
+    }
+    .EditWindowLeftArea{
+        width: 310px;
+    }
+    .EditLeftTopStyle{
+        width: fit-content;
+    }
+}
+@media(min-width: 1600px) and (min-height: 900px){
+    .EditWindowNew{
+        width: 1412px;
+        height: 700px;
+    }
+    .EditWindowLeftArea{
+        height: 700px;
+        width: 553px;
+    }
+    .EditWindowRightArea{
+        width: 859px;
+    }
+    .CircleInputstyle{
+        margin-top: 64px;
+    }
+    .EditLeftTopStyle{
+        margin-left: 64px;
+    }
+    .EditJoinLogo{
+        height: 80px;
+        width: 70px;
+    }
+    .EditWindowAddText1Con{
+        margin-bottom: 24x;
+    }
+    .EditwindowInputfield{
+        margin-top: 80px;
+    }
+}
+@media(max-width: 1300px) and (min-height: 800px){
+    .EditWindowNew{
+        height: 560px;
+    }
+}
+@media(max-width: 900px) and (min-height: 800px){
+    .EditWindowNew{
+        height: 640px;
+    }
+    .EditWindowLeftArea{
+        height: 400px;
+    }
+    .EditLeftTopStyle{
+        height: 100%;
+        justify-content: center;
+        margin: 0;
+    }
+}
+@media(max-width: 900px) and (min-height: 900px){
+    .EditWindowNew{
+        height: 740px;
+    }
+    .EditwindowInputfield{
+        margin-top: 120px;
+    }
+}
+@media(max-width: 900px) and (max-height: 700px){
+    .EditWindowNew{
+        height: 510px;
+    }
+}

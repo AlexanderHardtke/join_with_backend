@@ -1,0 +1,188 @@
+[
+  {
+    "category": "User Story",
+    "description": "Set up a summary for the user",
+    "prio": "../assets/icons/prioMedium.png",
+    "section": "inProgress",
+    "title": "implement summary",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      false, 
+      false
+    ],
+    "date": "2024-08-17",
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB",
+      "MM"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer",
+      "Max Muster"
+    ],
+    "color": [
+      "#CFD41D",
+      "#FB5807",
+      "#CA841B"
+    ]
+  },
+  {
+    "category": "User Story",
+    "description": "Create a login page for the user",
+    "prio": "../assets/icons/prioUrgent.png",
+    "section": "inProgress",
+    "title": "user Login set up",
+    "subtasks": [
+      "Create an HTML login form with username and password input fields and a login button",
+      "JavaScript code to process and authenticate login details"
+    ],
+    "subtasksCheck": [
+      true, 
+      true
+    ],
+    "date": "17/08/2024",
+    "prioName": "High",
+    "assignedInitals": [
+      "SB",
+      "SM"
+    ],
+    "assignedName": [
+      "Sophie Bach",
+      "Sarah Mueller"
+    ],
+    "color": [
+      "#16C99D",
+      "#5A52B9"
+    ]
+  },
+  {
+    "category": "User Story",
+    "description": "New contacts can be added using a button",
+    "prio": "../assets/icons/prioMedium.png",
+    "section": "awaitFeedback",
+    "title": "the user can add contacts",
+    "subtasks": [
+      "Add a button that displays a contact form when clicked",
+      "Implement the logic to display the form and process the contact details upon submission"
+    ],
+    "subtasksCheck": [
+      true, 
+      false
+    ],
+    "date": "18/08/2024",
+    "prioName": "Medium",
+    "assignedInitals": [
+      "KF",
+      "LB",
+      "SM"
+    ],
+    "assignedName": [
+      "Klaus Fischer",
+      "Lukas Bauer",
+      "Sophie Bach"
+    ],
+    "color": [
+      "#D8CD92",
+      "#FB5807",
+      "#16C99D"
+    ]
+  },
+  {
+    "category": "Technical Task",
+    "description": "The same template header and footer for every page",
+    "prio": "../assets/icons/prioMedium.png",
+    "section": "awaitFeedback",
+    "title": "HTML template header and footer",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      false, 
+      false
+    ],
+    "date": "17/08/2024",
+    "prioName": "Medium",
+    "assignedInitals": [
+      "KF",
+      "SB",
+      "LB"
+    ],
+    "assignedName": [
+      "Klaus Fischer",
+      "Sophie Bach",
+      "Lisa Bach"
+    ],
+    "color": [
+      "#0F91AF",
+      "#16C99D",
+      "#0F91AF"
+    ]
+  },
+  {
+    "category": "Technical Task",
+    "description": "Define CSS classes and structure them",
+    "prio": "../assets/icons/prioMedium.png",
+    "section": "toDo",
+    "title": "CSS Architecture Planning",
+    "subtasks": [
+      "",
+      ""
+    ],
+    "subtasksCheck": [
+      false, 
+      false
+    ],
+    "date": "19/08/2024",
+    "prioName": "Medium",
+    "assignedInitals": [
+      "MZ",
+      "LB"
+    ],
+    "assignedName": [
+      "Marie Zimmerman",
+      "Lukas Bauer"
+    ],
+    "color": [
+      "#CFD41D",
+      "#FB5807"
+    ]
+  },
+  {
+    "category": "Technical Task",
+    "description": "Optimize design for desktop and tablet",
+    "prio": "../assets/icons/prioLow.png",
+    "section": "done",
+    "title": "Responsive layout for the website",
+    "subtasks": [
+      "Adjust layout and styles for large screen sizes (desktops)",
+      "Optimize layout and styles for medium screen sizes (tablets)"
+    ],
+    "subtasksCheck": [
+      false, 
+      false
+    ],
+    "date": "19/08/2024",
+    "prioName": "Low",
+    "assignedInitals": [
+      "SM",
+      "KF",
+      "MM"
+    ],
+    "assignedName": [
+      "Sarah Mueller",
+      "Klaus Fischer",
+      "Max Muster"
+    ],
+    "color": [
+      "#5A52B9",
+      "#D8CD92",
+      "#CA841B"
+    ]
+  }
+]

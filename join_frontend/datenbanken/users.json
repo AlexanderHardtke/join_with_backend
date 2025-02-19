@@ -1,0 +1,77 @@
+[
+    {
+      "email": "Robert@gmail.com",
+      "name": "Robert Lewandowski",
+      "password": "Robi1234!"
+    },
+    {
+      "email": "Lukas@gmail.com",
+      "name": "Lukas Bauer",
+      "password": "Lukas123!"
+    },
+    {
+      "email": "test@gmail.com",
+      "name": "Sarah Test",
+      "password": "Test123!"
+    },
+    {
+      "email": "Bommel@gmail.com",
+      "name": "Mark Bommel",
+      "password": "Bommel123!"
+    },
+    {
+      "email": "5yl3kz@googlemail.com",
+      "name": "Alex Hardtke",
+      "password": "Alucard6!"
+    },
+    {
+      "email": "User@gmail.com",
+      "name": "New User",
+      "password": "User1234!"
+    },
+    {
+      "email": "hallo@hallo.de",
+      "name": "Test Hallo",
+      "password": "ah$0aBcf"
+    },
+    {
+      "email": "lilly@fee.de",
+      "name": "Lilly Fee",
+      "password": "Lilly_Fee3"
+    },
+    {
+      "email": "keks@cookie.de",
+      "name": "Keks Cookie",
+      "password": "keks@cookie.de1"
+    },
+    {
+      "email": "AlexH@gmail.com",
+      "name": "Alex H",
+      "password": "AlexH@gmail.com1"
+    },
+    {
+      "email": "AlexHalt@gmx.de",
+      "name": "Alex H",
+      "password": "AlexHalt@gmx.de1"
+    },
+    {
+      "email": "test@test.de",
+      "name": "Albert W",
+      "password": "aA123456"
+    },
+    {
+      "email": "test@test.net",
+      "name": "Test Test",
+      "password": "A123$asd"
+    },
+    {
+      "email": "Must@gmail.com",
+      "name": "Max Must",
+      "password": "Must1234"
+    },
+    {
+      "email": "Lukasnew@gmail.com",
+      "name": "Lukas Bauer",
+      "password": "Lukas1234"
+    }
+  ]

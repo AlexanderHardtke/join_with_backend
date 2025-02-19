@@ -1,0 +1,511 @@
+.d-none {
+  display: none !important;
+}
+
+.containerTasksDetail {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 13;
+  transition: transform 0.5s ease; 
+}
+
+.detailtask {
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  border-radius: 30px;
+  padding: 48px 40px 48px 40px;
+  width: 400px;
+  background-color: white;
+  gap: 15px;
+  max-height: 80vh;
+}
+
+.detailtaskinfos {
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
+  max-height: 600px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 15px;
+}
+
+.detailtaskinfos::-webkit-scrollbar {
+  width: 10px; 
+}
+
+.detailtaskinfos::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.detailtaskinfos::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.categoryAndClose {
+  display: flex;
+  justify-content: space-between;
+}
+
+.categoryAndClose img {
+  object-fit: cover;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.categoryAndClose img:hover {
+  border: none;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  padding: 2px;
+}
+
+.titleDetail {
+  font-size: 40px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.descriptionDetail {
+  margin-top: 15px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.assignedTo {
+  display: flex;
+  flex-direction: column;
+}
+
+.intalsAndName {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 10px;
+}
+
+.assignedInitals {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  padding: 10px;
+  width: 20px;
+  height: 20px;
+  color: white;
+  margin-left: 10px;
+}
+
+.assignedName {
+  display: flex;
+}
+
+.subtask {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 5px;
+}
+
+.subtask:hover {
+  background-color: #D9D9D9;
+  border-radius: 30px;
+}
+
+.custom-checkbox {
+  cursor: pointer;
+  margin-left: 10px;
+  margin-right: 15px;
+  width: 24px;
+}
+
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.detailTaskIcon {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  transition: color 0.3s ease, filter 0.3s ease;
+}
+
+.verticalLine {
+  width: 1px;
+  background-color: #d1d1d1;
+  height: 20px;
+  margin: 0 10px;
+}
+
+.detailTaskIcon:hover p {
+  color: #29abe2;
+}
+
+.detailTaskIcon:hover img {
+  filter: invert(53%) sepia(94%) saturate(417%) hue-rotate(158deg) brightness(93%) contrast(94%);
+}
+
+#taskDetailCard {
+  margin: 15% 0 15% 0;
+}
+
+.detailtaskEdit {
+  display: flex;
+  flex-direction: column;
+  top: 50px;
+  border-radius: 30px;
+  padding: 48px 40px 48px 40px;
+  width: 400px;
+  background-color: white;
+  gap: 8px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 80vh;
+}
+
+.detailtaskEdit::-webkit-scrollbar {
+  width: 10px;
+}
+
+.detailtaskEdit::-webkit-scrollbar-track {
+  margin-top: 14px;
+  margin-bottom: 14px;
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.detailtaskEdit::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.closeTaskContainer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.closeTask {
+  object-fit: cover;
+  cursor: pointer;
+  padding: 2px;
+  width: 20px;
+}
+
+.closeTask:hover {
+  border: none;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  padding: 2px;
+}
+
+.titleEdit {
+  font-size: 16px;
+  margin: 0;
+  font-weight: 400;
+  font-family: Inter;
+}
+
+.titleInput {
+  flex: none;
+  color: black;
+  width: 100%;
+  max-width: 440px;
+  height: 30px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  box-sizing: border-box;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 16px;
+  text-align: start;
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+.titleInput:focus {
+  cursor: default;
+}
+
+.descriptionInput {
+  color: black;
+  width: 100%;
+  max-width: 440px;
+  height: 100px;
+  min-height: 100px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  box-sizing: border-box;
+  margin-bottom: 12px;
+  padding-left: 15px;
+  padding-top: 15px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.descriptionInput:focus {
+  cursor: default;
+}
+
+.dateInput {
+  width: 100%;
+  height: 30px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  box-sizing: border-box;
+  font-size: 16px;
+  padding-left: 20px;
+  cursor: pointer;
+  padding-right: 20px;
+}
+
+.dateInput:focus {
+cursor: default;
+}
+
+.detailtaskEdit .dueDate {
+  width: calc(100% + 20px);
+}
+
+.calendar {
+  cursor: pointer;
+}
+
+.priorityEdit {
+  margin-top: 12px;
+}
+
+.prioButtonEdit {
+  font-size: 16px;
+  width: 33%;
+  max-width: 136px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border-radius: 8px;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.prioButtonEdit:hover {
+  box-shadow: 0px 4px 2px 2px #D1D1D1;
+}
+
+.searchUser {
+  width: 100%;
+  height: 30px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+  box-sizing: border-box;
+}
+
+.detailtaskEdit .upArrow {
+  top: 4px;
+}
+
+.detailtaskEdit .dropdown {
+  top: -31px;
+}
+
+.dropdownButtonArea {
+  font-size: 16px;
+}
+
+.okButtonContainer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.okButton {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #2a3647;
+  height: 50px;
+  width: 80px;
+  padding: 10px;
+  border-radius: 10px;
+  box-sizing: border-box;
+  border: 1px solid;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
+  margin-top: 14px;
+}
+
+.okButton:hover {
+  background-color:  #29abe2;
+}
+
+.subtasksContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subtasksInput {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  height: 30px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+}
+
+.dFlexAlign {
+  display: flex;
+}
+
+#subtasksInput {
+  padding-right: 30px;
+  width: 100%;
+  box-sizing: border-box;
+  height: 30px;
+  resize: none;
+  border-radius: 8px;
+  border: 1px solid #D1D1D1;
+}
+
+.subtaskAdd {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  height: 20px;
+  width: 20px;
+}
+
+.subtasksBox {
+  padding: 8px 8px 8px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 80px;
+  overflow-y: auto;
+}
+
+.subtasksBox::-webkit-scrollbar {
+  width: 10px;
+}
+
+.subtasksBox::-webkit-scrollbar-track {
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
+.subtasksBox::-webkit-scrollbar-thumb {
+  background-color: #888;
+  border-radius: 10px;
+}
+
+.subtasksBox::-webkit-scrollbar-thumb:hover {
+  background-color: #555;
+}
+
+.subtaskBox {
+  display: flex;
+}
+
+.subtaskBox ul {
+  display: flex;
+  width: 85%;
+  align-items: center;
+  padding-inline-start: 30px;
+}
+
+.subtaksUlEdit {
+  height: 100%;
+  display: flex;
+}
+
+.subtaskBox li {
+  width: 284px;
+  max-width: 50vw;
+  height: 100%;
+}
+
+.subtaskLiEdit {
+  height: 100%;
+  width: 100%;
+  margin-top: 4px;
+}
+
+.subtasksBox .subtaskIconsLower {
+  display: flex;
+  align-items: center;
+  position: relative;
+  top: 4px;
+}
+
+.dFlexAlign.subtaskInputContainer {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.dFlexAlign {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.editSubtaskInput {
+  width: 292px;
+  max-width: 50vw;
+  padding-right: 50px;
+  box-sizing: border-box;
+  height: 20px;
+  border: none;
+  border-bottom:1px solid #29abe2;
+  position: relative;
+  top: 12px;
+  right: 32px;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.editSubtaskInput:focus {
+  outline: none;
+}
+
+.subtaskIcons {
+  position: relative;
+  display: flex;
+  gap: 8px;
+  bottom: 24px;
+  height: 0px;
+  width: calc(100% - 20px);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.subtaskIcon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+}

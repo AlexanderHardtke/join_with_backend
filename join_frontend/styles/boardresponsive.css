@@ -1,0 +1,309 @@
+@media (max-width:1380px) {
+    .allTasks {
+        margin-left: 2%;
+        margin-right: 2%;
+    }
+
+    .wrapper {
+        width: 90%;
+    }
+}
+
+@media (max-width:1300px) {
+    .allTasks {
+        margin-left: 16px;
+        margin-right: 4px;
+    }
+}
+
+@media (max-width:1230px) {
+    .task {
+        width: 180px;
+    }
+
+    .noTasks {
+        width: 180px;
+    }
+
+    .headlineTasks {
+        width: 206px;
+    }
+
+    .searchContainer {
+        padding-right: 56px;
+    }
+}
+
+@media (max-width:1150px) {
+    .task {
+        width: 161px;
+    }
+
+    .noTasks {
+        width: 161px;
+    }
+
+    .headlineTasks {
+        width: 187px;
+    }
+}
+
+@media (max-width:1100px) {
+    .boardHeadline {
+        padding-left: 148px;
+    }
+}
+
+@media (pointer: coarse) {
+    #moveToMobile {
+        display: flex;
+    }
+
+    .moveToMobile {
+        padding: 10px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+    .section-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background-color: #2C3E50;
+        border-radius: 12px;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        padding: 10px 0;
+    }
+
+    .section-dropdown button {
+        background-color: transparent;
+        color: white;
+        padding: 12px 16px;
+        border: none;
+        text-align: left;
+        width: 100%;
+        cursor: pointer;
+        display: block;
+    }
+
+    .section-dropdown button:active {
+        background-color: #091931;
+    }
+
+    .show {
+        display: block;
+    }
+  }
+
+@media (max-width:1000px) {
+    .headlineAndSearch {
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .allTasks {
+        flex-direction: column;
+        margin: 0;
+        max-height: none;
+        margin-bottom: 80px;
+        padding-top: 16px;
+    }
+
+    .moveBox {
+        display: flex;
+        overflow-x: auto;
+    }
+
+    .moveBox::-webkit-scrollbar {
+        display: none;
+    }
+
+    .task {
+        width: 200px;
+        min-width: 200px;
+        margin: 16px 0 16px 16px;
+        height: 204px;
+    }
+
+    .noTasks {
+        width: 200px;
+        min-width: 200px;
+        margin-left: 16px;
+    }
+
+    .headlineTasks {
+        width: 100%;
+    }
+
+    .headlineTasks img {
+        margin-right: 16px;
+    }
+
+    .headlineTasks a {
+        padding-left: 16px;
+    }
+
+    .btnAddTask {
+        display: none;
+    }
+
+    .plusButton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 40px;
+        width: 40px;
+        background-color: #2a3647;
+        border-radius: 10px;
+        cursor: pointer;
+        margin-right: 16px;
+        border: none;
+    }
+
+    .searchContainer {
+        padding-right: 0;
+        width: calc(100% - 32px);
+    }
+
+    .searchWrapper {
+        width: 100%;
+        margin: 0;
+    }
+
+    .headlineBox {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    h1 {
+        margin-top: 40px;
+        margin-bottom: 24px;
+    }
+
+    .titleEdit {
+        margin-top: 0;
+    }
+
+}
+
+
+
+@media (max-width:900px) {
+    .detailtaskEdit {
+        max-height: calc(80vh - 90px);
+    }
+
+    .detailtask {
+        max-height: calc(80vh - 90px);
+    }
+
+    #taskDetailCard {
+        margin: 5% 0 15% 0;
+    }
+
+    .boardHeadline {
+        padding-left: 0;
+        padding-top: 80px;
+    }
+
+}
+
+@media (max-width:500px) {
+    .detailtask {
+        width: calc(96% - 30px);
+        padding: 48px 20px 48px 20px;
+    }
+
+    #taskDetailCard {
+        margin: 5% 3% 15% 3%;
+    }
+
+    .detailtaskEdit {
+        padding: 48px 20px 48px 20px;
+        width: 85vw;
+    }
+
+    .dropdownButtonArea {
+        font-size: 18px;
+    }
+}
+
+@media (max-width:450px) {
+    .detailtask {
+        width: auto;
+    }
+
+    .dropdownButtonArea {
+        font-size: 16px;
+    }
+}
+
+@media (max-width:420px) {
+    .detailtask {
+        font-size: 16px;
+    }
+
+    .descriptionDetail {
+        font-size: 16px;
+    }
+}
+
+@media (max-height:750px) {
+    .mainContent h1 {
+        margin-bottom: 12px;
+    }
+}
+
+@media (min-width: 1700px) {
+    .allTasks {
+        margin-left: 110px;
+        margin-right: 110px;
+    }
+
+    .noTasks {
+        width: 250px;
+    }
+
+    .headlineTasks {
+        width: 284px;
+    }
+
+    .task {
+        width: 258px;
+    }
+
+    .wrapper {
+        scale: 1.1;
+        height: 85%;
+    }
+}
+
+@media (min-width: 2000px) {
+    .wrapper {
+        scale: 1.2;
+        height: 80%;
+    }
+}
+
+@media (min-width: 2500px) {
+    .wrapper {
+        scale: 1.4;
+        height: 67.5%;
+    }
+}
+
+@media (min-width: 3000px) {
+    .wrapper {
+        scale: 1.6;
+        height: 60%;
+    }
+}

@@ -1,0 +1,626 @@
+.wrapper {
+    width: 100%;
+    min-width: 705px;
+    max-width: 1000px;
+    height: 100%;
+}
+
+.addTaskoverlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.225);
+    z-index: 12;
+}
+
+.mainContent {
+    margin: 0;
+    position: absolute;
+    top: 7%;
+    bottom: 7%;
+    left: 10%;
+    right: 10%;
+    border-radius: 30px;
+    z-index: 12;
+    padding: 0px 48px 0px 48px;
+    overflow-y: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainContent::placeholder {
+    color: #D1D1D1;
+}
+
+.mainContent h1 {
+    margin-top: 32px;
+    font-size: 61px;
+    margin-bottom: 32px;
+    width: auto;
+    height: auto;
+}
+
+.mainContent p {
+    padding-bottom: 8px;
+    margin-top: 18px;
+}
+
+.mainContent span {
+    color: #FF8190;
+    font-size: 18px;
+}
+
+.mainContent .dNone {
+    display: none;
+}
+
+.mainContent .dFlex {
+    display: flex;
+}
+
+.mainContent .dFlexAlign {
+    display: flex;
+    align-items: center;
+}
+
+.mainContent .backgroundWhite {
+    background-color: white;
+    border-bottom: solid #29abe3 1px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+}
+
+.xButton {
+    align-self: flex-end;
+    width: 20px;
+    height: 20px;
+}
+
+.mainContent .xButton {
+    top: 64px;
+    right: 72px;
+    cursor: pointer;
+    position: absolute;   
+}
+
+.mainContent .taskForm {
+    display: flex;
+    flex-direction: column;
+    max-width: 440px;
+    width: 49%;
+}
+
+.mainContent .taskSeperator {
+    width: 2px;
+    border-radius: 2px;
+    background-color: #D1D1D1;
+    height: 424px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.mainContent .required {
+    font-size: 16px;
+}
+
+.mainContent input {
+    max-width: 440px!important;
+    width: 100%!important;
+    height: 48px!important;
+    border-radius: 8px!important;
+    border: 1px solid #D1D1D1!important;
+    box-sizing: border-box!important;
+    padding-left: 20px!important;
+    padding-right: 20px!important;
+    font-size: 20px!important;
+    flex: none!important;
+}
+
+.redInputBorder {
+    border: 1px solid #ff8291;
+}
+
+.mainContent input:valid {
+    border: 1px solid #29abe3;
+}
+
+.inputError {
+    color: #ff8291;
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+}
+
+.mainContent #subtasksInput:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+.mainContent #subtasksInput:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+.mainContent input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.mainContent input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.mainContent input[type="search"]::-webkit-search-decoration,
+.mainContent input[type="search"]::-webkit-search-cancel-button,
+.mainContent input[type="search"]::-webkit-search-results-button,
+.mainContent input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.mainContent .description {
+    width: 100%;
+    max-width: 440px;
+    height: 120px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.detailtask.description {
+    width: 100%;
+    max-width: 440px;
+    height: 120px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.mainContent .description:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+    color: black;
+}
+
+.mainContent .description:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+.mainContent .description::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent .description::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.mainContent .description::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent::-webkit-scrollbar-track {
+    background-color: #D1D1D1;
+    border-radius: 8px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.mainContent::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent .searchUser {
+    border: 1px solid #29abe3;
+    position: relative;
+    top: 1px;
+}
+
+.mainContent .searchUser:focus-visible {
+    outline: 1px #29abe3;
+}
+
+.dropdownButtonArea {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 440px;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    padding-left: 20px;
+    font-size: 16px;
+    margin-bottom: -5px;
+    cursor: pointer;
+}
+
+.arrow {
+    rotate: 180deg;
+    margin-right: 10px;
+}
+
+.upArrow {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.dropdownWrapper {
+    position: relative;
+    height: 1px;
+    width: 100%;
+    max-width: 440px;
+}
+
+.dropdown {
+    background-color: white;
+    width: 100%;
+    max-width: 440px;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.dropdownUsers {
+    background-color: white;
+    width: 100%;
+    max-width: 440px;
+    max-height: 240px;
+    overflow-y: auto;
+    position: relative;
+    top: 1px;
+}
+
+.dropdownUsers::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.dropdownUsers::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.dropdownUsers::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent .dropdownCat {
+    background-color: white;
+    width: 100%;
+    max-width: 440px;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.dropdownButton {
+    height: 48px;
+    border-radius: 10px;
+    padding-left: 20px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdownButton:hover {
+    filter: brightness(0.9);
+}
+
+.dropdownButtonSelected {
+    background-color: #2A3647;
+    color: white;
+}
+
+.dropdownButtonSelectedUser {
+    background-color: #2A3647;
+    color: white;
+}
+
+.userCircle {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: #ff3c00;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dropdownUser {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdownCheckMark {
+    margin-right: 20px;
+}
+
+.assignedUsers {
+    height: 48px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.mainContent .extraUser {
+    top: -45px!important;
+}
+
+.extraUser {
+    min-height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    color: white;
+    background-color: #2A3647;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -50px;
+    left: 208px;
+    margin-bottom: -40px;
+}
+
+.dueDate {
+    display: flex;
+}
+
+.calendar {
+    height: 20px;
+    position: relative;
+    right: 43px;
+    align-self: center;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+.dateInput {
+    color: #D1D1D1;
+}
+
+.dateInput:valid {
+    color: #000000;
+}
+
+::-webkit-calendar-picker-indicator {
+    opacity: 0;
+}
+
+.prio {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 440px;
+}
+
+.mainContent .prioButton {
+    font-size: 20px;
+    width: 33%;
+    max-width: 136px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    gap: 8px;
+}
+
+.prioButton:hover {
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+}
+
+.prioButton.active:hover {
+    box-shadow: none;
+}
+
+.high {
+    background-color: #ff3c00!important;
+    color: white!important;
+}
+
+.medium {
+    background-color: #ffaa00!important;
+    color: white!important;
+}
+
+.low {
+    background-color: #79e329!important;
+    color: white!important;
+}
+
+.mainContent .subtaskHeadline {
+    margin-top: 24px;
+}
+
+.mainContent .subtaskBox {
+    margin-top: 4px;
+    padding: 0;
+}
+
+.mainContent .subtaskBox:hover {
+    background-color: #D1D1D1;
+    border-radius: 10px;
+}
+
+.mainContent .editSubtaskInput {
+    border-radius: 0!important;
+    border: none !important;
+    height: 22px!important;
+    width: 80%!important;
+    position:static!important;
+    margin-bottom: 0!important;
+}
+
+.mainContent .editSubtaskInput:focus {
+    outline: none;
+}
+
+.mainContent .subtaskIcons {
+    height: 1px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 20px;
+    bottom: 25px;
+}
+
+.mainContent .subtaskIconsLower {
+    height: 1px;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 14px;
+    bottom: -3px;
+}
+
+.mainContent .subtaskIcon {
+    cursor: pointer;
+}
+
+.mainContent .subtasksBox {
+    height: 100px;
+    width: 100%;
+    max-width: 440px;
+    overflow: auto;
+    padding: 0;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.mainContent .subtasksBox::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.mainContent .subtasksBox ul {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    padding-bottom: 4px;
+    width: 100%;
+}
+
+.mainContent .subtasksBox li {
+    font-size: 16px;
+    padding-top: 6px;
+    width: 80%;
+}
+
+.mainContent .taskButtons {
+    margin: auto 0;
+    margin-top: -18px;
+}
+
+.smallSeparator {
+    width: 2px;
+    height: 24px;
+    background-color: #d1d1d1;
+    margin: 3px;
+}
+
+.mainContent .clearButton {
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: #2A3647;
+    cursor: pointer;
+    width: 110px;
+    height: 56px;
+    padding: 16px;
+    margin-right: 16px;
+    font-size: 21px;
+}
+
+.mainContent .clearButton:active {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.mainContent .createTaskButton {
+    border-radius: 10px;
+    background-color: #2A3647;
+    cursor: pointer;
+    height: 56px;
+    width: 183px;
+    padding: 16px;
+    font-size: 21px;
+    color: white;
+    border: none;
+}
+
+.mainContent .createTaskButton:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+    border: 1px solid #29ABE2;
+}
+
+.mainContent .createTaskButton:active {
+    box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.mainContent .addTaskBottomBar {
+        z-index: 2;
+        display: flex;
+        width: 100%;
+        max-width: 962px;
+        justify-content: space-between;
+        position: relative;
+        padding-bottom: 12px;
+        top: 24px;
+}

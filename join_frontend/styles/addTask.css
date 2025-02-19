@@ -1,0 +1,596 @@
+body {
+    overflow-y: hidden;
+    max-width: 1920px;
+    display: flex;
+    background-color: #f5f6f7;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+.mainContent::-webkit-scrollbar {
+    display: none;
+}
+
+.mainContent {
+    margin-left: 232px;
+    padding: 96px 96px 0 96px;
+    font-size: 20px;
+    height: calc(100vh - 96px);
+    overflow-y: scroll;
+    flex: 1;
+    scrollbar-width: none;
+}
+
+::placeholder {
+    color: #D1D1D1;
+}
+
+h1 {
+    padding-top: 100px;
+    font-size: 61px;
+    margin-bottom: 32px;
+    margin-right: 10px;
+    overflow-y: hidden;
+}
+
+p {
+    padding-bottom: 8px;
+    margin-top: 18px;
+}
+
+span {
+    color: #FF8190;
+    font-size: 18px;
+}
+
+.dNone {
+    display: none;
+}
+
+.dFlex {
+    display: flex;
+}
+
+.dFlexAlign {
+    display: flex;
+    align-items: center;
+}
+
+.backgroundWhite {
+    background-color: white;
+    border-bottom: solid #29abe3 1px;
+    padding-bottom: 4px;
+    padding-right: 6px;
+}
+
+.taskForm {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 327px);
+    max-width: 440px;
+    width: 99%;
+}
+
+.taskSeperator {
+    width: 2px;
+    border-radius: 2px;
+    background-color: #D1D1D1;
+    height: 424px;
+    margin-left: 40px;
+    margin-right: 40px;
+}
+
+.required {
+    font-size: 16px;
+    margin-bottom: 20px;
+    align-self: flex-end;
+}
+
+input {
+    max-width: 440px;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-size: 20px;
+}
+
+.redInputBorder {
+    border: 1px solid #ff8291;
+}
+
+input:valid {
+    border: 1px solid #29abe3;
+}
+
+.inputError {
+    font-size: 12px;
+    margin-top: 4px;
+    display: none;
+}
+
+#subtasksInput:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+#subtasksInput:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+input[type=search]::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type=search]::-ms-reveal {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration {
+    display: none;
+}
+
+.description {
+    max-width: 440px;
+    width: 100%;
+    height: 120px;
+    resize: none;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    box-sizing: border-box;
+    margin-bottom: 12px;
+    padding-left: 20px;
+    padding-top: 20px;
+    font-size: 20px;
+}
+
+.description:not(:placeholder-shown) {
+    border: 1px solid #29abe3;
+}
+
+.description:placeholder-shown {
+    border: 1px solid #D1D1D1;
+}
+
+.description::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.description::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+}
+
+.description::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.searchUser {
+    border: 1px solid #29abe3;
+    position: relative;
+    top: 1px;
+}
+
+.searchUser:focus-visible {
+    outline: 1px #29abe3;
+}
+
+.dropdownButtonArea {
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 440px;
+    width: 100%;
+    height: 48px;
+    border-radius: 8px;
+    border: 1px solid #D1D1D1;
+    padding-left: 20px;
+    font-size: 20px;
+    margin-bottom: -5px;
+    cursor: pointer;
+}
+
+.arrow {
+    rotate: 180deg;
+    margin-right: 10px;
+}
+
+.upArrow {
+    position: absolute;
+    top: 13px;
+    right: 16px;
+    cursor: pointer;
+}
+
+.dropdownWrapper {
+    position: relative;
+    height: 1px;
+    max-width: 440px;
+    width: 100%;
+}
+
+.dropdown {
+    background-color: white;
+    max-width: 440px;
+    width: 100%;
+    max-width: 100%;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.dropdownUsers {
+    background-color: white;
+    max-width: 440px;
+    width: 100%;
+    max-width: 100%;
+    max-height: 240px;
+    overflow-y: auto;
+    position: relative;
+    top: 1px;
+}
+
+.dropdownUsers::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.dropdownUsers::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.dropdownUsers::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.dropdownCat {
+    background-color: white;
+    max-width: 440px;
+    width: 100%;
+    position: absolute;
+    top: -43px;
+    z-index: 3;
+    border-radius: 10px;
+}
+
+.dropdownButton {
+    height: 48px;
+    border-radius: 10px;
+    padding-left: 20px;
+    background-color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.dropdownButton:hover {
+    filter: brightness(0.9);
+}
+
+.dropdownButtonSelected {
+    background-color: #2A3647;
+    color: white;
+}
+
+.dropdownButtonSelectedUser {
+    background-color: #2A3647;
+    color: white;
+}
+
+.userCircle {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    background-color: #ff3c00;
+    color: white;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.extraUser {
+    height: 40px;
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 50%;
+    color: white;
+    background-color: #2A3647;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    top: -45px;
+    left: 208px;
+    margin-bottom: -40px;
+}
+
+.dropdownUser {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.dropdownCheckMark {
+    margin-right: 20px;
+}
+
+.assignedUsers {
+    height: 48px;
+    max-width: 440px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 10px;
+}
+
+.dueDate {
+    display: flex;
+}
+
+.calendar {
+    height: 20px;
+    position: relative;
+    right: 43px;
+    align-self: center;
+    pointer-events: none;
+    cursor: pointer;
+    margin-right: -20px;
+}
+
+.dateInput {
+    color: #D1D1D1;
+}
+
+.dateInput:valid {
+    color: #000000;
+}
+
+::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    cursor: pointer;
+}
+
+.prio {
+    display: flex;
+    justify-content: space-between;
+    max-width: 440px;
+    width: 100%;
+}
+
+.prioButton {
+    width: 33%;
+    max-width: 136px;
+    height: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    border-radius: 8px;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.prioButton:hover {
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+}
+
+.prioButton.active:hover {
+    box-shadow: none;
+}
+
+.high {
+    background-color: #ff3c00;
+    color: white;
+}
+
+.medium {
+    background-color: #ffaa00;
+    color: white;
+}
+
+.low {
+    background-color: #79e329;
+    color: white;
+}
+
+.subtaskHeadline {
+    margin-top: 24px;
+}
+
+.subtaskBox {
+    margin-top: 4px;
+}
+
+.subtaskBox:hover {
+    background-color: #D1D1D1;
+    border-radius: 10px;
+}
+
+.editSubtaskInput {
+    border-radius: 0;
+    border: none !important;
+    height: 26px;
+    font-size: 16px;
+}
+
+.editSubtaskInput:focus {
+    outline: none;
+}
+
+.subtaskIcons {
+    height: 1px;
+    max-width: 440px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 20px;
+    bottom: 25px;
+}
+
+.subtaskIconsLower {
+    height: 1px;
+    max-width: 440px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    justify-content: flex-end;
+    right: 14px;
+    bottom: -3px;
+}
+
+.subtaskIcon {
+    cursor: pointer;
+}
+
+.subtasksBox {
+    height: 100px;
+    max-width: 440px;
+    width: 100%;
+    overflow: auto;
+}
+
+.subtasksBox::-webkit-scrollbar {
+    width: 12px;
+    height: 20px;
+}
+
+.subtasksBox::-webkit-scrollbar-track {
+    background-color: #fff;
+    border-radius: 8px;
+}
+
+.subtasksBox::-webkit-scrollbar-thumb {
+    background: rgb(168, 168, 168);
+    border-radius: 8px;
+}
+
+.subtasksBox ul {
+    display: flex;
+    align-items: center;
+    padding-right: 6px;
+    padding-bottom: 4px;
+}
+
+.subtasksBox li {
+    font-size: 16px;
+    padding-top: 6px;
+    width: 80%;
+}
+
+.smallSeparator {
+    width: 2px;
+    height: 24px;
+    background-color: #d1d1d1;
+    margin: 3px;
+}
+
+.clearButton {
+    border: 1px solid #2A3647;
+    border-radius: 10px;
+    color: #2A3647;
+    cursor: pointer;
+    width: 110px;
+    height: 56px;
+    padding: 16px;
+    margin-right: 16px;
+    font-size: 21px;
+}
+
+.clearButton:hover {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.clearButton:active {
+    color: #29ABE2;
+    border: 1px solid #29ABE2;
+}
+
+.createTaskButton {
+    border-radius: 10px;
+    background-color: #2A3647;
+    cursor: pointer;
+    height: 56px;
+    width: 183px;
+    padding: 16px;
+    font-size: 21px;
+    color: white;
+    border: none;
+}
+
+.createTaskButton:hover {
+    background-color: #29ABE2;
+    box-shadow: 0px 4px 2px 2px #D1D1D1;
+    border: 1px solid #29ABE2;
+}
+
+.createTaskButton:active {
+    box-shadow: 1px 2px 2px 2px #D1D1D1;
+}
+
+.taskSuccessAdd {
+    position: absolute;
+    bottom: -15%;
+    offset-position: bottom;
+    left: 40%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    font-size: 20px;
+    background-color: #2a3647;
+    color: white;
+    width: 326px;
+    height: 74px;
+    border-radius: 20px;
+    transform: translateY(0);
+}
+
+.taskSuccessAdded {
+    transition: all 500ms ease-out;
+    transform: translateY(-58vh);
+}
+
+.addTaskBottomBar {
+    position: relative;
+    z-index: 2;
+    bottom: 87px;
+    display: flex;
+    width: 70%;
+    max-width: 962px;
+    justify-content: space-between;
+    padding-right: 96px;
+    width: 100%;
+    background-color: #f5f6f7;
+}
+
+.emptyBox {
+    height: 92px;
+    pointer-events: none;
+}
