@@ -29,7 +29,6 @@ async function loadContact() {
       throw new Error(`Response status: ${response.status}`);
     }
     contactAllArray = await response.json();
-    console.log(contactAllArray);
   } catch (error) {
     console.error(error.message);
   }
@@ -43,11 +42,7 @@ async function loadContact() {
 async function loadTasks() {
   try {
     const response = await fetch(taskURL);
-    if (!response.ok) {
-      throw new Error(`Response status: ${response.status}`);
-    }
     taskAllArray = await response.json();
-    console.log(taskAllArray);
   } catch (error) {
     console.error(error.message);
   }
@@ -57,8 +52,32 @@ async function loadTasks() {
 /**
  * Saves the task array to local storage.
  */
+async function saveMovedTasks() {
+  let taskId = getIndexOfTask(currentDraggedElement)
+  try {
+    let response = await fetch(taskURL + taskId + "/", {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(taskAllArray[currentDraggedElement])
+    });
+    await response.json();
+  } catch (error) {
+    console.error('Fehler beim Speichern:', error);
+  }
+}
+
+
 function saveTasksToLocalStorage() {
   localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
+}
+
+
+function getIndexOfTask(i) {
+  let task = taskAllArray[i]
+  return task.id
 }
 
 
@@ -172,6 +191,7 @@ function allowDrop(ev) {
  * @param {string} section - The ID of the section where the task should be moved.
  */
 function moveTo(section) {
+  event.preventDefault()
   if (typeof currentDraggedElement !== 'number' || currentDraggedElement < 0 || currentDraggedElement >= taskAllArray.length) {
     return;
   }
@@ -186,7 +206,7 @@ function moveTo(section) {
   sectionElement.classList.remove('dragHover');
 
   renderAllTasks();
-  saveTasksToLocalStorage();
+  saveMovedTasks();
 }
 
 

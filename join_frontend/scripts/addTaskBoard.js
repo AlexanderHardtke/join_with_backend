@@ -1,4 +1,3 @@
-const taskURL = 'http://127.0.0.1:8000/api/tasks/';
 const userURL = 'http://127.0.0.1:8000/api/contacts/'
 const dateInput = document.getElementById('dueDateInput');
 let tasks = [
