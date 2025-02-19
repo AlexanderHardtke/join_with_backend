@@ -224,7 +224,7 @@ function createTask() {
     }
     save();
     showSuccessTask();
-    // goToBoard();
+    goToBoard();
 }
 
 

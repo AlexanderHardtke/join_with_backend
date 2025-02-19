@@ -1,3 +1,6 @@
+const taskURL = 'http://127.0.0.1:8000/api/tasks/';
+const contactURL = 'http://127.0.0.1:8000/api/contacts/'
+
 let taskAllArray = [];
 let contactAllArray = [];
 let currentDraggedElement;
@@ -7,9 +10,9 @@ let currentDraggedElement;
  * Loads all necessary data (contacts and tasks) from local storage 
  * and renders the tasks on the page.
  */
-function loadAll() {
-  loadContact();
-  loadTasks();
+async function loadAll() {
+  await loadContact();
+  await loadTasks();
   checkContacts();
   renderAllTasks();
 }
@@ -19,10 +22,16 @@ function loadAll() {
  * Loads the contact array from local storage if it exists.
  * Otherwise, the contact array remains empty.
  */
-function loadContact() {
-  let contactAsText = localStorage.getItem('contactAllArray');
-  if (contactAsText) {
-    contactAllArray = JSON.parse(contactAsText);
+async function loadContact() {
+  try {
+    const response = await fetch(contactURL);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    contactAllArray = await response.json();
+    console.log(contactAllArray);
+  } catch (error) {
+    console.error(error.message);
   }
 }
 
@@ -31,10 +40,16 @@ function loadContact() {
  * Loads the task array from local storage if it exists.
  * Otherwise, the task array remains empty.
  */
-function loadTasks() {
-  let tasksAsText = localStorage.getItem('taskAllArray');
-  if (tasksAsText) {
-    taskAllArray = JSON.parse(tasksAsText);
+async function loadTasks() {
+  try {
+    const response = await fetch(taskURL);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    taskAllArray = await response.json();
+    console.log(taskAllArray);
+  } catch (error) {
+    console.error(error.message);
   }
 }
 
@@ -214,8 +229,8 @@ function removeHighlightBox(sectionId) {
  */
 function handleDropLeave(event, sectionId) {
   if (!event.relatedTarget || !event.currentTarget.contains(event.relatedTarget)) {
-      removeHighlightBox(sectionId);
-      event.stopPropagation();
+    removeHighlightBox(sectionId);
+    event.stopPropagation();
   }
 }
 
