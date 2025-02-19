@@ -1,6 +1,7 @@
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
+.gitignore
 /dist
 /tmp
 /out-tsc
@@ -8,7 +9,7 @@
 /join_frontend/out/
 /join_frontend/scripts/firebase.js
 join_frontend/scripts/firebase.js
-.gitignore
+
 
 # Node
 /node_modules
