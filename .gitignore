@@ -8,6 +8,7 @@
 /join_frontend/out/
 /join_frontend/scripts/firebase.js
 join_frontend/scripts/firebase.js
+.gitignore
 
 # Node
 /node_modules
