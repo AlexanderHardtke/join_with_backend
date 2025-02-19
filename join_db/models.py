@@ -1,3 +1,4 @@
+from sqlite3 import Date
 from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
@@ -18,7 +19,16 @@ class Contact(models.Model):
 class Task(models.Model):
     category = models.CharField(max_length=20)
     description = models.CharField(max_length=55)
-    prio = models.SlugField(max_length=55)
+    prio = models.CharField(max_length=255)
     section = models.CharField(max_length=55)
     title = models.CharField(max_length=55)
-    subtasks = models.JSONField(default=[])
+    subtasks = models.JSONField(default=list)
+    subtasksCheck = models.JSONField(default=list)
+    date = models.DateField(default=Date.today)
+    prioName = models.CharField(max_length=55, default="Medium")
+    assignedInitals = models.JSONField(default=list)
+    assignedName = models.JSONField(default=list)
+    color = models.JSONField(default=list)
+
+    def __str__(self):
+        return f"{self.title} ({self.prioName})"
