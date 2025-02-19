@@ -70,11 +70,6 @@ async function saveMovedTasks() {
 }
 
 
-function saveTasksToLocalStorage() {
-  localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
-}
-
-
 function getIndexOfTask(i) {
   let task = taskAllArray[i]
   return task.id
@@ -372,7 +367,8 @@ function checkContacts() {
         task.assignedInitals.splice(j, 1);
         task.assignedName.splice(j, 1);
         task.color.splice(j, 1);
-        saveTasksToLocalStorage()
+        saveMovedTasks
+        ()
       }
     }
   }

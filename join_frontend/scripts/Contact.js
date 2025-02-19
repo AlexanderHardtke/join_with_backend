@@ -1,4 +1,5 @@
-const BaseUrl = "https://join-357c8-default-rtdb.europe-west1.firebasedatabase.app/";
+const taskURL = 'http://127.0.0.1:8000/api/tasks/';
+const contactURL = 'http://127.0.0.1:8000/api/contacts/'
 let charContactArray = [];
 let emailsArray = [];
 let contactNameArray = [];
@@ -27,17 +28,25 @@ contactLoad();
  * 
  * @param {*} name
  */
-function contactLoad() {
+async function contactLoad() {
     cleanArray();
-    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
-    for (let key in contactAllArray) {  
-        contactNameArray.push(contactAllArray[key].name);
-        emailsArray.push(contactAllArray[key].email);
-        PhonenumberArray.push(contactAllArray[key].phone);
-        charContactArray.push({ key: key, name: contactAllArray[key].name, email: contactAllArray[key].email, phone: contactAllArray[key].phone });
-        colorPalette.push(contactAllArray[key].color);
-    }
-    contactLoadChar(contactNameArray);
+    try {
+        const response = await fetch(contactURL);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        let contactAllArray = await response.json();
+        for (let key in contactAllArray) {  
+            contactNameArray.push(contactAllArray[key].name);
+            emailsArray.push(contactAllArray[key].email);
+            PhonenumberArray.push(contactAllArray[key].phone);
+            charContactArray.push({ key: key, name: contactAllArray[key].name, email: contactAllArray[key].email, phone: contactAllArray[key].phone });
+            colorPalette.push(contactAllArray[key].color);
+        }
+        contactLoadChar(contactNameArray);
+      } catch (error) {
+        console.error(error.message);
+      }
 }
 
 
@@ -372,9 +381,3 @@ function contactLoadTargetId(container){
         targetElement.appendChild(container);
     }
 }
-
-
-
-
-
-
