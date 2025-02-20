@@ -54,25 +54,29 @@ async function loadTasks() {
  */
 async function saveMovedTasks() {
   let taskId = getIndexOfTask(currentDraggedElement)
-  try {
-    let response = await fetch(taskURL + taskId + "/", {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(taskAllArray[currentDraggedElement])
-    });
-    await response.json();
-  } catch (error) {
-    console.error('Fehler beim Speichern:', error);
+  if (taskId) {
+    try {
+      let response = await fetch(taskURL + taskId + "/", {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(taskAllArray[currentDraggedElement])
+      });
+      await response.json();
+    } catch (error) {
+      console.error('Fehler beim Speichern:', error);
+    }
   }
 }
 
 
 function getIndexOfTask(i) {
   let task = taskAllArray[i]
-  return task.id
+  if (task === undefined) {
+    return
+  } else return task.id
 }
 
 
@@ -368,7 +372,7 @@ function checkContacts() {
         task.assignedName.splice(j, 1);
         task.color.splice(j, 1);
         saveMovedTasks
-        ()
+          ()
       }
     }
   }

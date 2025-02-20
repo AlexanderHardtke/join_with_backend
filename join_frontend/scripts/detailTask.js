@@ -101,11 +101,29 @@ function closeTaskWithOverlay () {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function deleteTask(taskIndex) {
+  let taskId = getIndexOfTask(taskIndex)
+  deleteTasks(taskId)
   taskAllArray.splice(taskIndex, 1);
-  saveTasksToLocalStorage();
   toggleTask();
   renderAllTasks();
   document.getElementById('searchInput').value = "";
+}
+
+
+async function deleteTasks(taskId) {
+  try {
+    let response = await fetch(taskURL + taskId + "/", {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    if (response.ok && response.headers.get("Content-Length") !== "0") {
+        await response.json();
+    }
+  } catch (error) {
+    console.error('Fehler beim Speichern:', error);
+  }
 }
 
 
