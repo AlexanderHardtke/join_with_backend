@@ -74,9 +74,9 @@ async function saveMovedTasks() {
 
 function getIndexOfTask(i) {
   let task = taskAllArray[i]
-  if (task === undefined) {
-    return
-  } else return task.id
+  if (task) {
+    return task.id
+  }
 }
 
 

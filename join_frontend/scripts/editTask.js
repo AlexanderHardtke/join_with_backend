@@ -34,9 +34,8 @@ let editedTaskArray = editedTaskArrays[0];
  */
 function editTask(taskIndex) {
   let task = taskAllArray[taskIndex];
-  let date = changeDateFormatEdit(task.date);
   setTimeout(() => {
-    editTaskTemplate(task, date, taskIndex);
+    editTaskTemplate(task, task.date, taskIndex);
   }, 100);
   setTimeout(() => {
     setPriorityButton(task);
@@ -231,9 +230,21 @@ function checkInputsEdit() {
  *
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
-function saveToCurrentTask(taskIndex) {
-  taskAllArray[taskIndex] = { ...editedTaskArray };
-  saveTasksToLocalStorage();
+async function saveToCurrentTask(taskIndex) {
+  taskId = getIndexOfTask(taskIndex)
+  try {
+    let response = await fetch(taskURL + taskId + "/", {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(taskAllArray[taskIndex])
+    });
+    await response.json();
+  } catch (error) {
+    console.error('Fehler beim Speichern:', error);
+  }
 }
 
 
@@ -285,12 +296,10 @@ function updateAssignedUsers() {
  * @param {number} taskIndex - The index of the task in the taskAllArray.
  */
 function updateTaskDetails(taskIndex) {
-  let taskDate = taskAllArray[taskIndex].date;
   editedTaskArray['section'] = taskAllArray[taskIndex].section;
   editedTaskArray['category'] = taskAllArray[taskIndex].category;
-  editedTaskArray['date'] = changeDateFormat(taskDate);
+  editedTaskArray['date'] = taskAllArray[taskIndex].date;
   editedTaskArray['description'] = document.getElementById('descriptionInput').value;
-  editedTaskArray['id'] = `${taskIndex}`;
   editedTaskArray['title'] = document.getElementById('titleInput').value;
 }
 
