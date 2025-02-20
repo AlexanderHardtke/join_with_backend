@@ -1,3 +1,4 @@
+const taskURL = 'http://127.0.0.1:8000/api/tasks/';
 let SectionTypArray = []
 let SectionPrioArray = []
 let SectionPrioDateArray = []
@@ -8,6 +9,7 @@ let awaitFeedbackCount = 0;
 let doneCount = 0;
 let toDoCount = 0;
 let SectionTypLength = 0;
+let taskAllArray = [];
 summaryLoad()
 setTimeBasedGreeting();
 checkWidthAndExecute();
@@ -19,11 +21,19 @@ checkWidthAndExecute();
  * is pushed into the respective array.
  * 
  */
-function summaryLoad() {
+async function summaryLoad() {
     SectionTypArray = [];
     SectionPrioArray = [];
     SectionPrioDateArray = [];
-    let taskAllArray = JSON.parse(localStorage.getItem('taskAllArray')) || [];
+    try {
+        const response = await fetch(taskURL);
+        if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+        }
+        taskAllArray = await response.json();
+      } catch (error) {
+        console.error(error.message);
+      }
     for (let item of taskAllArray) {
         SectionTypArray.push(item.section);       
         SectionPrioDateArray.push(item.date);     
@@ -141,15 +151,15 @@ function summarySectionCheckCounter(highCount){
  * 
  * @param {*} highCount 
  */
-function summarySectionFilterDate(highCount){
+function summarySectionFilterDate(highCount) {
     let filteredDates = highIndices
-        .map(index => convertDateFormat(SectionPrioDateArray[index]))
-        .filter(date => date !== null); 
-    filteredDates.sort((a, b) => new Date(a) - new Date(b));
+        .map(index => new Date(SectionPrioDateArray[index]))
+        .filter(date => !isNaN(date.getTime()));
+    filteredDates.sort((a, b) => a - b);
     if (filteredDates.length > 0) {
-        summarySectionEarlyDate(filteredDates, highCount)
+        summarySectionEarlyDate(filteredDates, highCount);
     }
-    loginGoodMorning()
+    loginGoodMorning();
 }
 
 
@@ -162,7 +172,6 @@ function summarySectionFilterDate(highCount){
  */
 function summarySectionEarlyDate(filteredDates, highCount){
     const earliestDate = filteredDates[0];
-    filteredDates = filteredDates.filter(date => date === earliestDate);
     document.getElementById('SummaryCount').innerHTML=`${highCount}`
     const dateToDisplay = new Date(earliestDate);
     if (!isNaN(dateToDisplay)) {

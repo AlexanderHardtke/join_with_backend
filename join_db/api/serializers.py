@@ -21,3 +21,9 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
          model = Task
          fields = '__all__'
+
+class TaskSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+         model = Task
+         fields= ['section', 'date', 'prioName']
