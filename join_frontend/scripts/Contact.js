@@ -19,6 +19,7 @@ let goBackToContactsremoveID = ['EveryContact', 'AddContactNewButton', 'ArrowBac
 let goBackToContactsremove = ['none', 'none', 'StyleBackarrowClick', 'MenuEditDeleteButton']
 let goBackToContactsAddID = ['AddContactNewButton', 'editDeleteChoiceButton', 'MenuEditDeleteButtonID']
 let goBackToContactsAdd = ['MenuEditDeleteButton', 'none', 'none']
+let contactAllArray = []
 contactLoad();
 
 
@@ -35,8 +36,8 @@ async function contactLoad() {
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
-        let contactAllArray = await response.json();
-        for (let key in contactAllArray) {  
+        contactAllArray = await response.json();
+        for (let key in contactAllArray) {
             contactNameArray.push(contactAllArray[key].name);
             emailsArray.push(contactAllArray[key].email);
             PhonenumberArray.push(contactAllArray[key].phone);

@@ -153,20 +153,37 @@ function editNewContactHtmlChange() {
  */
 function createNewContact(event) {
     if (event) event.preventDefault();
-    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     const name = document.getElementById('editNameInput').value.trim();
     const email = document.getElementById('editEmailInput').value.trim();
     const phone = document.getElementById('editPhoneInput').value.trim();
     if (name && email && phone) {
         let newContact = {"name": name,"email": email,"phone": phone,"color": getRandomColor()};
         contactAllArray.push(newContact);
-        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+        save(newContact);
         editContactCloseWindow();
         showPopUpInfo('Contact was successfully added!')
         contactLoad()}
     else{document.getElementById('CreateContactButtonID').disabled = true;}
 }
         
+
+async function save(newContact) {
+    try {
+        let response = await fetch(contactURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(newContact)
+        });
+
+        let result = await response.json();
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+    }
+}
+
 
 /**
  * The data is transferred from the database in an object. The length of the array containing the objects is then determined.
@@ -177,16 +194,33 @@ function createNewContact(event) {
  * @param {*} name 
  */
 function deleteContactList(index) {
-    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     if (index >= 0 && index < contactAllArray.length) {
+        let contactId = getIndexOfContact(index)
+        deleteContact(contactId)
         contactAllArray.splice(index, 1);
-        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
         document.getElementById('ContactfieldInfodiv').classList.remove('Slideinright');
         document.getElementById('ContactfieldInfodiv').classList.add('Slideinleft');
         let windowSize = window.innerWidth
         if(windowSize < 900){goBackToContacts()}
         else{ document.getElementById('Contenttext').innerHTML='';}
         contactLoad(); }
+}
+
+
+async function deleteContact(contactId) {
+    try {
+        let response = await fetch(contactURL + contactId + "/", {
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+        if (response.ok && response.headers.get("Content-Length") !== "0") {
+            await response.json();
+        }
+      } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+      }
 }
 
 
@@ -216,12 +250,11 @@ function editContactCloseWindow() {
  * @param {*} index 
  */
 function editNewContactChange(name, email, phone ,index) {
-    let contactAllArray = JSON.parse(localStorage.getItem('contactAllArray')) || [];
     let duplicate = contactAllArray.some(contact => 
         contact.name === name && contact.email === email && contact.phone === phone
     );
     if (index >= 0 && index < contactAllArray.length && !duplicate) {
-        editChangeContact(name, email, phone,index, contactAllArray)
+        editChangeContact(name, email, phone,index)
     }
 }
 
@@ -237,16 +270,16 @@ function editNewContactChange(name, email, phone ,index) {
  * @param {*} email 
  * @param {*} phone 
  * @param {*} index 
- * @param {*} contactAllArray 
  */
-function editChangeContact(name, email, phone, index, contactAllArray){
+function editChangeContact(name, email, phone, index){
     document.getElementById('editContactForm').addEventListener('submit', function(event) {
         event.preventDefault();
+        let contactId = getIndexOfContact(index)
         contactAllArray.splice(index, 1);
         let NewColorBackground = getRandomColor()
         let newContact = {"email": email,"name": name,"phone": phone,"color": NewColorBackground};
         contactAllArray.splice(index, 0, newContact);
-        localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+        saveContact(index, contactId);
         document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
         document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
         let initial = getInitials(name)
@@ -254,6 +287,30 @@ function editChangeContact(name, email, phone, index, contactAllArray){
         contactLoad() 
     });   
 }
+
+
+async function saveContact(index, contactId) {
+    try {
+      let response = await fetch(contactURL + contactId + "/", {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(contactAllArray[index])
+      });
+      await response.json();
+    } catch (error) {
+      console.error('Fehler beim Speichern:', error);
+    }
+  }
+
+
+  function getIndexOfContact(i) {
+    let contact = contactAllArray[i]
+    console.log(contact);
+    return contact.id
+  }
 
 
 /**
