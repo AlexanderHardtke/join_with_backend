@@ -3,9 +3,9 @@ let matchingUser;
 window.loginUser = loginUser;
 window.addInputListeners = addInputListeners;
 window.guestLogIn = guestLogIn;
-window.loadRememberedData = loadRememberedData;
+window.toggleRememberMe = toggleRememberMe;
 window.logInAnimation = logInAnimation;
-fetchContactTask();
+window.checkRememberMe = checkRememberMe();
 
 
 /**
@@ -60,7 +60,7 @@ function logInvalidateEmailExist(snapshot, emailInput, emailContainer) {
             } else {
                 emailContainer.style.border = '1px solid red';
             }
-        } catch{emailContainer.style.border = '1px solid red';}
+        } catch { emailContainer.style.border = '1px solid red'; }
     } else {
         emailContainer.style.border = '1px solid red';
     }
@@ -101,7 +101,7 @@ function logInvalidatePassword() {
     if (matchingUser && matchingUser.password === passwordInput) {
         passwordContainer.style.border = '1px solid #29ABE2';
     } else {
-        passwordContainer.style.border = '1px solid red'; 
+        passwordContainer.style.border = '1px solid red';
     }
 }
 
@@ -134,7 +134,6 @@ function resetPasswordBorderOnBlur() {
 function loginUser() {
     const emailInputElement = document.getElementById("emailInputLogin");
     const passwordInputElement = document.getElementById("passwordInput1");
-    const rememberMeChecked = document.getElementById("rememberMe").checked;
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
     loginUserChecked(rememberMeChecked, emailInput, passwordInput)
@@ -144,26 +143,8 @@ function loginUser() {
             loginUserCorrect(emailInput, passwordInput, snapshot)
         } else {
             userInformationPopUp('Keine Benutzer gefunden.')
-        }})
-}
-
-
-/**
- * Here, data such as email, encrypted password and the click on the Rememberfield are saved in local storage.
- * If Rememberfield is not ticked, the data will not be saved
- * 
- * @param {*} rememberMeChecked 
- */
-function loginUserChecked(rememberMeChecked, emailInput, passwordInput){
-    if (rememberMeChecked) {
-        localStorage.setItem('rememberedEmail', emailInput);
-        localStorage.setItem('rememberedPassword', encryptPassword(passwordInput));
-        localStorage.setItem('rememberMeChecked', 'true'); 
-    } else {
-        localStorage.removeItem('rememberedEmail'); 
-        localStorage.removeItem('rememberedPassword');
-        localStorage.setItem('rememberMeChecked', 'false');
-    }
+        }
+    })
 }
 
 
@@ -174,9 +155,9 @@ function loginUserChecked(rememberMeChecked, emailInput, passwordInput){
  * @param {*} emailInput 
  * @param {*} passwordInput 
  */
-function loginUserCorrect(emailInput, passwordInput, snapshot){
+function loginUserCorrect(emailInput, passwordInput, snapshot) {
     const usersData = snapshot.val();
-    const matchingUser = Object.values(usersData).find(user => 
+    const matchingUser = Object.values(usersData).find(user =>
         user.email === emailInput);
     if (matchingUser) {
         if (matchingUser.password === passwordInput) {
@@ -185,9 +166,11 @@ function loginUserCorrect(emailInput, passwordInput, snapshot){
             localStorage.setItem('CurrentUser', JSON.stringify(decodedName));
             window.location.href = `../Join/htmls/summary.html`;
         } else {
-            userInformationPopUp('Passwort ist falsch!')}
+            userInformationPopUp('Passwort ist falsch!')
+        }
     } else {
-        userInformationPopUp('E-Mail existiert nicht!')}
+        userInformationPopUp('E-Mail existiert nicht!')
+    }
 }
 
 
@@ -209,29 +192,8 @@ function encryptPassword(password) {
  * @returns 
  */
 function decryptPassword(encryptedPassword) {
-    const decodedPassword = atob(encryptedPassword); 
+    const decodedPassword = atob(encryptedPassword);
     return decodedPassword;
-}
-
-
-/**
- * First of all, the stored values are retrieved from the localStorage and stored in variables. 
- * Then the values are loaded into the input fields except for the checkbox, where it is first checked whether it is true.
- * 
- */
-function loadRememberedData() {
-    const rememberedEmail = localStorage.getItem('rememberedEmail'); 
-    const rememberedPassword = localStorage.getItem('rememberedPassword');
-    const rememberMeChecked = localStorage.getItem('rememberMeChecked'); 
-    if (rememberedEmail) {
-        document.getElementById('emailInputLogin').value = rememberedEmail;
-    }
-    if (rememberedPassword) {
-        document.getElementById('passwordInput1').value = decryptPassword(rememberedPassword);
-    }
-    if (rememberMeChecked === 'true') {
-        document.getElementById('rememberMe').checked = true;
-    }
 }
 
 
@@ -241,7 +203,7 @@ function loadRememberedData() {
  * The current CurrentUser is also transferred to the summary.html file. 
  * 
  */
-function guestLogIn(){
+function guestLogIn() {
     let matchingUser = 'Guest'
     localStorage.removeItem('CurrentUser');
     localStorage.setItem('CurrentUser', JSON.stringify(matchingUser));
@@ -254,14 +216,14 @@ function guestLogIn(){
  * The second animation fades in the remaining content with a delay and ensures that scrolling is possible again.
  * 
  */
-export function logInAnimation(){
+export function logInAnimation() {
     const logo = document.querySelector('.JoinLogoStyle');
     const body = document.body;
     setTimeout(() => {
         logo.classList.add('logo-move');
         setTimeout(() => {
             body.classList.add('show-content');
-            body.style.overflow = 'auto'; 
+            body.style.overflow = 'auto';
         }, 1000);
     }, 400);
 }
@@ -272,36 +234,26 @@ export function logInAnimation(){
  * The arrays are recreated empty and the data from the Firebase is stored in variables in Json format.
  * 
  */
-async function fetchContactTask(){
-    localStorage.removeItem('taskAllArray');
-    localStorage.removeItem('contactAllArray');
-    let taskAllArray = [];
-    let contactAllArray = [];
-    const pathTasks = 'tasksAll';
-    const pathContacts = 'contactall';
-    let Summaryall = await fetch(BaseUrl + pathTasks + '.json');
-    let Summaryallshow = await Summaryall.json();
-    let Contactall = await fetch(BaseUrl + pathContacts + '.json');
-    let Contactallshow = await Contactall.json();
-    contactLoadStorage(Contactallshow, Summaryallshow, contactAllArray, taskAllArray)
+async function fetchContactTask() {
+    let LoggedUser = localStorage.getItem('LoggedUser');
+    if (LoggedUser !== null) {
+        const user = JSON.parse(LoggedUser);
+        document.getElementById("emailInputLogin").value = user.email;
+        document.getElementById("passwordInput1").value = user.password;
+        document.getElementById("rememberMe").checked = true;
+    }
 }
 
 
-/**
- * The data from the variables is added to the array and stored in the local storage.
- * 
- * @param {*} Contactallshow 
- * @param {*} Summaryallshow 
- * @param {*} contactAllArray 
- * @param {*} taskAllArray 
- */
-function contactLoadStorage(Contactallshow, Summaryallshow, contactAllArray, taskAllArray){
-    for (let key in Summaryallshow) {
-        taskAllArray.push(Summaryallshow[key]);
+function checkRememberMe() {
+    const rememberMeChecked = localStorage.getItem('rememberMeChecked');
+    if (rememberMeChecked === 'true') {
+        fetchContactTask();
     }
-    for (let key in Contactallshow) {
-        contactAllArray.push(Contactallshow[key]);
-    }
-    localStorage.setItem('taskAllArray', JSON.stringify(taskAllArray));
-    localStorage.setItem('contactAllArray', JSON.stringify(contactAllArray));
+}
+
+function toggleRememberMe() {
+    const rememberMeChecked = localStorage.getItem('rememberMeChecked')
+    if (rememberMeChecked === 'true') localStorage.setItem("rememberMeChecked", 'false');
+    else localStorage.setItem("rememberMeChecked", 'true');
 }

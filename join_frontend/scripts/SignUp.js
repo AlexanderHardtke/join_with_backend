@@ -95,10 +95,16 @@ export function submitToFirebase(event) {
     const passwordInput = document.getElementById("passwordInput").value;
     const repeated_password = document.getElementById("confirmPasswordInput").value;
     const newUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
-    save(newUser)
+    save(newUser);
+    saveToLocalStorage(newUser);
 }
 
 
+/**
+ * Saves the new User in the API
+ * 
+ * @param {*} newUser the Array with the newUser data
+ */
 async function save(newUser) {
     try {
         let response = await fetch(RegistrationURL, {
@@ -118,30 +124,8 @@ async function save(newUser) {
 }
 
 
-/**
- * Here it is checked whether the specified email already exists and, 
- * depending on this, a pop-up is generated that displays the corresponding action.
- * 
- * @param {*} snapshot 
- * @param {*} newUser 
- * @param {*} emailInput 
- * @param {*} usersRef 
- * @returns 
- */
-function checkEmailExist(snapshot, newUser, emailInput, usersRef) {
-    const usersData = snapshot.val();
-    const signUpButton = document.getElementById("SignUpButtondisabled");
-    const emailExists = Object.values(usersData).some(user => user.email === emailInput);
-    if (emailExists) {
-        userInformationPopUp('This email is already in use!');
-        signUpButton.disabled = true; return;}
-    const existingKeys = Object.keys(usersData).map(key => parseInt(key, 10));
-    const nextIndex = existingKeys.length > 0 ? Math.max(...existingKeys) + 1 : 0;
-    const newUserRef = child(usersRef, nextIndex.toString());
-    set(newUserRef, newUser).then(() => {
-        userInformationPopUp('User successfully registered!');
-        backToLogin();})
-    .catch(() => {userInformationPopUp('User could not be registered!'); signUpButton.disabled = true;});
+function saveToLocalStorage(newUser) {
+    localStorage.setItem("LoggedUser", JSON.stringify(newUser));
 }
 
 
@@ -192,8 +176,8 @@ function togglePasswordVisibility(id, PasswortID) {
  * 
  */
 window.onload = function() {
-    logInAnimation()
-    loadRememberedData();
+    logInAnimation();
+    checkRememberMe;
     addInputListeners();
 };
 
