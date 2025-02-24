@@ -57,3 +57,10 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
          model = Task
          fields= ['section', 'date', 'prioName']
+
+# {
+#     "username": "test",
+#  "email": "test@email.com",
+#  "password": "test123",
+#  "repeated_password": "test123"
+# }

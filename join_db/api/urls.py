@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import path, include
 from .views import ContactViewSet, TaskViewSet, SummaryView, UserProfileList, UserProfileDetail, RegistrationView
 from rest_framework import routers
+from rest_framework.authtoken.views import obtain_auth_token
 
 router = routers.SimpleRouter()
 router.register(r'contacts', ContactViewSet)
