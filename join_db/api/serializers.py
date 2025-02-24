@@ -16,7 +16,7 @@ class RegistrationSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password', 'repeated_password']
+        fields = ['username', 'first_name', 'last_name', 'email', 'password', 'repeated_password']
         extra_kwargs = {
             'password': {
                 'write_only': True
@@ -59,7 +59,8 @@ class TaskSerializer(serializers.ModelSerializer):
          fields= ['section', 'date', 'prioName']
 
 # {
-#     "username": "test",
+#     "username": "Test_Test",
+# "full_name": "Test_Test",
 #  "email": "test@email.com",
 #  "password": "test123",
 #  "repeated_password": "test123"

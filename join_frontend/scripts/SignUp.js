@@ -1,4 +1,4 @@
-const BaseUrl = "http://127.0.0.1:8000/api/registration/";
+const RegistrationURL = "http://127.0.0.1:8000/api/registration/";
 let SignUpWindowArrayIDs = ['LoginWindow', 'SignUpWindow', 'SignUpButtondisabled', 'SignUpButtonWindow']
 let SignUpWindowArrayAdd = ['none', 'SignUpMain', 'ButtonAddDisabled', 'none']
 let SignUpWindowArrayRemove = ['LoginPageMain', 'none', 'ButtonRemoveDisabled', 'LoginPageSignUp']
@@ -90,34 +90,31 @@ export function submitToFirebase(event) {
     event.preventDefault();
     const emailInput = document.getElementById("emailInput").value;
     const nameInput = document.getElementById("nameInput").value;
+    const firstName = nameInput.split(' ').slice(0, -1).join(' ');
+    const lastName = nameInput.split(' ').slice(-1).join(' ');
     const passwordInput = document.getElementById("passwordInput").value;
-    const newUser = { name: nameInput, email: emailInput, password: passwordInput };
-    const usersRef = ref(database, 'users');
-    get(usersRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            checkEmailExist(snapshot, newUser, emailInput, usersRef);
-        } else {
-            submitTryUser(newUser, database);}
-    }).catch(() => {
-        userInformationPopUp('Error when retrieving user data!');});
+    const repeated_password = document.getElementById("confirmPasswordInput").value;
+    const newUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
+    save(newUser)
 }
 
 
-/**
- * If the user does not yet exist, the user is registered here and you return to the login.
- * 
- * @param {*} newUser 
- * @param {*} database 
- */
-function submitTryUser(newUser, database) {
-    set(ref(database, 'users/0'), newUser)
-    .then(() => {
-        userInformationPopUp('User successfully registered!');
-        backToLogin();
-    })
-    .catch(() => {
-        userInformationPopUp('User could not be registered!');
-    });
+async function save(newUser) {
+    try {
+        let response = await fetch(RegistrationURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(newUser)
+        });
+
+        let result = await response.json();
+        console.log('Server Response:', result);
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+    }
 }
 
 
