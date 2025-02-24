@@ -1,20 +1,13 @@
-const BaseUrl = "https://join-357c8-default-rtdb.europe-west1.firebasedatabase.app/";
+const BaseUrl = "http://127.0.0.1:8000/api/registration/";
 let SignUpWindowArrayIDs = ['LoginWindow', 'SignUpWindow', 'SignUpButtondisabled', 'SignUpButtonWindow']
 let SignUpWindowArrayAdd = ['none', 'SignUpMain', 'ButtonAddDisabled', 'none']
 let SignUpWindowArrayRemove = ['LoginPageMain', 'none', 'ButtonRemoveDisabled', 'LoginPageSignUp']
-import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-database.js";
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.1.2/firebase-app.js";
 import {logInAnimation} from './LogIn.js';
-import { firebaseConfigHidden } from './firebase.js';
 window.submitToFirebase = submitToFirebase;
 window.backToLogin = backToLogin;
 window.signUpWindow = signUpWindow;
 window.togglePasswordVisibility = togglePasswordVisibility;
 window.userInformationPopUp = userInformationPopUp;
-const firebaseConfig = firebaseConfigHidden;
-const app = initializeApp(firebaseConfig);
-const database = getDatabase(app);
-export { app, database, ref, get, child, set };
 
 
 /**
