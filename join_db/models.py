@@ -1,19 +1,22 @@
 from sqlite3 import Date
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
+from django.core.validators import RegexValidator
+from django.contrib.auth.models import User
 
 
-class User(models.Model):
-    email = models.CharField(max_length=40)
-    name = models.CharField(max_length=30)
-    password = models.CharField(max_length=30)
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Contact(models.Model):
     color = models.CharField(max_length=7)
     email = models.EmailField(max_length=50)
     name = models.CharField(max_length=30)
-    phone = PhoneNumberField()
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone = models.CharField(validators=[phone_regex], max_length=17, blank=True)
 
 
 class Task(models.Model):

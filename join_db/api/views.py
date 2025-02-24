@@ -1,12 +1,44 @@
 from rest_framework import viewsets, mixins, generics
-from join_db.models import User, Contact, Task
-from .serializers import UsersSerializer, ContactSerializer, TaskSerializer
+from join_db.models import Contact, Task, UserProfile
+from .serializers import UserProfileSerializer, ContactSerializer, TaskSerializer
 from rest_framework.response import Response
+from .serializers import RegistrationSerializer
+from rest_framework.authtoken.models import Token
+from rest_framework.authtoken.views import ObtainAuthToken
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
 
 
-class UserViewSet(viewsets.ModelViewSet):
-    queryset = User.objects.all()
-    serializer_class = UsersSerializer
+class UserProfileList(generics.ListCreateAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+class UserProfileDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = UserProfile.objects.all()
+    serializer_class = UserProfileSerializer
+
+
+class RegistrationView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = RegistrationSerializer(data=request.data)
+
+        data = {}
+        if serializer.is_valid():
+            saved_account = serializer.save()
+            token, created = Token.objects.get_or_create(user=saved_account)
+            data = {
+                'token': token.key,
+                'username': saved_account.username,
+                'email': saved_account.email,
+                'created': created
+            }
+        else:
+            data=serializer.errors
+
+        return Response(data)
 
 
 class ContactViewSet(viewsets.ModelViewSet):
