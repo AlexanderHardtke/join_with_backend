@@ -95,7 +95,6 @@ export async function submitToFirebase(event) {
     const passwordInput = document.getElementById("passwordInput").value;
     const repeated_password = document.getElementById("confirmPasswordInput").value;
     const newUser = { username: emailInput, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
-    console.log(newUser);
     await save(newUser);
     const encryptedPassword = encryptPassword(passwordInput);
     const encryptedUser = { username: emailInput, first_name: firstName, last_name: lastName, password: encryptedPassword};

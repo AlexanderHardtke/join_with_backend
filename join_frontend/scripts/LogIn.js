@@ -132,16 +132,23 @@ function resetPasswordBorderOnBlur() {
  * Data is retrieved from the input fields and transferred to the functions.
  * 
  */
-function loginUser() {
+async function loginUser() {
     const emailInputElement = document.getElementById("emailInputLogin");
     const passwordInputElement = document.getElementById("passwordInput1");
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
     let user = { username: emailInput, password: passwordInput }
-    const userToken = getUserToken(user)
-    console.log(userToken);
-    
-    // setLocalStorage()
+    const userWithToken = await getUserToken(user)
+    if (userWithToken.token) {
+        userInformationPopUp("Login successful")
+        setLocalStorage(userWithToken)
+        setTimeout(() => {
+            window.location.href = `../join_frontend/htmls/summary.html`;
+        }, 2500);
+    } else {
+        let error = Object.values(userWithToken)
+        userInformationPopUp(error[0]);
+    }
 }
 
 async function getUserToken(user) {
@@ -156,13 +163,18 @@ async function getUserToken(user) {
         });
 
         let result = await response.json();
-        console.log('Server Response:', result);
+        return result
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
+        userInformationPopUp(error)
     }
     LoginURL
 }
-function setLocalStorage() { }
+
+
+function setLocalStorage(user) {
+    localStorage.setItem('CurrentUser', JSON.stringify(user));
+}
 
 
 /**
