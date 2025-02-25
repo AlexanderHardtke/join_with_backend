@@ -364,8 +364,8 @@ async function save() {
         let response = await fetch(taskURL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Authorization': 'Token ' + currentLoggedUser.token,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(task)
         });

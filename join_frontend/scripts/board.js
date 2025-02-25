@@ -27,10 +27,10 @@ async function loadContact() {
     const response = await fetch(contactURL, {
       method: 'GET',
       headers: {
-          'Authorization': 'Token ' + currentLoggedUser.token,
-          'Content-Type': 'application/json'
+        'Authorization': 'Token ' + currentLoggedUser.token,
+        'Content-Type': 'application/json'
       }
-  });
+    });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -46,17 +46,17 @@ async function loadContact() {
  * Otherwise, the task array remains empty.
  */
 async function loadTasks() {
-    try {
-      const response = await fetch(taskURL, {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Token ' + currentLoggedUser.token,
-            'Content-Type': 'application/json'
-        }
-    });
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
+  try {
+    const response = await fetch(taskURL, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Token ' + currentLoggedUser.token,
+        'Content-Type': 'application/json'
       }
+    });
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
     taskAllArray = await response.json();
   } catch (error) {
     console.error(error.message);
@@ -74,8 +74,8 @@ async function saveMovedTasks() {
       let response = await fetch(taskURL + taskId + "/", {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
+          'Authorization': 'Token ' + currentLoggedUser.token,
+          'Content-Type': 'application/json'
         },
         body: JSON.stringify(taskAllArray[currentDraggedElement])
       });
@@ -379,7 +379,6 @@ function checkContacts() {
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
     let assignedNames = task.assignedName;
-    console.log(task);
     for (let j = 0; j < assignedNames.length; j++) {
       let name = assignedNames[j];
       let check = containsValue("name", name);

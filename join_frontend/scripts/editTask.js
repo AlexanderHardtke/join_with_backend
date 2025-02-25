@@ -236,8 +236,8 @@ async function saveToCurrentTask(taskIndex) {
     let response = await fetch(taskURL + taskId + "/", {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+        'Authorization': 'Token ' + currentLoggedUser.token,
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(taskAllArray[taskIndex])
     });
