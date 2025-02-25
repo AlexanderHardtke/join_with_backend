@@ -66,8 +66,7 @@ async function checkUser() {
  */
 function checkIfUserGuest(Currentname, name) {
     name = JSON.parse(Currentname);
-    let nameParts = name.split(' ');
-    let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
+    let initials = name.first_name[0] + name.last_name[0]
     if (initials.length === 1) {
         document.getElementById('headerProfile').classList.add('guestLogin');
     }
