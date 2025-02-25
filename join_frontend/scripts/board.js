@@ -7,7 +7,7 @@ let currentDraggedElement;
 
 
 /**
- * Loads all necessary data (contacts and tasks) from local storage 
+ * Loads all necessary data (contacts and tasks) from the API 
  * and renders the tasks on the page.
  */
 async function loadAll() {
@@ -19,12 +19,18 @@ async function loadAll() {
 
 
 /**
- * Loads the contact array from local storage if it exists.
+ * Loads the contact array from the API if it exists.
  * Otherwise, the contact array remains empty.
  */
 async function loadContact() {
   try {
-    const response = await fetch(contactURL);
+    const response = await fetch(contactURL, {
+      method: 'GET',
+      headers: {
+          'Authorization': 'Token ' + currentLoggedUser.token,
+          'Content-Type': 'application/json'
+      }
+  });
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -36,12 +42,21 @@ async function loadContact() {
 
 
 /**
- * Loads the task array from local storage if it exists.
+ * Loads the task array from the API if it exists.
  * Otherwise, the task array remains empty.
  */
 async function loadTasks() {
-  try {
-    const response = await fetch(taskURL);
+    try {
+      const response = await fetch(taskURL, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Token ' + currentLoggedUser.token,
+            'Content-Type': 'application/json'
+        }
+    });
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
     taskAllArray = await response.json();
   } catch (error) {
     console.error(error.message);
@@ -50,7 +65,7 @@ async function loadTasks() {
 
 
 /**
- * Saves the task array to local storage.
+ * Saves the task array to the API
  */
 async function saveMovedTasks() {
   let taskId = getIndexOfTask(currentDraggedElement)
@@ -185,7 +200,7 @@ function allowDrop(ev) {
  * 
  * This function handles the movement of a currently dragged task to the target section.
  * It removes the 'dragging' class from the task element and removes the 'dragHover' class
- * from the target section once the task is dropped. The tasks are re-rendered and saved to local storage.
+ * from the target section once the task is dropped. The tasks are re-rendered and saved to the API
  * 
  * @param {string} section - The ID of the section where the task should be moved.
  */
@@ -364,6 +379,7 @@ function checkContacts() {
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
     let assignedNames = task.assignedName;
+    console.log(task);
     for (let j = 0; j < assignedNames.length; j++) {
       let name = assignedNames[j];
       let check = containsValue("name", name);

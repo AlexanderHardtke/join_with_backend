@@ -56,7 +56,7 @@ class TaskSerializer(serializers.ModelSerializer):
     
     class Meta:
          model = Task
-         fields= ['section', 'date', 'prioName']
+         fields = '__all__'
 
 # {
 #     "username": "Test_Test",
