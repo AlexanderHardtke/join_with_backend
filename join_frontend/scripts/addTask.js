@@ -1,5 +1,5 @@
 const taskURL = 'http://127.0.0.1:8000/api/tasks/';
-const userURL = 'http://127.0.0.1:8000/api/contacts/'
+const contactURL = 'http://127.0.0.1:8000/api/contacts/'
 
 let tasks = [
     {
@@ -31,7 +31,6 @@ function loadFunctions() {
     activatePrioButton(1);
     loadMembers();
     searchUsers();
-    load();
     configureDueDateInput()
 }
 
@@ -97,14 +96,25 @@ function activatePrioButton(i) {
 
 
 /**
- * Loads the Users from the local storage
+ * Loads the Users from the API
  */
-function loadMembers() {
-    let tasksAsText = localStorage.getItem('contactAllArray');
-    if (tasksAsText) {
-        json = JSON.parse(tasksAsText);
+async function loadMembers() {
+    try {
+        const response = await fetch(contactURL, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Token ' + currentLoggedUser.token,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        tasksAsText = await response.json();
+    } catch (error) {
+        console.error(error.message);
     }
-    getUsers(json);
+    getUsers(tasksAsText);
 }
 
 
@@ -212,12 +222,11 @@ function clearAddTask() {
 
 
 /**
- * Creates a new Task and adds it to the local storage
+ * Creates a new Task and adds it to the API
  * 
  * @returns stops the function if not all inputs needed are filled
  */
 function createTask() {
-    load();
     setArrayUsers();
     if (!checkInputs()) {
         return;
@@ -273,7 +282,7 @@ function setArrayUsers() {
 function setArrayInputs() {
     task['date'] = document.getElementById('dueDateInput').value;
     console.log(task['date']);
-    
+
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length;
     task['id'] = id;
@@ -330,15 +339,15 @@ function updateUserDisplay(userBox, userName, input) {
 
 
 /**
- * pushes the current taskAllArray into the local storage Array
+ * pushes the current taskAllArray into the API
  */
 async function save() {
     try {
         let response = await fetch(taskURL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Authorization': 'Token ' + currentLoggedUser.token,
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(task)
         });
@@ -347,17 +356,6 @@ async function save() {
         console.log('Server Response:', result);
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
-    }
-}
-
-
-/**
- * loads the current Array from the local storage in the taskAllArray
- */
-function load() {
-    let tasksAsText = localStorage.getItem('taskAllArray');
-    if (tasksAsText) {
-        taskAllArray = JSON.parse(tasksAsText);
     }
 }
 

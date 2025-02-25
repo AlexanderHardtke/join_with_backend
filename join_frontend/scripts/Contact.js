@@ -19,7 +19,15 @@ let goBackToContactsremove = ['none', 'none', 'StyleBackarrowClick', 'MenuEditDe
 let goBackToContactsAddID = ['AddContactNewButton', 'editDeleteChoiceButton', 'MenuEditDeleteButtonID']
 let goBackToContactsAdd = ['MenuEditDeleteButton', 'none', 'none']
 let contactAllArray = []
-contactLoad();
+initial();
+
+
+
+function initial() {
+    setTimeout(() => {
+        contactLoad();
+    }, 50);
+}
 
 
 /**
@@ -29,12 +37,12 @@ contactLoad();
  * @param {*} name
  */
 async function contactLoad() {
-    let user = cleanArray();
+    cleanArray();
     try {
         const response = await fetch(contactURL, {
             method: 'GET',
             headers: {
-                'Authorization': 'Token ' + user.token,
+                'Authorization': 'Token ' + currentLoggedUser.token,
                 'Content-Type': 'application/json'
             }
         });
@@ -62,9 +70,6 @@ function cleanArray(){
     PhonenumberArray = [];
     charContactArray = [];
     colorPalette = [];
-    let currentUser = localStorage.getItem('CurrentUser');
-    const user = JSON.parse(currentUser)
-    return user
 }
 
 
