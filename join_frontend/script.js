@@ -20,7 +20,7 @@ async function init(id) {
 async function getUserFromLocalStorage() {
     let currentUser = localStorage.getItem('CurrentUser');
     currentLoggedUser = JSON.parse(currentUser)
-    if (currentLoggedUser == null) {
+    if (currentLoggedUser == null && !window.location.href.includes('legal') && !window.location.href.includes('privacy')) {
         window.location.href = `../index.html`;
     }
 }
@@ -57,7 +57,7 @@ function goBack() {
  * In addition, the initials are loaded at the desired position in the header.
  */
 async function checkUser() {
-    if (currentLoggedUser == 'null') {
+    if (currentLoggedUser == null) {
         initials = removeNoneUserOptions();
     } else {
         initials = checkIfUserGuest(currentLoggedUser);
@@ -78,11 +78,12 @@ async function checkUser() {
  * @returns 
  */
 function checkIfUserGuest(currentLoggedUser) {
-    let initials = currentLoggedUser.first_name[0] + currentLoggedUser.last_name[0]
-    if (initials.length === 1) {
-        document.getElementById('headerProfile').classList.add('guestLogin');
+    if (currentLoggedUser.first_name === "Guest") {
+        return "G"
+    } else {
+        let initials = currentLoggedUser.first_name[0] + currentLoggedUser.last_name[0]
+        return initials;
     }
-    return initials;
 }
 
 

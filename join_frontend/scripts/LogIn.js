@@ -144,7 +144,7 @@ async function loginUser() {
         setLocalStorage(userWithToken)
         setTimeout(() => {
             window.location.href = `../join_frontend/htmls/summary.html`;
-        }, 2500);
+        }, 1000);
     } else {
         let error = Object.values(userWithToken)
         userInformationPopUp(error[0]);
@@ -245,7 +245,12 @@ function decryptPassword(encryptedPassword) {
  * 
  */
 function guestLogIn() {
-    let matchingUser = 'Guest'
+    let matchingUser = {
+        "token": "1d41be367c99a990503850feacb811f25a130ac9",
+        "username": "Guest",
+        "first_name": "Guest",
+        "last_name": ""
+    }
     localStorage.removeItem('CurrentUser');
     localStorage.setItem('CurrentUser', JSON.stringify(matchingUser));
     window.location.href = `./htmls/summary.html?name=${encodeURIComponent(matchingUser)}`;
