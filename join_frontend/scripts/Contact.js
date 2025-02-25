@@ -1,4 +1,3 @@
-const taskURL = 'http://127.0.0.1:8000/api/tasks/';
 const contactURL = 'http://127.0.0.1:8000/api/contacts/'
 let charContactArray = [];
 let emailsArray = [];
@@ -30,9 +29,15 @@ contactLoad();
  * @param {*} name
  */
 async function contactLoad() {
-    cleanArray();
+    let user = cleanArray();
     try {
-        const response = await fetch(contactURL);
+        const response = await fetch(contactURL, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Token ' + user.token,
+                'Content-Type': 'application/json'
+            }
+        });
         if (!response.ok) {
           throw new Error(`Response status: ${response.status}`);
         }
@@ -57,6 +62,9 @@ function cleanArray(){
     PhonenumberArray = [];
     charContactArray = [];
     colorPalette = [];
+    let currentUser = localStorage.getItem('CurrentUser');
+    const user = JSON.parse(currentUser)
+    return user
 }
 
 
