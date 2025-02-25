@@ -1,12 +1,25 @@
+let currentLoggedUser = {};
+
 /**
  * The following functions are executed when the page is loaded.
  * 
  * @param {*} id 
  */
 function init(id) {
+    getUserFromLocalStorage()
     renderHeader(id);
     checkCurrentPage();
     checkUser()
+}
+
+
+/**
+ * Gets the user from the loal storage and parse it into an array
+ * 
+ */
+function getUserFromLocalStorage() {
+    let currentUser = localStorage.getItem('CurrentUser');
+    currentLoggedUser = JSON.parse(currentUser)
 }
 
 
@@ -41,17 +54,14 @@ function goBack() {
  * In addition, the initials are loaded at the desired position in the header.
  */
 async function checkUser() {
-    let name;
-    let Currentname = localStorage.getItem('CurrentUser');
-    let initials;
-    if (Currentname == 'null') {
+    if (currentLoggedUser == 'null') {
         initials = removeNoneUserOptions();
     } else {
-        initials = checkIfUserGuest(Currentname, name);
+        initials = checkIfUserGuest(currentLoggedUser);
     }
     document.getElementById('headerProfile').innerHTML = /*html*/`
     <div>${initials}</div>
-    `;   
+    `;
 }
 
 
@@ -64,9 +74,8 @@ async function checkUser() {
  * @param {*} name 
  * @returns 
  */
-function checkIfUserGuest(Currentname, name) {
-    name = JSON.parse(Currentname);
-    let initials = name.first_name[0] + name.last_name[0]
+function checkIfUserGuest(currentLoggedUser) {
+    let initials = currentLoggedUser.first_name[0] + currentLoggedUser.last_name[0]
     if (initials.length === 1) {
         document.getElementById('headerProfile').classList.add('guestLogin');
     }

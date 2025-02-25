@@ -10,9 +10,16 @@ let doneCount = 0;
 let toDoCount = 0;
 let SectionTypLength = 0;
 let taskAllArray = [];
-summaryLoad()
-setTimeBasedGreeting();
-checkWidthAndExecute();
+initial()
+
+
+function initial() {
+    setTimeout(() => {
+        summaryLoad()
+        setTimeBasedGreeting();
+        checkWidthAndExecute();
+    }, 50);
+}
 
 
 /**
@@ -22,12 +29,11 @@ checkWidthAndExecute();
  * 
  */
 async function summaryLoad() {
-    let user = clearArrays();
     try {
         const response = await fetch(taskURL, {
             method: 'GET',
             headers: {
-                'Authorization': 'Token ' + user.token,
+                'Authorization': 'Token ' + currentLoggedUser.token,
                 'Content-Type': 'application/json'
             }
         });
@@ -55,9 +61,6 @@ function clearArrays() {
     SectionTypArray = [];
     SectionPrioArray = [];
     SectionPrioDateArray = [];
-    let currentUser = localStorage.getItem('CurrentUser');
-    const user = JSON.parse(currentUser)
-    return user
 }
 
 
@@ -259,11 +262,8 @@ function toDoChangeOut(id) {
  * 
  */
 function loginGoodMorning() {
-    let GoodMorningName = '';
-    let Currentname = localStorage.getItem('CurrentUser');
-    let user = JSON.parse(Currentname)
-    if (Currentname) {
-        GoodMorningName = user.first_name +' '+ user.last_name;
+    if (currentLoggedUser) {
+        GoodMorningName = currentLoggedUser.first_name + ' ' + currentLoggedUser.last_name;
     }
     document.getElementById('UserLogGoodMorning').innerHTML = `${GoodMorningName}`;
 }
