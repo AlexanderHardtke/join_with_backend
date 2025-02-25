@@ -94,10 +94,10 @@ export async function submitToFirebase(event) {
     const lastName = nameInput.split(' ').slice(-1).join(' ');
     const passwordInput = document.getElementById("passwordInput").value;
     const repeated_password = document.getElementById("confirmPasswordInput").value;
-    const newUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
+    const newUser = { username: emailInput, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
     await save(newUser);
     const encryptedPassword = encryptPassword(passwordInput);
-    const encryptedUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: encryptedPassword};
+    const encryptedUser = { username: emailInput, first_name: firstName, last_name: lastName, password: encryptedPassword};
     saveToLocalStorage(encryptedUser);
 }
 

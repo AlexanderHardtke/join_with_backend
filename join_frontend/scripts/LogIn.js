@@ -137,7 +137,7 @@ function loginUser() {
     const passwordInputElement = document.getElementById("passwordInput1");
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
-    let user = { email: emailInput, password: passwordInput }
+    let user = { username: emailInput, password: passwordInput }
     const userToken = getUserToken(user)
     console.log(userToken);
     
@@ -146,7 +146,7 @@ function loginUser() {
 
 async function getUserToken(user) {
     try {
-        let response = await fetch(RegistrationURL, {
+        let response = await fetch(LoginURL, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -256,7 +256,7 @@ async function fetchContactTask() {
     if (LoggedUser !== null) {
         const user = JSON.parse(LoggedUser);
         let pw = decryptPassword(user.password)
-        document.getElementById("emailInputLogin").value = user.email;
+        document.getElementById("emailInputLogin").value = user.username;
         document.getElementById("passwordInput1").value = pw;
         document.getElementById("rememberMe").checked = true;
     }

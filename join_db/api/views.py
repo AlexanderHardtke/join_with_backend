@@ -32,7 +32,8 @@ class UserLogin(ObtainAuthToken):
             data = {
                 'token': token.key,
                 'username': user.username,
-                'email': user.email
+                'first_name': user.first_name,
+                'last_name': user.last_name,
             }
         else:
             data=serializer.errors
@@ -55,7 +56,6 @@ class RegistrationView(APIView):
                 'username': saved_account.username,
                 'first_name': saved_account.first_name,
                 'last_name': saved_account.last_name,
-                'email': saved_account.email
             }
         else:
             data=serializer.errors
