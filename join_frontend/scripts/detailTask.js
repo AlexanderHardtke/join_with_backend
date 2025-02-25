@@ -115,8 +115,9 @@ async function deleteTasks(taskId) {
     let response = await fetch(taskURL + taskId + "/", {
       method: 'DELETE',
       headers: {
+        'Authorization': 'Token ' + currentLoggedUser.token,
         'Content-Type': 'application/json'
-      }
+      },
     });
     if (response.ok && response.headers.get("Content-Length") !== "0") {
         await response.json();

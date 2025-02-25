@@ -57,11 +57,3 @@ class TaskSerializer(serializers.ModelSerializer):
     class Meta:
          model = Task
          fields = '__all__'
-
-# {
-#     "username": "Test_Test",
-# "full_name": "Test_Test",
-#  "email": "test@email.com",
-#  "password": "test123",
-#  "repeated_password": "test123"
-# }

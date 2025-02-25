@@ -172,9 +172,9 @@ async function save(newContact) {
         let response = await fetch(contactURL, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
+                'Authorization': 'Token ' + currentLoggedUser.token,
+                'Content-Type': 'application/json'
+              },
             body: JSON.stringify(newContact)
         });
 
@@ -212,8 +212,9 @@ async function deleteContact(contactId) {
         let response = await fetch(contactURL + contactId + "/", {
           method: 'DELETE',
           headers: {
+            'Authorization': 'Token ' + currentLoggedUser.token,
             'Content-Type': 'application/json'
-          }
+          },
         });
         if (response.ok && response.headers.get("Content-Length") !== "0") {
             await response.json();
@@ -294,9 +295,9 @@ async function saveContact(index, contactId) {
       let response = await fetch(contactURL + contactId + "/", {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
+            'Authorization': 'Token ' + currentLoggedUser.token,
+            'Content-Type': 'application/json'
+          },
         body: JSON.stringify(contactAllArray[index])
       });
       await response.json();
