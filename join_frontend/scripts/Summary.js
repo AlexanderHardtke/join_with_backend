@@ -22,24 +22,42 @@ checkWidthAndExecute();
  * 
  */
 async function summaryLoad() {
+    let user = clearArrays();
+    try {
+        const response = await fetch(taskURL, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'Token ' + user.token,
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        taskAllArray = await response.json();
+    } catch (error) {
+        console.error(error.message);
+    } for (let item of taskAllArray) {
+        SectionTypArray.push(item.section);
+        SectionPrioDateArray.push(item.date);
+        SectionPrioArray.push(item.prioName);
+    }
+    summarySectionCheck();
+}
+
+
+/**
+ * clears the arrays and gets the user from local storage
+ * 
+ * @returns the user Object
+ */
+function clearArrays() {
     SectionTypArray = [];
     SectionPrioArray = [];
     SectionPrioDateArray = [];
-    try {
-        const response = await fetch(taskURL);
-        if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-        }
-        taskAllArray = await response.json();
-      } catch (error) {
-        console.error(error.message);
-      }
-    for (let item of taskAllArray) {
-        SectionTypArray.push(item.section);       
-        SectionPrioDateArray.push(item.date);     
-        SectionPrioArray.push(item.prioName);   
-    }
-    summarySectionCheck();
+    let currentUser = localStorage.getItem('CurrentUser');
+    const user = JSON.parse(currentUser)
+    return user
 }
 
 
@@ -68,9 +86,9 @@ function setTimeBasedGreeting() {
  * is present. The number of times an element occurs is stored in a variable. 
  * 
  */
-function summarySectionCheck(){
+function summarySectionCheck() {
     SectionTypArray.forEach(type => {
-        switch(type) {
+        switch (type) {
             case "inProgress":
                 inProgressCount++;
                 break;
@@ -88,9 +106,9 @@ function summarySectionCheck(){
  * is present. The number of times an element occurs is stored in a variable. 
  * 
  */
-function summarySectionCheckNext(){
+function summarySectionCheckNext() {
     SectionTypArray.forEach(type => {
-        switch(type) {
+        switch (type) {
             case "done":
                 doneCount++;
                 break;
@@ -111,16 +129,16 @@ function summarySectionCheckNext(){
  * 
  * @param {*} SectionTypLength 
  */
-function summarySectionChangeText(SectionTypLength){
-    document.getElementById('SummaryTaskProgressCount').innerHTML=`${inProgressCount}`;
-    document.getElementById('SummaryBoardCount').innerHTML=`${SectionTypLength}`;
-    document.getElementById('SummaryAwaitFeedbackCount').innerHTML=`${awaitFeedbackCount}`;
-    document.getElementById('SummaryToDoCount').innerHTML=`${toDoCount}`;
-    document.getElementById('SummaryDoneCount').innerHTML=`${doneCount}`;
+function summarySectionChangeText(SectionTypLength) {
+    document.getElementById('SummaryTaskProgressCount').innerHTML = `${inProgressCount}`;
+    document.getElementById('SummaryBoardCount').innerHTML = `${SectionTypLength}`;
+    document.getElementById('SummaryAwaitFeedbackCount').innerHTML = `${awaitFeedbackCount}`;
+    document.getElementById('SummaryToDoCount').innerHTML = `${toDoCount}`;
+    document.getElementById('SummaryDoneCount').innerHTML = `${doneCount}`;
     SectionPrioArray.forEach((value, index) => {
         if (value === "Urgent") {
             highCount++;
-            highIndices.push(index); 
+            highIndices.push(index);
         }
         summarySectionCheckCounter(highCount)
     });
@@ -133,12 +151,12 @@ function summarySectionChangeText(SectionTypLength){
  * 
  * @param {*} highCount 
  */
-function summarySectionCheckCounter(highCount){
-    if(highCount == 0){
+function summarySectionCheckCounter(highCount) {
+    if (highCount == 0) {
         document.getElementById('currentDate').classList.add('none')
         document.getElementById('currentDate').classList.remove('SummarySecondDate')
     }
-    else{
+    else {
         document.getElementById('currentDate').classList.remove('none')
         document.getElementById('currentDate').classList.add('SummarySecondDate')
     }
@@ -170,9 +188,9 @@ function summarySectionFilterDate(highCount) {
  * @param {*} filteredDates 
  * @param {*} highCount 
  */
-function summarySectionEarlyDate(filteredDates, highCount){
+function summarySectionEarlyDate(filteredDates, highCount) {
     const earliestDate = filteredDates[0];
-    document.getElementById('SummaryCount').innerHTML=`${highCount}`
+    document.getElementById('SummaryCount').innerHTML = `${highCount}`
     const dateToDisplay = new Date(earliestDate);
     if (!isNaN(dateToDisplay)) {
         const options = { year: 'numeric', month: 'long', day: 'numeric' };
@@ -192,7 +210,7 @@ function summarySectionEarlyDate(filteredDates, highCount){
  */
 function convertDateFormat(dateString) {
     if (!dateString || !dateString.includes(".") && !dateString.includes("/")) {
-        return null; 
+        return null;
     }
     const parts = dateString.includes(".") ? dateString.split(".") : dateString.split("/");
     const day = parts[0].padStart(2, '0');
@@ -207,12 +225,12 @@ function convertDateFormat(dateString) {
  * 
  * @param {*} id 
  */
-function toDoChangeOn(id){
-    if(id == 'ChangeIcon1'){
+function toDoChangeOn(id) {
+    if (id == 'ChangeIcon1') {
         const imgElement = document.querySelector(`#${id} img`);
-        imgElement.src = "../assets/icons/Frame 59.png"; 
+        imgElement.src = "../assets/icons/Frame 59.png";
     }
-    if(id == 'ChangeIcon2'){
+    if (id == 'ChangeIcon2') {
         const imgElement = document.querySelector(`#${id} img`);
         imgElement.src = "../assets/icons/checkCircle.png";
     }
@@ -224,12 +242,12 @@ function toDoChangeOn(id){
  * 
  * @param {*} id 
  */
-function toDoChangeOut(id){
-    if(id == 'ChangeIcon1'){
+function toDoChangeOut(id) {
+    if (id == 'ChangeIcon1') {
         const imgElement = document.querySelector(`#${id} img`);
         imgElement.src = "../assets/icons/editCircleDark.png";
     }
-    if(id == 'ChangeIcon2'){
+    if (id == 'ChangeIcon2') {
         const imgElement = document.querySelector(`#${id} img`);
         imgElement.src = "../assets/icons/checkCircleDark.png";
     }
@@ -240,13 +258,14 @@ function toDoChangeOut(id){
  * The current name of the user is read from the local storage and assigned to the id as text.
  * 
  */
-function loginGoodMorning(){
+function loginGoodMorning() {
     let GoodMorningName = '';
     let Currentname = localStorage.getItem('CurrentUser');
+    let user = JSON.parse(Currentname)
     if (Currentname) {
-        GoodMorningName = JSON.parse(Currentname);
+        GoodMorningName = user.first_name +' '+ user.last_name;
     }
-    document.getElementById('UserLogGoodMorning').innerHTML=`${GoodMorningName}`; 
+    document.getElementById('UserLogGoodMorning').innerHTML = `${GoodMorningName}`;
 }
 
 
@@ -259,13 +278,13 @@ function checkWidthAndExecute() {
     const viewportWidth = window.innerWidth;
     if (viewportWidth < 1400) {
         setTimeout(() => {
-            document.getElementById('SummaryRightSectionNone').style.display='none'
-            document.getElementById('SummaryheaderheadlineNone').style.display='flex'
-            document.getElementById('SummaryLeftToDoNone').style.display='flex'
-        }, 2000); 
+            document.getElementById('SummaryRightSectionNone').style.display = 'none'
+            document.getElementById('SummaryheaderheadlineNone').style.display = 'flex'
+            document.getElementById('SummaryLeftToDoNone').style.display = 'flex'
+        }, 2000);
     }
-    else{
-        document.getElementById('SummaryRightSectionNone').style.display='flex'
+    else {
+        document.getElementById('SummaryRightSectionNone').style.display = 'flex'
     }
 
 }
