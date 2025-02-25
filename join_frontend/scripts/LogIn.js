@@ -1,4 +1,4 @@
-const BaseUrl = "http://127.0.0.1:8000/api/users/";
+const LoginURL = "http://127.0.0.1:8000/api/login/";
 let matchingUser;
 window.loginUser = loginUser;
 window.addInputListeners = addInputListeners;
@@ -6,6 +6,7 @@ window.guestLogIn = guestLogIn;
 window.toggleRememberMe = toggleRememberMe;
 window.logInAnimation = logInAnimation;
 window.checkRememberMe = checkRememberMe();
+// window.loginUserCorrect = loginUserCorrect();
 
 
 /**
@@ -136,16 +137,32 @@ function loginUser() {
     const passwordInputElement = document.getElementById("passwordInput1");
     const emailInput = emailInputElement.value;
     const passwordInput = passwordInputElement.value;
-    loginUserChecked(rememberMeChecked, emailInput, passwordInput)
-    const usersRef = ref(database, 'users');
-    get(usersRef).then((snapshot) => {
-        if (snapshot.exists()) {
-            loginUserCorrect(emailInput, passwordInput, snapshot)
-        } else {
-            userInformationPopUp('Keine Benutzer gefunden.')
-        }
-    })
+    let user = { email: emailInput, password: passwordInput }
+    const userToken = getUserToken(user)
+    console.log(userToken);
+    
+    // setLocalStorage()
 }
+
+async function getUserToken(user) {
+    try {
+        let response = await fetch(RegistrationURL, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(user)
+        });
+
+        let result = await response.json();
+        console.log('Server Response:', result);
+    } catch (error) {
+        console.error('Fehler beim Speichern:', error);
+    }
+    LoginURL
+}
+function setLocalStorage() { }
 
 
 /**
@@ -238,8 +255,9 @@ async function fetchContactTask() {
     let LoggedUser = localStorage.getItem('LoggedUser');
     if (LoggedUser !== null) {
         const user = JSON.parse(LoggedUser);
+        let pw = decryptPassword(user.password)
         document.getElementById("emailInputLogin").value = user.email;
-        document.getElementById("passwordInput1").value = user.password;
+        document.getElementById("passwordInput1").value = pw;
         document.getElementById("rememberMe").checked = true;
     }
 }

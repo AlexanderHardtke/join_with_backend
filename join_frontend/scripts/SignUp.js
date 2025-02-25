@@ -86,7 +86,7 @@ function signUpInputChange(nameInput, emailInput, passwordInput, confirmPassword
  * 
  * @param {*} event 
  */
-export function submitToFirebase(event) {
+export async function submitToFirebase(event) {
     event.preventDefault();
     const emailInput = document.getElementById("emailInput").value;
     const nameInput = document.getElementById("nameInput").value;
@@ -95,8 +95,21 @@ export function submitToFirebase(event) {
     const passwordInput = document.getElementById("passwordInput").value;
     const repeated_password = document.getElementById("confirmPasswordInput").value;
     const newUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: passwordInput, repeated_password: repeated_password};
-    save(newUser);
-    saveToLocalStorage(newUser);
+    await save(newUser);
+    const encryptedPassword = encryptPassword(passwordInput);
+    const encryptedUser = { username: firstName+"_"+lastName, first_name: firstName, last_name: lastName, email: emailInput, password: encryptedPassword};
+    saveToLocalStorage(encryptedUser);
+}
+
+
+/**
+ * The password is encrypted using Base64 and returned. 
+ * 
+ * @param {*} password 
+ * @returns 
+ */
+function encryptPassword(password) {
+    return btoa(password);
 }
 
 
