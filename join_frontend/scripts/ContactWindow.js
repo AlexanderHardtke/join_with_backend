@@ -167,6 +167,11 @@ function createNewContact(event) {
 }
         
 
+/**
+ * saves the new Contact to the API
+ * 
+ * @param {*} newContact 
+ */
 async function save(newContact) {
     try {
         let response = await fetch(contactURL, {
@@ -207,6 +212,11 @@ function deleteContactList(index) {
 }
 
 
+/**
+ * deletes the Contact from the API
+ * 
+ * @param {*} contactId 
+ */
 async function deleteContact(contactId) {
     try {
         let response = await fetch(contactURL + contactId + "/", {
@@ -290,6 +300,12 @@ function editChangeContact(name, email, phone, index){
 }
 
 
+/**
+ * saves the edited Contact to the API
+ * 
+ * @param {*} index index of the contact
+ * @param {*} contactId the id of the contact
+ */
 async function saveContact(index, contactId) {
     try {
       let response = await fetch(contactURL + contactId + "/", {

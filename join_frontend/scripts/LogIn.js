@@ -151,6 +151,13 @@ async function loginUser() {
     }
 }
 
+
+/**
+ * gets the user array token from the login API
+ * 
+ * @param {*} user the user array
+ * @returns the user array
+ */
 async function getUserToken(user) {
     try {
         let response = await fetch(LoginURL, {
@@ -172,6 +179,11 @@ async function getUserToken(user) {
 }
 
 
+/**
+ * sets the Current User in the local storage and stringifys it
+ * 
+ * @param {*} user the user array
+ */
 function setLocalStorage(user) {
     localStorage.setItem('CurrentUser', JSON.stringify(user));
 }
@@ -275,6 +287,10 @@ async function fetchContactTask() {
 }
 
 
+/**
+ * checks if the remember me button was checked in the local storage
+ * 
+ */
 function checkRememberMe() {
     const rememberMeChecked = localStorage.getItem('rememberMeChecked');
     if (rememberMeChecked === 'true') {
@@ -282,6 +298,11 @@ function checkRememberMe() {
     }
 }
 
+
+/**
+ * toggles the remember me button and saves the status on the local storage
+ * 
+ */
 function toggleRememberMe() {
     const rememberMeChecked = localStorage.getItem('rememberMeChecked')
     if (rememberMeChecked === 'true') localStorage.setItem("rememberMeChecked", 'false');

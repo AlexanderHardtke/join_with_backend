@@ -110,6 +110,11 @@ function deleteTask(taskIndex) {
 }
 
 
+/**
+ * deletes the task from the API
+ * 
+ * @param {*} taskId 
+ */
 async function deleteTasks(taskId) {
   try {
     let response = await fetch(taskURL + taskId + "/", {

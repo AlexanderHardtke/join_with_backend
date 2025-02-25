@@ -87,6 +87,12 @@ async function saveMovedTasks() {
 }
 
 
+/**
+ * get the index of the task in the array
+ * 
+ * @param {*} i the index
+ * @returns the taskid
+ */
 function getIndexOfTask(i) {
   let task = taskAllArray[i]
   if (task) {

@@ -23,6 +23,9 @@ initial();
 
 
 
+/**
+ * starts all initial functions
+ */
 function initial() {
     setTimeout(() => {
         contactLoad();

@@ -137,6 +137,11 @@ async function save(newUser) {
 }
 
 
+/**
+ * saves the logged User in the local storage
+ * 
+ * @param {*} newUser the user that is saved in the local storage
+ */
 function saveToLocalStorage(newUser) {
     localStorage.setItem("LoggedUser", JSON.stringify(newUser));
 }
@@ -306,5 +311,3 @@ function validateEveryone(isNameValid, isEmailValid, isPasswordValid, isConfirmP
         signUpButton.classList.remove('ButtonRemoveDisabled');
     }
 }
-
-

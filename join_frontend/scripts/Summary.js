@@ -13,6 +13,9 @@ let taskAllArray = [];
 initial()
 
 
+/**
+ * starts the initial Functions for the site
+ */
 function initial() {
     setTimeout(() => {
         summaryLoad()
