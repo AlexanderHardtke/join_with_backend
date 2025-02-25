@@ -5,8 +5,8 @@ let currentLoggedUser = {};
  * 
  * @param {*} id 
  */
-function init(id) {
-    getUserFromLocalStorage()
+async function init(id) {
+    await getUserFromLocalStorage()
     renderHeader(id);
     checkCurrentPage();
     checkUser()
@@ -17,9 +17,12 @@ function init(id) {
  * Gets the user from the loal storage and parse it into an array
  * 
  */
-function getUserFromLocalStorage() {
+async function getUserFromLocalStorage() {
     let currentUser = localStorage.getItem('CurrentUser');
     currentLoggedUser = JSON.parse(currentUser)
+    if (currentLoggedUser == null) {
+        window.location.href = `../index.html`;
+    }
 }
 
 
