@@ -18,13 +18,8 @@ function logInvalidateEmail() {
     const emailInputElement = document.getElementById("emailInputLogin");
     const emailContainer = document.getElementById("LoginInputIconID1");
     const emailInput = emailInputElement.value;
-    const usersRef = ref(database, 'users');
+    emailContainer.style.border = '1px solid red';
     logInvalidateEmailNull(emailInput, emailContainer);
-    get(usersRef).then((snapshot) => {
-        logInvalidateEmailExist(snapshot, emailInput, emailContainer);
-    }).catch(() => {
-        emailContainer.style.border = '1px solid red';
-    });
 }
 
 
@@ -40,30 +35,6 @@ function logInvalidateEmailNull(emailInput, emailContainer) {
         emailContainer.style.border = '1px solid black';
         matchingUser = null;
         return;
-    }
-}
-
-
-/**
- * If the email field is empty when logging in, the border of the container is black and if entered incorrectly it is red.
- * 
- * @param {*} snapshot 
- * @param {*} emailInput 
- * @param {*} emailContainer 
- */
-function logInvalidateEmailExist(snapshot, emailInput, emailContainer) {
-    if (snapshot.exists()) {
-        try {
-            const usersData = snapshot.val();
-            matchingUser = Object.values(usersData).find(user => user.email === emailInput);
-            if (matchingUser) {
-                emailContainer.style.border = '1px solid black';
-            } else {
-                emailContainer.style.border = '1px solid red';
-            }
-        } catch { emailContainer.style.border = '1px solid red'; }
-    } else {
-        emailContainer.style.border = '1px solid red';
     }
 }
 

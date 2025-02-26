@@ -119,8 +119,6 @@ function encryptPassword(password) {
  * @param {*} newUser the Array with the newUser data
  */
 async function save(newUser) {
-    console.log(newUser);
-    
     try {
         let response = await fetch(RegistrationURL, {
             method: 'POST',
@@ -132,7 +130,6 @@ async function save(newUser) {
         });
 
         let result = await response.json();
-        console.log('Server Response:', result);
     } catch (error) {
         console.error('Fehler beim Speichern:', error);
     }
