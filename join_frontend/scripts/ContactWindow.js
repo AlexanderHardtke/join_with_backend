@@ -288,7 +288,8 @@ function editChangeContact(name, email, phone, index){
         let contactId = getIndexOfContact(index)
         contactAllArray.splice(index, 1);
         let NewColorBackground = getRandomColor()
-        let newContact = {"email": email,"name": name,"phone": phone,"color": NewColorBackground};
+        let phoneWoSpace = phone.replaceAll(" ","")
+        let newContact = {"email": email,"name": name,"phone": phoneWoSpace,"color": NewColorBackground};
         contactAllArray.splice(index, 0, newContact);
         saveContact(index, contactId);
         document.getElementById('EditContactIDWIn').classList.remove('Slideinright');
@@ -307,14 +308,15 @@ function editChangeContact(name, email, phone, index){
  * @param {*} contactId the id of the contact
  */
 async function saveContact(index, contactId) {
+    let editedContact = contactAllArray[index];
     try {
       let response = await fetch(contactURL + contactId + "/", {
-        method: 'PUT',
+        method: 'PATCH',
         headers: {
             'Authorization': 'Token ' + currentLoggedUser.token,
             'Content-Type': 'application/json'
           },
-        body: JSON.stringify(contactAllArray[index])
+        body: JSON.stringify(editedContact)
       });
       await response.json();
     } catch (error) {
@@ -325,7 +327,6 @@ async function saveContact(index, contactId) {
 
   function getIndexOfContact(i) {
     let contact = contactAllArray[i]
-    console.log(contact);
     return contact.id
   }
 
