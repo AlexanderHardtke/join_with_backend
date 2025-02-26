@@ -46,12 +46,4 @@ class Task(models.Model):
     assignedName = models.JSONField(default=list)
 
     def __str__(self):
-        return f"{self.title} ({self.prioName})"
-    
-class TaskAssignment(models.Model):
-    task = models.ForeignKey(Task, on_delete=models.CASCADE)
-    contact = models.ForeignKey(Contact, on_delete=models.CASCADE)
-
-
-
-    
+        return f"{self.title} ({self.prioName})"    
