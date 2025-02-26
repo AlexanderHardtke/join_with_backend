@@ -51,6 +51,14 @@ class RegistrationSerializer(serializers.ModelSerializer):
             color=random.choice(colors)
         )
 
+        initials = f"{account.first_name[0]}{account.last_name[0]}".upper()
+
+        tasks = Task.objects.all()
+        for task in tasks:
+            task.assignedInitals.append(initials)
+            task.assignedName.append(f"{account.first_name} {account.last_name}".strip())
+            task.save()
+
         return account
 
 
