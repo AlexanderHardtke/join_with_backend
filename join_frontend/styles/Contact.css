@@ -599,7 +599,7 @@ body{
 }
 .ContactsInfoSectionClass{
     position: relative;
-    z-index: 20;
+    z-index: 10;
 }
 .person-email {
     margin-top: 4px;
