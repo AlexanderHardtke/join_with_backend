@@ -281,8 +281,6 @@ function setArrayUsers() {
  */
 function setArrayInputs() {
     task['date'] = document.getElementById('dueDateInput').value;
-    console.log(task['date']);
-
     task['description'] = document.getElementById('descriptionInput').value;
     let id = taskAllArray.length;
     task['id'] = id;

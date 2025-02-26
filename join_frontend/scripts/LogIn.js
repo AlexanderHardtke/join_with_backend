@@ -144,7 +144,7 @@ async function loginUser() {
         setLocalStorage(userWithToken)
         setTimeout(() => {
             window.location.href = `../join_frontend/htmls/summary.html`;
-        }, 1000);
+        }, 1500);
     } else {
         let error = Object.values(userWithToken)
         userInformationPopUp(error[0]);
@@ -271,7 +271,7 @@ export function logInAnimation() {
             body.classList.add('show-content');
             body.style.overflow = 'auto';
         }, 1000);
-    }, 400);
+    }, 50);
 }
 
 

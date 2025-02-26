@@ -385,6 +385,8 @@ function checkContacts() {
   for (let i = 0; i < taskAllArray.length; i++) {
     let task = taskAllArray[i];
     let assignedNames = task.assignedName;
+    console.log(assignedNames, task);
+    
     for (let j = 0; j < assignedNames.length; j++) {
       let name = assignedNames[j];
       let check = containsValue("name", name);
