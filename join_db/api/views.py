@@ -72,6 +72,18 @@ class TaskViewSet(viewsets.ModelViewSet):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer
 
+    def list(self, request):
+        user = request.user.first_name + " " + request.user.last_name
+        print(user)
+        if user == "Guest":
+            tasks = Task.objects.all()
+        else:
+            tasks = Task.objects.filter(assignedName__icontains=user)
+            print(f"Gefilterte Tasks: {tasks}")
+
+        serializer = TaskSerializer(tasks, many=True)
+        return Response(serializer.data)
+
 class SummaryView(mixins.ListModelMixin,generics.GenericAPIView):
     queryset = Task.objects.all()
     serializer_class = TaskSerializer

@@ -114,7 +114,7 @@ async function loginUser() {
         userInformationPopUp("Login successful")
         setLocalStorage(userWithToken)
         setTimeout(() => {
-            window.location.href = `../join_frontend/htmls/summary.html`;
+            window.location.href = `../htmls/summary.html`;
         }, 1500);
     } else {
         let error = Object.values(userWithToken)

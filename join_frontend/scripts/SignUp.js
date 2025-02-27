@@ -99,6 +99,7 @@ export async function submitToFirebase(event) {
     const encryptedPassword = encryptPassword(passwordInput);
     const encryptedUser = { username: emailInput, first_name: firstName, last_name: lastName, password: encryptedPassword};
     saveToLocalStorage(encryptedUser);
+    window.location.href = `../index.html`;
 }
 
 
