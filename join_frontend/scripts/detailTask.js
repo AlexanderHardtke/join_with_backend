@@ -150,7 +150,7 @@ function toggleSubtaskImage(taskIndex, subtaskIndex) {
       ? "../assets/icons/checkButtonChecked.png"
       : "../assets/icons/checkButtonblank.png";
   }
-  saveToCurrentTask();
+  saveToCurrentTask(taskIndex);
   let { subtaskBarWidth, completedSubtasks, amountSubtasks } = calculateSubtaskProgress(taskIndex);
   updateSubtaskProgressBar(taskIndex, subtaskBarWidth, completedSubtasks, amountSubtasks);
 }
