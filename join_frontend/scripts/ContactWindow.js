@@ -173,7 +173,8 @@ function createNewContact(event) {
  * @param {*} newContact 
  */
 async function save(newContact) {
-    try {
+    newContact.phone = newContact.phone.replace(/\s+/g, '');
+        try {
         let response = await fetch(contactURL, {
             method: 'POST',
             headers: {

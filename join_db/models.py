@@ -14,7 +14,7 @@ class UserProfile(models.Model):
 class Contact(models.Model):
     user_profile = models.OneToOneField(
         UserProfile, on_delete=models.CASCADE,
-        related_name="contact", blank=True, default=""
+        related_name="contact", blank=True, null=True
     )
     color = models.CharField(max_length=7)
     email = models.EmailField(max_length=50)
