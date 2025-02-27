@@ -76,7 +76,8 @@ class ContactSerializer(serializers.ModelSerializer):
         for task in tasks:
             if instance.name in task.assignedName:
                 i = task.assignedName.index(instance.name)
-                initials = validated_data.get('name', instance.name)
+                full_name = validated_data.get('name', instance.name)
+                initials = "".join(word[0] for word in full_name.split()).upper()
                 task.color[i] = validated_data.get('color', instance.color)
                 task.assignedInitals[i] = initials
                 task.assignedName[i] = validated_data.get('name', instance.name)
