@@ -44,17 +44,20 @@ class RegistrationSerializer(serializers.ModelSerializer):
         user_profile = UserProfile.objects.create(user=account)
 
         colors = ["#41afaa", "#466eb4", "#00a0e1", "#e6a532", "#d7642c", "#af4b91"]
+        random_color = random.choice(colors)
+
         Contact.objects.create(
             user_profile=user_profile,
             email=account.email,
             name=f"{account.first_name} {account.last_name}".strip(),
-            color=random.choice(colors)
+            color=random_color
         )
 
         initials = f"{account.first_name[0]}{account.last_name[0]}".upper()
 
         tasks = Task.objects.all()
         for task in tasks:
+            task.color.append(random_color)
             task.assignedInitals.append(initials)
             task.assignedName.append(f"{account.first_name} {account.last_name}".strip())
             task.save()
@@ -68,6 +71,36 @@ class ContactSerializer(serializers.ModelSerializer):
          model = Contact
          fields = '__all__'
 
+    def update(self, instance, validated_data):
+        tasks = Task.objects.all()
+        for task in tasks:
+            if instance.name in task.assignedName:
+                i = task.assignedName.index(instance.name)
+                initials = validated_data.get('name', instance.name)
+                task.color[i] = validated_data.get('color', instance.color)
+                task.assignedInitals[i] = initials
+                task.assignedName[i] = validated_data.get('name', instance.name)
+                task.save()
+
+        instance.color = validated_data.get('color', instance.color)
+        instance.email = validated_data.get('email', instance.email)
+        instance.name = validated_data.get('name', instance.name)
+        instance.phone = validated_data.get('phone', instance.phone)
+        instance.save()
+
+        return instance
+    
+    def delete(self, *args, **kwargs):
+        tasks = Task.objects.all()
+        for task in tasks:
+            if self.name in task.assignedName:
+                i = task.assignedName.index(self.name)
+                del task.assignedName[i]
+                del task.assignedInitals[i]
+                del task.color[i]
+                task.save()
+
+        super().delete(*args, **kwargs)
 
 class TaskSerializer(serializers.ModelSerializer):
     
