@@ -516,6 +516,9 @@ components:
           type: string
           pattern: ^\+?1?\d{9,15}$
           maxLength: 17
+        user_profile:
+          type: integer
+          nullable: true
       required:
       - color
       - email
@@ -541,6 +544,9 @@ components:
           type: string
           pattern: ^\+?1?\d{9,15}$
           maxLength: 17
+        user_profile:
+          type: integer
+          nullable: true
     PatchedTask:
       type: object
       properties:
@@ -570,9 +576,9 @@ components:
         prioName:
           type: string
           maxLength: 55
+        color: {}
         assignedInitals: {}
         assignedName: {}
-        color: {}
     PatchedUserProfile:
       type: object
       properties:
@@ -610,12 +616,11 @@ components:
         prioName:
           type: string
           maxLength: 55
+        color: {}
         assignedInitals: {}
         assignedName: {}
-        color: {}
       required:
       - category
-      - description
       - id
       - prio
       - section
