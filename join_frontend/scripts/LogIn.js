@@ -30,16 +30,7 @@ function logInvalidateEmail() {
 function logInvalidatePassword() {
     const passwordInputElement = document.getElementById("passwordInput1");
     const passwordContainer = passwordInputElement.closest(".LoginInputIcon");
-    const passwordInput = passwordInputElement.value;
-    if (passwordInput.trim() === '') {
-        passwordContainer.style.border = '1px solid black';
-        return;
-    }
-    if (matchingUser && matchingUser.password === passwordInput) {
-        passwordContainer.style.border = '1px solid #29ABE2';
-    } else {
-        passwordContainer.style.border = '1px solid red';
-    }
+    passwordContainer.style.border = '1px solid red';
 }
 
 
@@ -88,14 +79,12 @@ async function loginUser() {
 }
 
 
-function checkErrors(error) {
-    loginUserCorrect()
-    logInvalidatePassword()
-    logInvalidateEmail()
+async function checkErrors(error) {
+    await loginUserCorrect()
     setTimeout(() => {
         resetEmailBorderOnBlur();
         resetPasswordBorderOnBlur();
-    }, 2000);
+    }, 2500);
 }
 
 
@@ -127,17 +116,16 @@ async function getUserToken(user) {
 
 
 async function checkEmail() {
-    console.log(checkURL);
     try {
         const response = await fetch(checkURL);
         if (!response.ok) {
             throw new Error(`Response status: ${response.status}`);
         }
-        user = await response.json();
+        const user = response.json();
+        return user
     } catch (error) {
         console.error(error.message);
     }
-    getUsers(tasksAsText);
 }
 
 
@@ -155,24 +143,21 @@ function setLocalStorage(user) {
  * This function checks whether the email and password in the login match a user in the database.
  * If this is the case, the current user with the name is saved in an array in the local storage.
  * 
- * @param {*} emailInput 
+ * @param {*} emailInput  
  * @param {*} passwordInput 
  */
-function loginUserCorrect() {
-    const usersData = checkEmail()
+async function loginUserCorrect() {
+    const users = [];
     const emailInput = document.getElementById("emailInputLogin").value;
-    const matchingUser = Object.values(usersData).find(user =>
-        user.email === emailInput);
-    if (matchingUser) {
-        if (matchingUser.password === passwordInput) {
-            localStorage.removeItem('CurrentUser');
-            let decodedName = decodeURIComponent(matchingUser.name);
-            localStorage.setItem('CurrentUser', JSON.stringify(decodedName));
-            window.location.href = `../Join/htmls/summary.html`;
-        } else {
-            userInformationPopUp('Passwort ist falsch!')
-        }
+    const usersData = await checkEmail()
+    usersData.forEach(user => {
+        users.push(user.email);
+    });
+    if (users.includes(emailInput)) {
+        logInvalidatePassword()
+        userInformationPopUp('Passwort ist falsch!')
     } else {
+        logInvalidateEmail()
         userInformationPopUp('E-Mail existiert nicht!')
     }
 }
