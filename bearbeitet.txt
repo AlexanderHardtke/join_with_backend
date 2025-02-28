@@ -1,8 +1,0 @@
-aktualisieren nach update, create und delete in denm Contacts im Frontend
-Task erstellen geht nicht? GEHT jawohl
-
-
-Oh sorry, das war mein Fehler da ich Tasks die für den User nicht bestimmt sind ausblende, außer dem Gast.
-Dachte das System würde so mehr Sinn ergeben.
-Der User der den Task erstellt ist jetzt auch automatisch hinzugefügt.
-Das aktualisieren im Frontend habe ich auch gleich noch überarbeitet.
