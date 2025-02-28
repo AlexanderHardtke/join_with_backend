@@ -70,7 +70,7 @@ async function loginUser() {
         userInformationPopUp("Login successful")
         setLocalStorage(userWithToken)
         setTimeout(() => {
-            window.location.href = `../htmls/summary.html`;
+            window.location.href = `./htmls/summary.html`;
         }, 1500);
     } else {
         let error = Object.values(userWithToken)
@@ -79,6 +79,11 @@ async function loginUser() {
 }
 
 
+/**
+ * checks for errors in the login
+ * 
+ * @param {*} error 
+ */
 async function checkErrors(error) {
     await loginUserCorrect()
     setTimeout(() => {
@@ -115,6 +120,11 @@ async function getUserToken(user) {
 }
 
 
+/**
+ * checks all emails from the contacts
+ * 
+ * @returns the email List
+ */
 async function checkEmail() {
     try {
         const response = await fetch(checkURL);
