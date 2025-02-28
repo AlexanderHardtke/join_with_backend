@@ -21,7 +21,7 @@ async function getUserFromLocalStorage() {
     let currentUser = localStorage.getItem('CurrentUser');
     currentLoggedUser = JSON.parse(currentUser)
     if (currentLoggedUser == null && !window.location.href.includes('legal') && !window.location.href.includes('privacy')) {
-        window.location.href = `../index.html`;
+        window.location.href = `./index.html`;
     }
 }
 
