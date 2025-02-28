@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.urls import path, include
-from .views import ContactViewSet, TaskViewSet, SummaryView, UserProfileList, UserProfileDetail, RegistrationView, UserLogin
+from .views import ContactViewSet, TaskViewSet, SummaryView, UserProfileList, UserProfileDetail, RegistrationView, UserLogin, CheckUserList
 from rest_framework import routers
 from rest_framework.authtoken.views import obtain_auth_token
 
@@ -14,5 +14,6 @@ urlpatterns = [
     path('users/', UserProfileList.as_view(), name='users-list'),
     path('user/<int:pk>/', UserProfileDetail.as_view(), name='user-detail'),
     path('registration/', RegistrationView.as_view(), name='registration-detail'),
-    path('login/', UserLogin.as_view(), name='login')
+    path('login/', UserLogin.as_view(), name='login'),
+    path('usercheck/', CheckUserList.as_view(), name='usercheck-list')
 ]

@@ -196,7 +196,6 @@ function togglePasswordVisibility(id, PasswortID) {
 window.onload = function() {
     logInAnimation();
     checkRememberMe;
-    addInputListeners();
 };
 
 

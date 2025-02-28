@@ -1,12 +1,11 @@
 const LoginURL = "http://127.0.0.1:8000/api/login/";
+const checkURL = "http://127.0.0.1:8000/api/usercheck/";
 let matchingUser;
 window.loginUser = loginUser;
-window.addInputListeners = addInputListeners;
 window.guestLogIn = guestLogIn;
 window.toggleRememberMe = toggleRememberMe;
 window.logInAnimation = logInAnimation;
 window.checkRememberMe = checkRememberMe();
-// window.loginUserCorrect = loginUserCorrect();
 
 
 /**
@@ -19,40 +18,6 @@ function logInvalidateEmail() {
     const emailContainer = document.getElementById("LoginInputIconID1");
     const emailInput = emailInputElement.value;
     emailContainer.style.border = '1px solid red';
-    logInvalidateEmailNull(emailInput, emailContainer);
-}
-
-
-/**
- * If the email field is empty, the border of the container will turn black.
- * 
- * @param {*} emailInput 
- * @param {*} emailContainer 
- * @returns 
- */
-function logInvalidateEmailNull(emailInput, emailContainer) {
-    if (emailInput.trim() === '') {
-        emailContainer.style.border = '1px solid black';
-        matchingUser = null;
-        return;
-    }
-}
-
-
-/**
- * Adds two add event listeners to the two input fields. The first is responsible for when the field is clicked to enter text and
- * the second, when you leave the field, the original state is restored.
- * 
- */
-function addInputListeners() {
-    const emailInputElement = document.getElementById("emailInputLogin");
-    emailInputElement.addEventListener('input', logInvalidateEmail);
-    emailInputElement.addEventListener('change', logInvalidateEmail);
-    emailInputElement.addEventListener('blur', resetEmailBorderOnBlur);
-    const passwordInputElement = document.getElementById("passwordInput1");
-    passwordInputElement.addEventListener('input', logInvalidatePassword);
-    passwordInputElement.addEventListener('change', logInvalidatePassword);
-    passwordInputElement.addEventListener('blur', resetPasswordBorderOnBlur);
 }
 
 
@@ -118,8 +83,19 @@ async function loginUser() {
         }, 1500);
     } else {
         let error = Object.values(userWithToken)
-        userInformationPopUp(error[0]);
+        checkErrors(error); 
     }
+}
+
+
+function checkErrors(error) {
+    loginUserCorrect()
+    logInvalidatePassword()
+    logInvalidateEmail()
+    setTimeout(() => {
+        resetEmailBorderOnBlur();
+        resetPasswordBorderOnBlur();
+    }, 2000);
 }
 
 
@@ -150,6 +126,21 @@ async function getUserToken(user) {
 }
 
 
+async function checkEmail() {
+    console.log(checkURL);
+    try {
+        const response = await fetch(checkURL);
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+        user = await response.json();
+    } catch (error) {
+        console.error(error.message);
+    }
+    getUsers(tasksAsText);
+}
+
+
 /**
  * sets the Current User in the local storage and stringifys it
  * 
@@ -167,8 +158,9 @@ function setLocalStorage(user) {
  * @param {*} emailInput 
  * @param {*} passwordInput 
  */
-function loginUserCorrect(emailInput, passwordInput, snapshot) {
-    const usersData = snapshot.val();
+function loginUserCorrect() {
+    const usersData = checkEmail()
+    const emailInput = document.getElementById("emailInputLogin").value;
     const matchingUser = Object.values(usersData).find(user =>
         user.email === emailInput);
     if (matchingUser) {

@@ -4,6 +4,13 @@ from django.contrib.auth.models import User
 import random
 
 
+class CheckUserListSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+         model = Contact
+         fields = ['email']
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     
     class Meta:

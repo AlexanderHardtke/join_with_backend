@@ -1,12 +1,19 @@
 from rest_framework import viewsets, mixins, generics
 from join_db.models import Contact, Task, UserProfile
-from .serializers import UserProfileSerializer, ContactSerializer, TaskSerializer
+from .serializers import UserProfileSerializer, ContactSerializer, TaskSerializer, CheckUserListSerializer
 from rest_framework.response import Response
 from .serializers import RegistrationSerializer
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
+
+
+class CheckUserList(generics.ListCreateAPIView):
+    permission_classes = [AllowAny]
+    queryset = Contact.objects.all()
+    serializer_class = CheckUserListSerializer
+
 
 
 class UserProfileList(generics.ListCreateAPIView):
