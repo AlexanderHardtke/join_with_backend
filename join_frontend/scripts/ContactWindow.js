@@ -162,7 +162,7 @@ function createNewContact(event) {
         save(newContact);
         editContactCloseWindow();
         showPopUpInfo('Contact was successfully added!')
-        contactLoad()}
+        initial()}
     else{document.getElementById('CreateContactButtonID').disabled = true;}
 }
         
@@ -209,7 +209,7 @@ function deleteContactList(index) {
         let windowSize = window.innerWidth
         if(windowSize < 900){goBackToContacts()}
         else{ document.getElementById('Contenttext').innerHTML='';}
-        contactLoad(); }
+        initial(); }
 }
 
 
@@ -297,7 +297,7 @@ function editChangeContact(name, email, phone, index){
         document.getElementById('EditContactIDWIn').classList.add('Slideinleft');
         let initial = getInitials(name)
         contactInfoHtml(initial, name, email, phone, NewColorBackground, index)
-        contactLoad() 
+        initial() 
     });   
 }
 

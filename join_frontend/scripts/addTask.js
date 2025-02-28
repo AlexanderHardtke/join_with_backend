@@ -145,6 +145,10 @@ function loadUser(user, i) {
     let initials = nameParts.slice(0, 2).map(part => part.charAt(0).toUpperCase()).join('');
     renderAssignedTo(user, initials, i);
     renderAssignedUser(user, initials, i);
+    let loggedUser = currentLoggedUser.first_name + " " + currentLoggedUser.last_name;
+    if (user.name === loggedUser) {
+        toggleAssignedUser(i)
+    }
 }
 
 
